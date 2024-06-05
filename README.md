@@ -14,6 +14,7 @@
 
 - docker
 - docker compose
+- node 20.14.0
 
 ## Install
 
