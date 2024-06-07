@@ -1,117 +1,131 @@
 <template>
-  <div class="flex flex-col lg:col-start-6 lg:col-span-2 bg-white shadow-sm ring-1 ring-gray-900/5 rounded-xl lg:row-end-1 mt-14 p-4">
-    <h2 class="text-base font-semibold leading-6 text-gray-900">Фильтры</h2>
-    <!--    qualification-->
-    <div class="w-full mt-4">
-      <Listbox as="div" v-model="selected">
-        <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">
-          Квалификация
-        </ListboxLabel>
-        <div class="relative mt-0.5">
-          <ListboxButton class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none sm:text-sm sm:leading-6">
-            <span class="block truncate">{{ selected.name }}</span>
-            <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-          <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
-        </span>
-          </ListboxButton>
-          <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
-            <ListboxOptions class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-              <ListboxOption as="template" v-for="item in qualification" :key="item.id" :value="item" v-slot="{ active, selected }">
-                <li :class="[active ? 'bg-indigo-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
-                  <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">{{ item.name }}</span>
-                  <span v-if="selected" :class="[active ? 'text-white' : 'text-indigo-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
-                <CheckIcon class="h-5 w-5" aria-hidden="true" />
-              </span>
-                </li>
-              </ListboxOption>
-            </ListboxOptions>
-          </transition>
-        </div>
-      </Listbox>
+  <div class="flex flex-col lg:col-start-6 lg:col-span-2 bg-white shadow-sm ring-1 ring-gray-900/5 rounded-xl lg:row-end-1 mt-3 lg:mt-14 lg:p-4">
+    <div @click="onShowFilters"
+         class="flex flex-row justify-between items-center cursor-pointer lg:cursor-auto lg:m-0 p-4 lg:p-0 lg:pointer-events-none"
+    >
+      <h2 class="text-base font-semibold leading-6 text-gray-900">Фильтры</h2>
+      <ChevronRightIcon
+          v-if="!isShowFilters"
+          class="flex lg:hidden h-5 w-5 flex-none text-gray-400 rotate-90"
+          aria-hidden="true" />
+      <ChevronRightIcon
+          v-else
+          class="flex lg:hidden h-5 w-5 flex-none text-gray-400 -rotate-90"
+          aria-hidden="true" />
     </div>
-    <!--  skills  -->
-    <div class="w-full mt-4">
-      <Listbox as="div" v-model="selectedSkills">
-        <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">
-          Профессиональные навыки
-        </ListboxLabel>
-        <div class="relative mt-0.5">
-          <ListboxButton class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none sm:text-sm sm:leading-6">
-            <span class="block truncate">{{ selectedSkills.name }}</span>
-            <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+    <div v-if="isShowFilters" class="p-4 pt-0 lg:p-0">
+      <!--    qualification-->
+      <div class="w-full lg:mt-4">
+        <Listbox as="div" v-model="selected">
+          <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">
+            Квалификация
+          </ListboxLabel>
+          <div class="relative mt-0.5">
+            <ListboxButton class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none sm:text-sm sm:leading-6">
+              <span class="block truncate">{{ selected.name }}</span>
+              <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
           <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
         </span>
-          </ListboxButton>
-          <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
-            <ListboxOptions class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-              <ListboxOption as="template" v-for="skill in skills" :key="skill.id" :value="skill" v-slot="{ active, selected }">
-                <li :class="[active ? 'bg-indigo-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
-                  <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">{{ skill.name }}</span>
-                  <span v-if="selected" :class="[active ? 'text-white' : 'text-blue-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
+            </ListboxButton>
+            <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
+              <ListboxOptions class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                <ListboxOption as="template" v-for="item in qualification" :key="item.id" :value="item" v-slot="{ active, selected }">
+                  <li :class="[active ? 'bg-indigo-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
+                    <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">{{ item.name }}</span>
+                    <span v-if="selected" :class="[active ? 'text-white' : 'text-indigo-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
                 <CheckIcon class="h-5 w-5" aria-hidden="true" />
               </span>
-                </li>
-              </ListboxOption>
-            </ListboxOptions>
-          </transition>
-        </div>
-      </Listbox>
-    </div>
-    <!--  Employment type  -->
-    <div class="w-full mt-4">
-      <Listbox as="div" v-model="selectedEmploymentType">
-        <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">
-          Тип занятости
-        </ListboxLabel>
-        <div class="relative mt-0.5">
-          <ListboxButton class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 outline-0 sm:text-sm sm:leading-6">
-            <span class="block truncate">{{ selectedEmploymentType.name }}</span>
-            <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                  </li>
+                </ListboxOption>
+              </ListboxOptions>
+            </transition>
+          </div>
+        </Listbox>
+      </div>
+      <!--  skills  -->
+      <div class="w-full mt-4">
+        <Listbox as="div" v-model="selectedSkills">
+          <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">
+            Профессиональные навыки
+          </ListboxLabel>
+          <div class="relative mt-0.5">
+            <ListboxButton class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none sm:text-sm sm:leading-6">
+              <span class="block truncate">{{ selectedSkills.name }}</span>
+              <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
           <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
         </span>
-          </ListboxButton>
-          <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
-            <ListboxOptions class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-              <ListboxOption as="template" v-for="type in employmentType" :key="type.id" :value="type" v-slot="{ active, selected }">
-                <li :class="[active ? 'bg-indigo-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
-                  <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">{{ type.name }}</span>
-                  <span v-if="selected" :class="[active ? 'text-white' : 'text-blue-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
+            </ListboxButton>
+            <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
+              <ListboxOptions class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                <ListboxOption as="template" v-for="skill in skills" :key="skill.id" :value="skill" v-slot="{ active, selected }">
+                  <li :class="[active ? 'bg-indigo-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
+                    <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">{{ skill.name }}</span>
+                    <span v-if="selected" :class="[active ? 'text-white' : 'text-blue-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
                 <CheckIcon class="h-5 w-5" aria-hidden="true" />
               </span>
-                </li>
-              </ListboxOption>
-            </ListboxOptions>
-          </transition>
-        </div>
-      </Listbox>
-    </div>
-    <!--  Price  -->
-    <div class="w-full mt-4">
-      <Listbox as="div" v-model="selectedPrice">
-        <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">
-          Зарплата
-        </ListboxLabel>
-        <div class="relative mt-0.5">
-          <ListboxButton class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 outline-0 sm:text-sm sm:leading-6">
-            <span class="block truncate">{{ selectedPrice.name }}</span>
-            <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                  </li>
+                </ListboxOption>
+              </ListboxOptions>
+            </transition>
+          </div>
+        </Listbox>
+      </div>
+      <!--  Employment type  -->
+      <div class="w-full mt-4">
+        <Listbox as="div" v-model="selectedEmploymentType">
+          <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">
+            Тип занятости
+          </ListboxLabel>
+          <div class="relative mt-0.5">
+            <ListboxButton class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 outline-0 sm:text-sm sm:leading-6">
+              <span class="block truncate">{{ selectedEmploymentType.name }}</span>
+              <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
           <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
         </span>
-          </ListboxButton>
-          <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
-            <ListboxOptions class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-              <ListboxOption as="template" v-for="price in prices" :key="price.id" :value="price" v-slot="{ active, selected }">
-                <li :class="[active ? 'bg-indigo-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
-                  <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">{{ price.name }}</span>
-                  <span v-if="selected" :class="[active ? 'text-white' : 'text-blue-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
+            </ListboxButton>
+            <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
+              <ListboxOptions class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                <ListboxOption as="template" v-for="type in employmentType" :key="type.id" :value="type" v-slot="{ active, selected }">
+                  <li :class="[active ? 'bg-indigo-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
+                    <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">{{ type.name }}</span>
+                    <span v-if="selected" :class="[active ? 'text-white' : 'text-blue-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
                 <CheckIcon class="h-5 w-5" aria-hidden="true" />
               </span>
-                </li>
-              </ListboxOption>
-            </ListboxOptions>
-          </transition>
-        </div>
-      </Listbox>
+                  </li>
+                </ListboxOption>
+              </ListboxOptions>
+            </transition>
+          </div>
+        </Listbox>
+      </div>
+      <!--  Price  -->
+      <div class="w-full mt-4">
+        <Listbox as="div" v-model="selectedPrice">
+          <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">
+            Зарплата
+          </ListboxLabel>
+          <div class="relative mt-0.5">
+            <ListboxButton class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 outline-0 sm:text-sm sm:leading-6">
+              <span class="block truncate">{{ selectedPrice.name }}</span>
+              <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+          <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+        </span>
+            </ListboxButton>
+            <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
+              <ListboxOptions class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                <ListboxOption as="template" v-for="price in prices" :key="price.id" :value="price" v-slot="{ active, selected }">
+                  <li :class="[active ? 'bg-indigo-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
+                    <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">{{ price.name }}</span>
+                    <span v-if="selected" :class="[active ? 'text-white' : 'text-blue-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
+                <CheckIcon class="h-5 w-5" aria-hidden="true" />
+              </span>
+                  </li>
+                </ListboxOption>
+              </ListboxOptions>
+            </transition>
+          </div>
+        </Listbox>
+      </div>
     </div>
   </div>
 </template>
@@ -120,6 +134,7 @@
 import { ref } from 'vue'
 import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid'
+import {ChevronRightIcon} from "@heroicons/vue/20/solid/index.js";
 
 const qualification = [
   { id: 1, name: 'Любая' },
@@ -157,4 +172,10 @@ const selected = ref(qualification[0])
 const selectedSkills = ref(skills[0])
 const selectedEmploymentType = ref(employmentType[0])
 const selectedPrice = ref(prices[0])
+
+const isShowFilters = ref(true)
+
+const onShowFilters = () => {
+  isShowFilters.value = !isShowFilters.value
+}
 </script>

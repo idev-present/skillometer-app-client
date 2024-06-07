@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-gray-100">
-    <header class="absolute inset-x-0 top-0 z-50">
+  <div class="bg-gray-100 min-h-[100vh]">
+    <header class="inset-x-0 bg-white z-50">
       <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
         <div class="flex items-center justify-between w-full lg:justify-start">
           <div class="flex">
@@ -23,7 +23,7 @@
           </div>
         </div>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-          <router-link to="profile" class="inline-block h-10 w-10 overflow-hidden rounded-full bg-gray-100">
+          <router-link to="profile" class="inline-block h-9 w-9 overflow-hidden rounded-full bg-gray-100">
             <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
               <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
             </svg>

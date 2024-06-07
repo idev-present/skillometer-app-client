@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto w-full max-w-7xl mt-[88px] px-4 py-8 md:py-16 sm:px-6 lg:px-8">
+  <div class="mx-auto w-full max-w-7xl px-4 py-8 md:py-16 sm:px-6 lg:px-8">
     <div class="mx-auto grid max-w-2xl grid-cols-1 grid-rows-1 items-start gap-x-8 gap-y-8 lg:mx-0 lg:max-w-none lg:grid-cols-7">
       <div class="lg:col-span-5">
         <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900">
@@ -15,9 +15,10 @@
             />
           </div>
         </div>
+        <list-filters class="flex lg:hidden"/>
         <div class="divide-y mt-5 divide-gray-100 overflow-hidden bg-white cursor-pointer shadow-sm ring-1 ring-gray-900/5 rounded-xl">
           <router-link
-              v-if="isLoading"
+              v-if="!isLoading"
               v-for="(item, index) in vacancyList"
               :key="index"
               class="relative flex justify-between gap-x-6 px-4 py-5 hover:bg-gray-50 sm:px-6"
@@ -57,7 +58,7 @@
           <loading class="py-10" v-else />
         </div>
       </div>
-      <list-filters/>
+      <list-filters class="hidden lg:flex"/>
     </div>
   </div>
 </template>
@@ -100,9 +101,9 @@ const vacancyStore = useVacancyStore()
 
 onMounted(async () => {
   isLoading.value = true
-  await vacancyStore.fillVacancyList().then((res) => {
-    console.log('fillVacancyList', res)
-  })
+  // await vacancyStore.fillVacancyList().then((res) => {
+  //   console.log('fillVacancyList', res)
+  // })
   isLoading.value = false
 })
 </script>
