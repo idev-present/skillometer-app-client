@@ -1,0 +1,13 @@
+services:
+  api:
+    build:
+      context: .
+      args:
+        ENV: staging
+    container_name: skillometer-client
+    image: ilyamachetto/skillometer-client:0.1.0
+    platform: linux/amd64
+    env_file:
+      - .env.staging
+    ports:
+      - "80:8080"

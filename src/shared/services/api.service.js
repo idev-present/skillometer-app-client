@@ -56,6 +56,6 @@ class ApiFacade {
   }
 }
 
-const apiService = new ApiFacade();
+const apiService = new ApiFacade(import.meta.env.VITE_API_URL);
 
 export default apiService;
