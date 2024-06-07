@@ -15,8 +15,13 @@
             />
           </div>
         </div>
-        <ul role="list" class="divide-y mt-5 divide-gray-100 overflow-hidden bg-white cursor-pointer shadow-sm ring-1 ring-gray-900/5 rounded-xl">
-          <li v-for="(item, index) in vacancyList" :key="index" class="relative flex justify-between gap-x-6 px-4 py-5 hover:bg-gray-50 sm:px-6">
+        <div class="divide-y mt-5 divide-gray-100 overflow-hidden bg-white cursor-pointer shadow-sm ring-1 ring-gray-900/5 rounded-xl">
+          <router-link
+              v-for="(item, index) in vacancyList"
+              :key="index"
+              class="relative flex justify-between gap-x-6 px-4 py-5 hover:bg-gray-50 sm:px-6"
+              :to="`/vacancy/${item.id}`"
+          >
             <div class="min-w-0 flex-1">
               <h2 class="text-xl font-bold leading-7 text-gray-900 sm:truncate sm:text-2xl sm:tracking-tight">
                 Back End Developer
@@ -47,8 +52,8 @@
             <div class="flex shrink-0 -mr-2 sm:mr-0 items-center">
               <ChevronRightIcon class="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
             </div>
-          </li>
-        </ul>
+          </router-link>
+        </div>
       </div>
       <!--filters-->
       <div class="hidden lg:flex lg:col-start-6 lg:col-span-2 bg-white shadow-sm ring-1 ring-gray-900/5 rounded-xl lg:row-end-1 mt-14 p-4">
@@ -63,18 +68,21 @@ import { ChevronRightIcon, MagnifyingGlassIcon, BriefcaseIcon, MapPinIcon, Calen
 
 const vacancyList = [
   {
+    id: 1,
     name: 'Тестировщик роботизированных процессов',
     tags: ['Инженер по ручному тестированию', 'JS', 'Python'],
     location: 'Полный рабочий день',
     typeEmployment: 'Можно удалённо'
   },
   {
+    id: 2,
     name: 'Тестировщик роботизированных процессов',
     tags: ['Инженер по ручному тестированию', 'Python', 'Python'],
     location: 'Полный рабочий день',
     typeEmployment: 'Можно удалённо'
   },
   {
+    id: 3,
     name: 'Тестировщик роботизированных процессов',
     tags: ['Инженер по ручному тестированию', 'Node JS', 'Python'],
     location: 'Полный рабочий день',
