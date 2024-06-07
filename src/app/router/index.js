@@ -12,7 +12,21 @@ const router = createRouter({
       path: '/vacancy/:id',
       name: 'VacancyItem',
       component: () => import('@/pages/VacancyItem.vue')
-    }
+    },
+    // System
+    {
+      path: '/',
+      redirect: '/vacancy',
+    },
+    {
+      path: "/:pathMatch(.*)*",
+      name: "NotFoundPage",
+      component: () => import("@/pages/NotFoundPage.vue"),
+      meta: {
+        requiresAuth: false,
+        layout: "system",
+      },
+    },
   ]
 })
 

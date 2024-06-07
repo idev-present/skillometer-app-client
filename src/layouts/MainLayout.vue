@@ -69,6 +69,3 @@ const navigation = [
 
 const mobileMenuOpen = ref(false)
 </script>
-
-<style scoped>
-</style>

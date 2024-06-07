@@ -10,7 +10,7 @@
           <div class="relative mt-2 p-4">
             <MagnifyingGlassIcon class="pointer-events-none absolute inset-y-0 left-6 h-full w-5 text-gray-400" aria-hidden="true" />
             <input name="search"
-                   class="block w-full rounded-md border-0 py-1.5 pl-9 pr-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                   class="block w-full rounded-md border-0 py-1.5 pl-9 pr-3 text-gray-900 shadow-sm ring-1 ring-gray-300 outline-0 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                    placeholder="Поиск"
             />
           </div>
@@ -55,16 +55,14 @@
           </router-link>
         </div>
       </div>
-      <!--filters-->
-      <div class="hidden lg:flex lg:col-start-6 lg:col-span-2 bg-white shadow-sm ring-1 ring-gray-900/5 rounded-xl lg:row-end-1 mt-14 p-4">
-        <h2 class="text-base font-semibold leading-6 text-gray-900">Filters</h2>
-      </div>
+      <list-filters/>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ChevronRightIcon, MagnifyingGlassIcon, BriefcaseIcon, MapPinIcon, CalendarIcon } from '@heroicons/vue/20/solid'
+import ListFilters from "@/widgets/ListFilters.vue";
 
 const vacancyList = [
   {
