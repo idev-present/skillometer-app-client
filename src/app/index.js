@@ -5,10 +5,10 @@ import App from '@/app/App.vue'
 const app = createApp(App)
 
 // init plugins
-import { createPinia } from 'pinia'
+import store from '@/app/store/index.js'
 import router from '@/app/router/index.js'
 
-app.use(createPinia())
+app.use(store)
 app.use(router)
 
 // init styles

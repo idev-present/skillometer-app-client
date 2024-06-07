@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-100 min-h-[100vh]">
+  <div class="bg-gray-100">
     <header class="absolute inset-x-0 top-0 z-50">
       <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
         <div class="flex items-center justify-between w-full lg:justify-start">
@@ -10,12 +10,16 @@
           </div>
           <div class="flex lg:hidden">
             <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700" @click="mobileMenuOpen = true">
-              <span class="sr-only">Open main menu</span>
               <Bars3Icon class="h-6 w-6" aria-hidden="true" />
             </button>
           </div>
-          <div class="hidden ml-12 lg:flex lg:gap-x-12">
-            <router-link v-for="item in navigation" :key="item.name" :to="item.href" class="text-sm font-semibold leading-6 text-gray-900">{{ item.name }}</router-link>
+          <div class="hidden ml-12 lg:flex lg:gap-x-8">
+            <router-link v-for="item in navigation" :key="item.name" :to="item.href"
+                         class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-800 transform"
+                         :class="$route.path === item.href && 'text-gray-800'"
+            >
+              {{ item.name }}
+            </router-link>
           </div>
         </div>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
@@ -65,6 +69,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
 
 const navigation = [
   { name: 'Вакансии', href: '/vacancy' },
+  { name: 'Новости', href: '/news' },
 ]
 
 const mobileMenuOpen = ref(false)

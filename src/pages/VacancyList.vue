@@ -6,7 +6,7 @@
           Вакансии
         </h1>
         <!--list-->
-        <div class="bg-white shadow-sm ring-1 mt-4 ring-gray-900/5 rounded-xl">
+        <div  class="bg-white shadow-sm ring-1 mt-4 ring-gray-900/5 rounded-xl">
           <div class="relative mt-2 p-4">
             <MagnifyingGlassIcon class="pointer-events-none absolute inset-y-0 left-6 h-full w-5 text-gray-400" aria-hidden="true" />
             <input name="search"
@@ -17,6 +17,7 @@
         </div>
         <div class="divide-y mt-5 divide-gray-100 overflow-hidden bg-white cursor-pointer shadow-sm ring-1 ring-gray-900/5 rounded-xl">
           <router-link
+              v-if="isLoading"
               v-for="(item, index) in vacancyList"
               :key="index"
               class="relative flex justify-between gap-x-6 px-4 py-5 hover:bg-gray-50 sm:px-6"
@@ -53,6 +54,7 @@
               <ChevronRightIcon class="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
             </div>
           </router-link>
+          <loading class="py-10" v-else />
         </div>
       </div>
       <list-filters/>
@@ -61,10 +63,13 @@
 </template>
 
 <script setup>
+import { onMounted, ref } from "vue"
 import { ChevronRightIcon, MagnifyingGlassIcon, BriefcaseIcon, MapPinIcon, CalendarIcon } from '@heroicons/vue/20/solid'
 import ListFilters from "@/widgets/ListFilters.vue";
+import {useVacancyStore} from "@/app/store/modules/vacancy.js";
+import Loading from "@/shared/Loading.vue";
 
-const vacancyList = [
+const vacancyList = ref([
   {
     id: 1,
     name: 'Тестировщик роботизированных процессов',
@@ -86,5 +91,18 @@ const vacancyList = [
     location: 'Полный рабочий день',
     typeEmployment: 'Можно удалённо'
   },
-]
+])
+const isLoading = ref(false)
+
+//* store
+const vacancyStore = useVacancyStore()
+
+
+onMounted(async () => {
+  isLoading.value = true
+  await vacancyStore.fillVacancyList().then((res) => {
+    console.log('fillVacancyList', res)
+  })
+  isLoading.value = false
+})
 </script>
