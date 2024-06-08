@@ -15,14 +15,14 @@
           </div>
           <div class="hidden ml-12 lg:flex lg:gap-x-8">
             <router-link v-for="item in navigation" :key="item.name" :to="item.href"
-                         class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-800 transform"
+                         class="inline-flex items-center px-1 pt-1 text font-medium text-gray-500 hover:text-gray-800 transform"
                          :class="$route.path === item.href && 'text-gray-800'"
             >
               {{ item.name }}
             </router-link>
           </div>
         </div>
-        <div class="hidden sm:ml-6 sm:flex sm:items-center">
+        <div class="hidden lg:ml-6 lg:flex lg:items-center">
           <button type="button" class="relative mr-3 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none">
             <span class="absolute -inset-1.5" />
             <BellIcon class="h-6 w-6" aria-hidden="true" />
