@@ -189,7 +189,7 @@
               <div class="mt-3">
                 <textarea rows="4" name="comment" id="comment" class="block px-3 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 placeholder:text-gray-400 outline-0 sm:text-sm sm:leading-6" />
               </div>
-            <button type="button" class="mt-3 mb-6 w-full sm:w-fit rounded-md bg-blue-600 px-5 py-2.5 text-sm font-semibold tr text-white shadow-sm hover:bg-blue-700 outline-0">
+            <button type="button" class="mt-3 mb-4 w-full sm:w-fit rounded-md bg-blue-600 px-5 py-2.5 text-sm font-semibold tr text-white shadow-sm hover:bg-blue-700 outline-0">
               Отправить
             </button>
           </div>

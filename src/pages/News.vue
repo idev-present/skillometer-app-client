@@ -24,25 +24,21 @@
             class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10"
           />
         </div>
-        <div class="w-full">
+        <div class="w-full flex justify-between flex-col">
           <div class="flex items-center gap-x-4 text-xs">
             <date :date="item.date" class="text-gray-500">{{ item.date }}</date>
             <time :time="item.time" class="text-gray-500">{{ item.time }}</time>
           </div>
           <div class="group relative">
-            <h3
-              class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600"
-            >
+            <h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
               <a :href="item.href">
                 <span class="absolute inset-0" />
                 {{ item.title }}
               </a>
             </h3>
-            <p class="mt-5 text-sm leading-6 text-gray-600">
-              {{ item.description }}
-            </p>
+            <p class="mt-4 text-sm leading-6 text-gray-600 line-clamp-4">{{ item.description }}</p>
           </div>
-          <div class="mt-6 flex border-t border-gray-900/5 pt-6">
+          <div class="flex pt-4">
             <div class="relative flex items-center gap-x-4">
               <img
                 :src="item.author.imageUrl"
@@ -74,7 +70,7 @@ const posts = ref([
     title: "Обзор изменений в законодательстве за май 2024 года",
     href: "#",
     description:
-      "В обзоре изменений за май 2024 года рассмотрим следующие темы: критическая информационная инфраструктура, безопасность финансовых организаций и другие важные изменения в законодательстве в сфере ИТ и ИБ.",
+      "В Штатах выяснили, какие американские университеты самые изобретательные, Apple будет следить за положением головы и расположением на ней наушников, а Dodo Pizza попытается заставить Telegram изжить в себе захват юзернеймов. Все главные новости в сфере интеллектуальной собственности за неделю — в нашем дайджесте. В Штатах выяснили, какие американские университеты самые изобретательные, Apple будет следить за положением головы и расположением на ней наушников, а Dodo Pizza попытается заставить Telegram изжить в себе захват юзернеймов. Все главные новости в сфере интеллектуальной собственности за неделю — в нашем дайджесте.",
     imageUrl:
       "https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80",
     date: "Mar 16, 2020",
@@ -93,7 +89,7 @@ const posts = ref([
       "Контроль осанки от Apple, рейтинг университетов и суд на опережение: дайджест главных новостей",
     href: "#",
     description:
-      "В Штатах выяснили, какие американские университеты самые изобретательные, Apple будет следить за положением головы и расположением на ней наушников, а Dodo Pizza попытается заставить Telegram изжить в себе захват юзернеймов. Все главные новости в сфере интеллектуальной собственности за неделю — в нашем дайджесте. ",
+      "В Штатах выяснили, какие американские университеты самые изобретательные, Apple будет следить за положением головы и расположением на ней наушников, а Dodo Pizza попытается заставить Telegram изжить в себе захват юзернеймов. Все главные новости в сфере интеллектуальной собственности за неделю — в нашем дайджесте. В Штатах выяснили, какие американские университеты самые изобретательные, Apple будет следить за положением головы и расположением на ней наушников, а Dodo Pizza попытается заставить Telegram изжить в себе захват юзернеймов. Все главные новости в сфере интеллектуальной собственности за неделю — в нашем дайджесте.",
     imageUrl:
       "https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80",
     date: "Mar 16, 2020",
@@ -112,7 +108,7 @@ const posts = ref([
       "Geometric Future представила Model 0 Flamingo — складной корпус Mini ITX на магнитах для ПК со встроенным GPU",
     href: "#",
     description:
-      "Компания Geometric Future (основана бывшими сотрудниками InWin) представила на выставке Computex свой проект Model 0 Flamingo — складной корпус Mini ITX на магнитах и штифтах для небольшого ПК с интегрированной видеокартой.",
+      "В Штатах выяснили, какие американские университеты самые изобретательные, Apple будет следить за положением головы и расположением на ней наушников, а Dodo Pizza попытается заставить Telegram изжить в себе захват юзернеймов. Все главные новости в сфере интеллектуальной собственности за неделю — в нашем дайджесте. В Штатах выяснили, какие американские университеты самые изобретательные, Apple будет следить за положением головы и расположением на ней наушников, а Dodo Pizza попытается заставить Telegram изжить в себе захват юзернеймов. Все главные новости в сфере интеллектуальной собственности за неделю — в нашем дайджесте.",
     imageUrl:
       "https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80",
     date: "Mar 16, 2020",
