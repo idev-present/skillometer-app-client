@@ -23,37 +23,51 @@
           :to="`/vacancy/${item.id}`"
       >
         <div class="min-w-0 flex-1">
-          <h2 class="text-xl font-bold leading-7 text-gray-900 sm:truncate sm:text-2xl sm:tracking-tight">
-            Back End Developer
+          <h2 class="text-xl font-bold leading-7 text-gray-900 sm:text-2xl sm:tracking-tight">
+            {{item.name}}
           </h2>
-          <div class="mt-1 flex items-center font-bold text-sm text-green-600">
-            250 000 &ndash; 800 000 ₽
+          <div v-if="item?.salary_to || item?.salary_from" class="mt-1 flex items-center font-bold text-green-600">
+            <span>{{formattedNumberValue(item?.salary_from || 0)}}</span>
+            <span v-if="item?.salary_to">&nbsp;&ndash; {{formattedNumberValue(item?.salary_to || 0) }} </span>
+            <span>&nbsp;{{item?.currency?.value || "₽"}}</span>
           </div>
           <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
-            <div class="mt-2 flex items-center text-sm text-gray-500">
+            <div v-if="item?.employmentType?.name" class="mt-2 flex items-center text-sm text-gray-500">
               <BriefcaseIcon class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-              Полный рабочий день
+              {{item?.employmentType?.name}}
             </div>
             <div class="mt-2 flex items-center text-sm text-gray-500">
               <MapPinIcon class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-              Удаленная
+              {{item?.city?.name}}
             </div>
           </div>
           <div class="mt-3 flex flex-col sm:flex-row sm:flex-wrap sm:space-x-2">
+            <div v-if="item?.division?.name" class="flex items-center">
+              {{item?.division?.name}}
+              <svg viewBox="0 0 2 2" class="hidden sm:flex h-0.5 w-0.5 ml-2 fill-current">
+                <circle cx="1" cy="1" r="1" />
+              </svg>
+            </div>
+            <div v-if="item?.qualification?.name" class="flex items-center">
+              {{item?.qualification?.name}}
+              <svg viewBox="0 0 2 2" class="hidden sm:flex h-0.5 w-0.5 ml-2 fill-current">
+                <circle cx="1" cy="1" r="1" />
+              </svg>
+            </div>
             <div
-                v-for="(tag, index) in item.tags"
+                v-for="(skill, index) in item.skills"
                 :key="index"
                 class="flex items-center"
             >
               <svg v-if="index" viewBox="0 0 2 2" class="hidden sm:flex h-0.5 w-0.5 mr-2 fill-current">
                 <circle cx="1" cy="1" r="1" />
               </svg>
-              {{tag}}
+              {{skill}}
             </div>
           </div>
           <div class="mt-3 flex items-center text-sm text-gray-500">
             <CalendarIcon class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-            7 июня
+            {{formattedDateValue(item.published_at)}}
           </div>
         </div>
         <div class="flex shrink-0 -mr-2 sm:mr-0 items-center">
@@ -81,17 +95,45 @@ const isLoading = ref(false)
 const vacancyStore = useVacancyStore()
 const directoriesStore = useDirectoriesStore()
 
-const vacancyList = computed(() => {
-  console.log(vacancyStore?.vacancyList)
-  return vacancyStore?.vacancyList || []
+const employmentTypeList = computed(() => {
+  return directoriesStore?.employmentTypeList || []
 })
+const divisionList = computed(() => {
+  return directoriesStore?.divisionList || []
+})
+const qualificationList = computed(() => {
+  return directoriesStore?.qualificationList || []
+})
+const cityList = computed(() => {
+  return directoriesStore?.cityList || []
+})
+const vacancyList = computed(() => {
+  return vacancyStore?.vacancyList?.map((item) => ({
+    ...item,
+    employmentType: employmentTypeList?.value?.find((type) => type?.id === item?.employment_type_id) || null,
+    skills: item?.skill_set?.split(',') || [],
+    division: divisionList?.value?.find((type) => type?.id === item?.division_id) || null,
+    qualification: qualificationList?.value?.find((type) => type?.id === item?.qualification_id) || null,
+    city: cityList?.value?.find((type) => type?.habr_alias === item?.city_id) || null,
+  }))|| []
+})
+const formattedNumberValue = ((number) => {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+});
+const formattedDateValue = ((date) => {
+  const dateRes = new Date(date);
+  const day = String(dateRes.getDate()).padStart(2, '0');
+  const month = String(dateRes.getMonth() + 1).padStart(2, '0');
+  const year = dateRes.getFullYear();
+  return `${day}.${month}.${year}`;
+});
 
 
 onMounted(async () => {
   isLoading.value = true
   await Promise.all([
     directoriesStore.fillCurrencyList(),
-    // directoriesStore.fillCityList(),
+    directoriesStore.fillCityList(),
     directoriesStore.fillEmploymentTypeList(),
     directoriesStore.fillDivisionList(),
     directoriesStore.fillQualificationList(),
