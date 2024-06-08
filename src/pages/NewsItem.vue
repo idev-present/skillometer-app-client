@@ -155,6 +155,12 @@
         </p>
       </div>
     </div>
+    
+    <!-- Comments -->
+    <div class="mt-4 bg-white py-4 px-4 sm:px-6 sm:py-6 rounded-xl shadow-sm ring-1 ring-gray-900/5">
+      <h2 class="text-xl font-bold leading-7 text-gray-900 sm:truncate sm:text-2xl sm:tracking-tight border-b-2 pb-3">Комментарии</h2>
+    
+    </div>
   </div>
 </template>
 
