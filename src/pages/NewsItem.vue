@@ -35,9 +35,18 @@
         </li>
       </ol>
     </nav>
-    <div
-      class="mt-4 bg-white py-4 px-4 sm:px-6 sm:py-6 rounded-xl shadow-sm ring-1 ring-gray-900/5"
-    >
+    <div class="mt-4 bg-white py-4 px-4 sm:px-6 sm:py-6 rounded-xl shadow-sm ring-1 ring-gray-900/5">
+      <div class="flex justify-between">
+        <div class="flex items-center gap-x-4 text-xs">
+          <date :date="news.date" class="text-gray-500">{{ news.date }}</date>
+          <time :time="news.time" class="text-gray-500">{{ news.time }}</time>
+        </div>
+          <button type="button" class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
+            <EyeIcon class="h-5 w-5" aria-hidden="true" />
+            <span class="text-sm text-gray-500">{{ news.views }}</span>
+            <span class="sr-only">views</span>
+          </button>
+      </div>
       <h1
         class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
       >
@@ -169,13 +178,27 @@
     </div>
 
     <!-- Comments -->
+     
+    <!-- cards -->
     <div class="mt-4 bg-white py-4 px-4 sm:px-6 sm:py-6 rounded-xl shadow-sm ring-1 ring-gray-900/5">
-      <h2 class="text-xl font-bold leading-7 text-gray-900 sm:truncate sm:text-2xl sm:tracking-tight border-b-2 pb-3">Комментарии</h2>
+      <h2 class="text-xl font-bold leading-7 text-gray-900 sm:truncate sm:text-2xl sm:tracking-tight">Комментарии</h2>
+      
+      <!-- textarea -->
+      <div class="min-w-0 flex-1">
+          <div class="mt-2 flex flex-col text-gray-900">
+              <div class="mt-3">
+                <textarea rows="4" name="comment" id="comment" class="block px-3 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 placeholder:text-gray-400 outline-0 sm:text-sm sm:leading-6" />
+              </div>
+            <button type="button" class="mt-3 mb-6 w-full sm:w-fit rounded-md bg-blue-600 px-5 py-2.5 text-sm font-semibold tr text-white shadow-sm hover:bg-blue-700 outline-0">
+              Отправить
+            </button>
+          </div>
+        </div>
       <ul role="list" class="space-y-4 mt-4">
         <li
           v-for="question in questions"
           :key="question.id"
-          class="bg-white px-4 py-6 shadow-sm ring-1 ring-gray-900/5 sm:p-6 rounded-xl"
+          class="bg-white px-4 py-6 shadow-sm ring-1 ring-gray-300 sm:p-6 rounded-xl"
         >
           <article :aria-labelledby="'question-title-' + question.id">
             <div>
@@ -191,7 +214,7 @@
                   <p class="text-sm font-medium text-gray-900"><a :href="question.author.href" class="hover:underline">{{question.author.name}}</a></p>
                   <p class="text-sm text-gray-500">
                     <a :href="question.href" class="hover:underline">
-                      <time :datetime="question.datetime">{{question.date}}</time>
+                      <time :datetime="question.datetime">{{question.date}} {{ question.time }}</time>
                     </a>
                   </p>
                 </div>
@@ -247,21 +270,11 @@
                   </button>
                 </span>
               </div>
-              <div class="flex text-sm">
-                <span class="inline-flex items-center text-sm">
-                  <button
-                    type="button"
-                    class="inline-flex space-x-2 text-gray-400 hover:text-gray-500"
-                  >
-                    <ShareIcon class="h-5 w-5" aria-hidden="true" />
-                    <span class="font-medium text-gray-900">Share</span>
-                  </button>
-                </span>
-              </div>
             </div>
           </article>
         </li>
       </ul>
+      
     </div>
   </div>
 </template>
@@ -272,7 +285,6 @@ import {
   ChatBubbleLeftEllipsisIcon,
   EyeIcon,
   HandThumbUpIcon,
-  ShareIcon,
 } from "@heroicons/vue/20/solid";
 import {
   ChevronRightIcon,
@@ -282,11 +294,14 @@ import {
 
 const news = ref({
   title: "Обзор изменений в законодательстве за май 2024 года",
+  date: "Mar 16, 2020",
+  time: "10:20",
+  views: "2.7k",
 });
 const questions = [
   {
     id: "1",
-    likes: "29",
+    likes: "11",
     replies: "11",
     views: "2.7k",
     author: {
@@ -295,8 +310,8 @@ const questions = [
         "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
       href: "#",
     },
-    date: "December 9 at 11:43 AM",
-    datetime: "2020-12-09T11:43:00",
+    date: "Mar 16, 2020",
+    time: "10:20",
     href: "#",
     title: "What would you have done differently if you ran Jurassic Park?",
     body: `
@@ -306,7 +321,7 @@ const questions = [
   },
   {
     id: "2",
-    likes: "29",
+    likes: "22",
     replies: "11",
     views: "2.7k",
     author: {
@@ -315,8 +330,28 @@ const questions = [
         "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
       href: "#",
     },
-    date: "December 9 at 11:43 AM",
-    datetime: "2020-12-09T11:43:00",
+    date: "Mar 16, 2020",
+    time: "10:20",
+    href: "#",
+    title: "What would you have done differently if you ran Jurassic Park?",
+    body: `
+      <p>Jurassic Park was an incredible idea and a magnificent feat of engineering, but poor protocols and a disregard for human safety killed what could have otherwise been one of the best businesses of our generation.</p>
+      <p>Ultimately, I think that if you wanted to run the park successfully and keep visitors safe, the most important thing to prioritize would be&hellip;</p>
+    `,
+  },
+  {
+    id: "3",
+    likes: "33",
+    replies: "11",
+    views: "2.7k",
+    author: {
+      name: "Dries Vincent",
+      imageUrl:
+        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+      href: "#",
+    },
+    date: "Mar 16, 2020",
+    time: "10:20",
     href: "#",
     title: "What would you have done differently if you ran Jurassic Park?",
     body: `
