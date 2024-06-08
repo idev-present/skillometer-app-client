@@ -68,41 +68,23 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue"
+import {computed, onMounted, ref} from "vue"
 import { ChevronRightIcon, MagnifyingGlassIcon, BriefcaseIcon, MapPinIcon, CalendarIcon } from '@heroicons/vue/20/solid'
 import ListFilters from "@/widgets/ListFilters.vue";
 import {useVacancyStore} from "@/app/store/modules/vacancy.js";
 import Loading from "@/shared/Loading.vue";
 import {useDirectoriesStore} from "@/app/store/modules/directories.js";
 
-const vacancyList = ref([
-  {
-    id: 1,
-    name: 'Тестировщик роботизированных процессов',
-    tags: ['Инженер по ручному тестированию', 'JS', 'Python'],
-    location: 'Полный рабочий день',
-    typeEmployment: 'Можно удалённо'
-  },
-  {
-    id: 2,
-    name: 'Тестировщик роботизированных процессов',
-    tags: ['Инженер по ручному тестированию', 'Python', 'Python'],
-    location: 'Полный рабочий день',
-    typeEmployment: 'Можно удалённо'
-  },
-  {
-    id: 3,
-    name: 'Тестировщик роботизированных процессов',
-    tags: ['Инженер по ручному тестированию', 'Node JS', 'Python'],
-    location: 'Полный рабочий день',
-    typeEmployment: 'Можно удалённо'
-  },
-])
 const isLoading = ref(false)
 
 //* store
 const vacancyStore = useVacancyStore()
 const directoriesStore = useDirectoriesStore()
+
+const vacancyList = computed(() => {
+  console.log(vacancyStore?.vacancyList)
+  return vacancyStore?.vacancyList || []
+})
 
 
 onMounted(async () => {
@@ -114,9 +96,7 @@ onMounted(async () => {
     directoriesStore.fillDivisionList(),
     directoriesStore.fillQualificationList(),
   ]).then(() => {
-    vacancyStore.fillVacancyList().then((res) => {
-      console.log('fillVacancyList', res)
-    })
+    vacancyStore.fillVacancyList()
   });
   isLoading.value = false
 })

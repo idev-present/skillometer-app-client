@@ -104,8 +104,10 @@
           Зарплата
         </label>
         <div class="flex items-center">
-          <input name="search"
+          <input name="price"
                  class="block mr-2 w-full rounded-md border-0 py-[5px] mt-0.5 pl-3 pr-3 text-gray-900 shadow-sm ring-1 ring-gray-300 outline-0 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                 @input="inputPrice"
+                 v-model="inputValue"
                  placeholder="От"
           />
           <Listbox as="div" v-model="selectedCurrency">
@@ -163,8 +165,6 @@ const employmentTypeList = computed(() => {
     ...directoriesStore?.employmentTypeList
   ]
 })
-
-// доделать
 const selectedDivision = ref({key: "all", name: "Любая"})
 const divisionList = computed(() => {
   return [
@@ -172,6 +172,19 @@ const divisionList = computed(() => {
     ...directoriesStore?.divisionList
   ]
 })
+const inputValue = ref('')
+
+
+const inputPrice = (value) => {
+  const regex = /^(\d+(\.\d{0,2})?)?$/;
+  const newValue = event.target.value;
+
+  if (regex.test(newValue)) {
+    inputValue.value = newValue;
+  } else {
+    event.target.value = inputValue.value;
+  }
+}
 
 const isShowFilters = ref(true)
 

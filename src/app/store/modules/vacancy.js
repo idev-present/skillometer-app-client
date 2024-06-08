@@ -18,7 +18,7 @@ export const useVacancyStore = defineStore({
                     .get("/vacancy/", payload)
                     .then((res) => {
                         resolve()
-                        this.vacancyList = res?.data || []
+                        this.vacancyList = res || []
                     })
                     .catch((err) => {
                         console.error(err)
