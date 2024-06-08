@@ -4,69 +4,66 @@
       Новости
     </h1>
     <!-- post -->
-    <!-- <router-link
-          v-if="!isLoading"
+    <router-link
           v-for="(item, index) in posts"
           :key="index"
-          class="relative mt-3 flex justify-between gap-x-6 px-4 py-5 hover:bg-gray-50 sm:px-6 bg-white cursor-pointer shadow-sm ring-1 ring-gray-900/5 rounded-xl"
           :to="`/news/${item.id}`"
-      > -->
-    <article
-      v-for="post in posts"
-      :key="post.id"
-      class="mt-6 bg-white py-4 px-4 sm:px-6 sm:py-6 rounded-xl relative isolate flex flex-col gap-8 lg:flex-row"
-    >
-      <div
-        class="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:w-64 lg:shrink-0"
       >
-        <img
-          :src="post.imageUrl"
-          alt=""
-          class="absolute inset-0 h-full w-full rounded-2xl bg-gray-50 object-cover"
-        />
+      <article
+        class="mt-6 bg-white py-4 px-4 sm:px-6 sm:py-6 rounded-xl relative isolate flex flex-col gap-8 lg:flex-row"
+      >
         <div
-          class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10"
-        />
-      </div>
-      <div class="w-full">
-        <div class="flex items-center gap-x-4 text-xs">
-          <time :datetime="post.datetime" class="text-gray-500">{{
-            post.date
-          }}</time>
+          class="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:w-64 lg:shrink-0"
+        >
+          <img
+            :src="item.imageUrl"
+            alt=""
+            class="absolute inset-0 h-full w-full rounded-2xl bg-gray-50 object-cover"
+          />
+          <div
+            class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10"
+          />
         </div>
-        <div class="group relative">
-          <h3
-            class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600"
-          >
-            <a :href="post.href">
-              <span class="absolute inset-0" />
-              {{ post.title }}
-            </a>
-          </h3>
-          <p class="mt-5 text-sm leading-6 text-gray-600">
-            {{ post.description }}
-          </p>
-        </div>
-        <div class="mt-6 flex border-t border-gray-900/5 pt-6">
-          <div class="relative flex items-center gap-x-4">
-            <img
-              :src="post.author.imageUrl"
-              alt=""
-              class="h-10 w-10 rounded-full bg-gray-50"
-            />
-            <div class="text-sm leading-6">
-              <p class="font-semibold text-gray-900">
-                <a :href="post.author.href">
-                  <span class="absolute inset-0" />
-                  {{ post.author.name }}
-                </a>
-              </p>
-              <p class="text-gray-600">{{ post.author.role }}</p>
+        <div class="w-full">
+          <div class="flex items-center gap-x-4 text-xs">
+            <time :datetime="item.datetime" class="text-gray-500">{{
+              item.date
+            }}</time>
+          </div>
+          <div class="group relative">
+            <h3
+              class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600"
+            >
+              <a :href="item.href">
+                <span class="absolute inset-0" />
+                {{ item.title }}
+              </a>
+            </h3>
+            <p class="mt-5 text-sm leading-6 text-gray-600">
+              {{ item.description }}
+            </p>
+          </div>
+          <div class="mt-6 flex border-t border-gray-900/5 pt-6">
+            <div class="relative flex items-center gap-x-4">
+              <img
+                :src="item.author.imageUrl"
+                alt=""
+                class="h-10 w-10 rounded-full bg-gray-50"
+              />
+              <div class="text-sm leading-6">
+                <p class="font-semibold text-gray-900">
+                  <a :href="item.author.href">
+                    <span class="absolute inset-0" />
+                    {{ item.author.name }}
+                  </a>
+                </p>
+                <p class="text-gray-600">{{ item.author.role }}</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </article>
+      </article>
+    </router-link>
   </div>
 </template>
 
