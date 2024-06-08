@@ -109,7 +109,7 @@ onMounted(async () => {
   isLoading.value = true
   await Promise.all([
     directoriesStore.fillCurrencyList(),
-    directoriesStore.fillCityList(),
+    // directoriesStore.fillCityList(),
     directoriesStore.fillEmploymentTypeList(),
     directoriesStore.fillDivisionList(),
     directoriesStore.fillQualificationList(),

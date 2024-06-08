@@ -22,7 +22,7 @@ export const useDirectoriesStore = defineStore({
                     .get("/dict/currency", payload)
                     .then((res) => {
                         resolve()
-                        this.currencyList = res?.data || []
+                        this.currencyList = res || []
                     })
                     .catch((err) => {
                         console.error(err)
@@ -38,7 +38,7 @@ export const useDirectoriesStore = defineStore({
                     .get("/dict/city", payload)
                     .then((res) => {
                         resolve()
-                        this.cityList = res?.data || []
+                        this.cityList = res || []
                     })
                     .catch((err) => {
                         console.error(err)
@@ -54,7 +54,7 @@ export const useDirectoriesStore = defineStore({
                     .get("/dict/employment_type", payload)
                     .then((res) => {
                         resolve()
-                        this.employmentTypeList = res?.data || []
+                        this.employmentTypeList = res || []
                     })
                     .catch((err) => {
                         console.error(err)
@@ -70,7 +70,7 @@ export const useDirectoriesStore = defineStore({
                     .get("/dict/division", payload)
                     .then((res) => {
                         resolve()
-                        this.divisionList = res?.data || []
+                        this.divisionList = res || []
                     })
                     .catch((err) => {
                         console.error(err)
@@ -86,7 +86,7 @@ export const useDirectoriesStore = defineStore({
                     .get("/dict/qualification", payload)
                     .then((res) => {
                         resolve()
-                        this.qualificationList = res?.data || []
+                        this.qualificationList = res || []
                     })
                     .catch((err) => {
                         console.error(err)
