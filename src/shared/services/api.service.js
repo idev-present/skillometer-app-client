@@ -4,7 +4,7 @@ class ApiFacade {
 
   constructor(baseURL) {
     this.client = axios.create({
-      baseURL: baseURL || 'http://192.168.1.116:8000/api/v1'
+      baseURL: baseURL || 'https://skillometer.idev-present.com/api/v1/'
     });
   }
 
