@@ -17,7 +17,7 @@ export const useApplicantStore = defineStore({
                 ApiService
                     .get("/applicant/", payload)
                     .then((res) => {
-                        resolve()
+                        resolve(res || [])
                         this.applicantList = res || []
                     })
                     .catch((err) => {
