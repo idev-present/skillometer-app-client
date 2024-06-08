@@ -25,18 +25,20 @@
           />
         </div>
         <div class="w-full flex justify-between flex-col">
-          <div class="flex items-center gap-x-4 text-xs">
+          <div>
+            <div class="flex items-center gap-x-4 text-xs">
             <date :date="item.date" class="text-gray-500">{{ item.date }}</date>
             <time :time="item.time" class="text-gray-500">{{ item.time }}</time>
           </div>
-          <div class="group relative">
-            <h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+          <div class="group relative mt-1.5">
+            <h3 class=" text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
               <a :href="item.href">
                 <span class="absolute inset-0" />
                 {{ item.title }}
               </a>
             </h3>
             <p class="mt-4 text-sm leading-6 text-gray-600 line-clamp-4">{{ item.description }}</p>
+          </div>
           </div>
           <div class="flex pt-4">
             <div class="relative flex items-center gap-x-4">
