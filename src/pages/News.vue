@@ -5,12 +5,12 @@
     </h1>
     <!-- post -->
     <router-link
-          v-for="(item, index) in posts"
-          :key="index"
-          :to="`/news/${item.id}`"
-      >
+      v-for="(item, index) in posts"
+      :key="index"
+      :to="`/news/${item.id}`"
+    >
       <article
-        class="mt-6 bg-white py-4 px-4 sm:px-6 sm:py-6 rounded-xl relative isolate flex flex-col gap-8 lg:flex-row"
+        class="hover:bg-gray-50 mt-4 bg-white py-4 px-4 sm:px-6 sm:py-6 rounded-xl relative isolate flex flex-col gap-8 lg:flex-row shadow-sm ring-1 ring-gray-900/5"
       >
         <div
           class="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:w-64 lg:shrink-0"
@@ -26,9 +26,8 @@
         </div>
         <div class="w-full">
           <div class="flex items-center gap-x-4 text-xs">
-            <time :datetime="item.datetime" class="text-gray-500">{{
-              item.date
-            }}</time>
+            <date :date="item.date" class="text-gray-500">{{ item.date }}</date>
+            <time :time="item.time" class="text-gray-500">{{ item.time }}</time>
           </div>
           <div class="group relative">
             <h3
@@ -79,7 +78,7 @@ const posts = ref([
     imageUrl:
       "https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80",
     date: "Mar 16, 2020",
-    datetime: "2020-03-16",
+    time: "10:20",
     author: {
       name: "Michael Foster",
       role: "Co-Founder / CTO",
@@ -98,7 +97,7 @@ const posts = ref([
     imageUrl:
       "https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80",
     date: "Mar 16, 2020",
-    datetime: "2020-03-16",
+    time: "10:20",
     author: {
       name: "Michael Foster",
       role: "Co-Founder / CTO",
@@ -117,7 +116,7 @@ const posts = ref([
     imageUrl:
       "https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80",
     date: "Mar 16, 2020",
-    datetime: "2020-03-16",
+    time: "10:20",
     author: {
       name: "Michael Foster",
       role: "Co-Founder / CTO",
