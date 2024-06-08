@@ -131,10 +131,17 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import {onMounted, ref} from 'vue'
 import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid'
 import {ChevronRightIcon} from "@heroicons/vue/20/solid/index.js";
+import {useDirectoriesStore} from "@/app/store/modules/directories.js";
+
+const directoriesStore = useDirectoriesStore()
+
+const currencyList = ref([
+  { key: 'all', value: 'Любая' },
+])
 
 const qualification = [
   { id: 1, name: 'Любая' },
@@ -168,6 +175,7 @@ const prices = [
   { id: 3, name: 'USD' },
   { id: 3, name: 'EUR' },
 ];
+
 const selected = ref(qualification[0])
 const selectedSkills = ref(skills[0])
 const selectedEmploymentType = ref(employmentType[0])
@@ -178,4 +186,8 @@ const isShowFilters = ref(true)
 const onShowFilters = () => {
   isShowFilters.value = !isShowFilters.value
 }
+
+onMounted(async () => {
+  // currencyList.value =
+})
 </script>

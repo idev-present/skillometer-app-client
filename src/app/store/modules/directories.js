@@ -19,7 +19,7 @@ export const useDirectoriesStore = defineStore({
         fillCurrencyList(payload = null) {
             return new Promise((resolve, reject) => {
                 ApiService
-                    .get("/dist/currency", payload)
+                    .get("/dict/currency", payload)
                     .then((res) => {
                         resolve()
                         this.currencyList = res?.data || []
@@ -35,7 +35,7 @@ export const useDirectoriesStore = defineStore({
         fillCityList(payload = null) {
             return new Promise((resolve, reject) => {
                 ApiService
-                    .get("/dist/city", payload)
+                    .get("/dict/city", payload)
                     .then((res) => {
                         resolve()
                         this.cityList = res?.data || []

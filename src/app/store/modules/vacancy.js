@@ -15,7 +15,7 @@ export const useVacancyStore = defineStore({
         fillVacancyList(payload = null) {
             return new Promise((resolve, reject) => {
                 ApiService
-                    .get("/vacancy", payload)
+                    .get("/vacancy/", payload)
                     .then((res) => {
                         resolve()
                         this.vacancyList = res?.data || []

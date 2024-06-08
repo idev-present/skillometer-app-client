@@ -57,7 +57,9 @@
         </DialogPanel>
       </Dialog>
     </header>
-    <RouterView />
+    <div class="mx-auto w-full max-w-7xl px-4 pt-8 pb-16 md:py-16 sm:px-6 lg:px-8">
+      <RouterView />
+    </div>
   </div>
 </template>
 
