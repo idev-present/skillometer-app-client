@@ -22,12 +22,35 @@
             </router-link>
           </div>
         </div>
-        <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-          <router-link to="profile" class="inline-block h-9 w-9 overflow-hidden rounded-full bg-gray-100">
-            <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-            </svg>
-          </router-link>
+        <div class="hidden sm:ml-6 sm:flex sm:items-center">
+          <button type="button" class="relative mr-3 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none">
+            <span class="absolute -inset-1.5" />
+            <BellIcon class="h-6 w-6" aria-hidden="true" />
+          </button>
+
+          <!-- Profile dropdown -->
+          <Menu as="div" class="relative">
+            <div>
+              <MenuButton class="relative flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none">
+                <span class="absolute -inset-1.5" />
+                <img class="h-8 w-8 min-w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+              </MenuButton>
+            </div>
+            <transition enter-active-class="transition ease-out duration-200" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
+              <MenuItems class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <MenuItem v-for="item in userNavigation" :key="item.name" v-slot="{ active }">
+                  <router-link :to="item.href" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">
+                    {{ item.name }}
+                  </router-link>
+                </MenuItem>
+                <MenuItem v-slot="{ active }">
+                  <span :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer']">
+                    Выйти
+                  </span>
+                </MenuItem>
+              </MenuItems>
+            </transition>
+          </Menu>
         </div>
       </nav>
       <!--mobile-->
@@ -45,12 +68,39 @@
           <div class="mt-6 flow-root">
             <div class="-my-6 divide-y divide-gray-500/10">
               <div class="space-y-2 py-6">
-                <a v-for="item in navigation" :key="item.name" :href="item.href" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">{{ item.name }}</a>
+                <a v-for="item in navigation"
+                   :key="item.name"
+                   :href="item.href"
+                   class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                  {{ item.name }}
+                </a>
               </div>
-              <div class="py-6">
-                <router-link to="profile" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
-                  Профиль
-                </router-link>
+              <div class="border-t -mx-3 border-gray-200 pb-3 pt-4">
+                <div class="flex items-center px-4">
+                  <div class="flex-shrink-0">
+                    <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+                  </div>
+                  <div class="ml-3">
+                    <div class="text-base font-medium text-gray-800">Tom Cook</div>
+                    <div class="text-sm font-medium text-gray-500">tom@example.com</div>
+                  </div>
+                  <button type="button" class="relative ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none">
+                    <span class="absolute -inset-1.5" />
+                    <BellIcon class="h-6 w-6" aria-hidden="true" />
+                  </button>
+                </div>
+                <div class="space-y-2 py-6">
+                  <a
+                      v-for="item in userNavigation"
+                      :key="item.name"
+                      :href="item.href"
+                      class="block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                    {{ item.name }}
+                  </a>
+                  <span class="block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                    Выйти
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -66,12 +116,16 @@
 <script setup>
 import { RouterView } from 'vue-router'
 import { ref } from 'vue'
-import { Dialog, DialogPanel } from '@headlessui/vue'
-import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
+import { Dialog, DialogPanel, MenuButton, Menu, MenuItem, MenuItems, DisclosureButton } from '@headlessui/vue'
+import { Bars3Icon, XMarkIcon, BellIcon } from '@heroicons/vue/24/outline'
 
 const navigation = [
   { name: 'Вакансии', href: '/vacancy' },
   { name: 'Новости', href: '/news' },
+]
+const userNavigation = [
+  { name: 'Профиль', href: '/profile' },
+  { name: 'Резюме', href: '/resume' },
 ]
 
 const mobileMenuOpen = ref(false)

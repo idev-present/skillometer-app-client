@@ -139,7 +139,7 @@
 </template>
 
 <script setup>
-import {ref, computed} from 'vue'
+import {ref, computed, onMounted} from 'vue'
 import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid'
 import {ChevronRightIcon} from "@heroicons/vue/20/solid/index.js";
@@ -191,4 +191,10 @@ const isShowFilters = ref(true)
 const onShowFilters = () => {
   isShowFilters.value = !isShowFilters.value
 }
+
+onMounted(() => {
+  if(window.innerWidth < 1024) {
+    isShowFilters.value = false
+  }
+})
 </script>
