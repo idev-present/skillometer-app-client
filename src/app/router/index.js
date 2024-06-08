@@ -24,9 +24,19 @@ const router = createRouter({
       component: () => import('@/pages/NewsItem.vue')
     },
     {
+      path: '/profile',
+      name: 'Profile',
+      component: () => import('@/pages/Profile.vue')
+    },
+    {
       path: '/resume',
       name: 'Resume',
       component: () => import('@/pages/Resume.vue')
+    },
+    {
+      path: '/notification',
+      name: 'Notification',
+      component: () => import('@/pages/Notification.vue')
     },
     // System
     {

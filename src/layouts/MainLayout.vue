@@ -23,16 +23,17 @@
           </div>
         </div>
         <div class="hidden lg:ml-6 lg:flex lg:items-center">
-          <button type="button" class="relative mr-3 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none">
-            <span class="absolute -inset-1.5" />
+          <router-link to="/notification" class="relative mr-3 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none">
+            <span class="absolute top-0 right-0 bg-blue-600 text-white font-bold text-xs rounded-full w-4 h-4 flex items-center justify-center">
+              2
+            </span>
             <BellIcon class="h-6 w-6" aria-hidden="true" />
-          </button>
+          </router-link>
 
           <!-- Profile dropdown -->
           <Menu as="div" class="relative">
             <div>
               <MenuButton class="relative flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none">
-                <span class="absolute -inset-1.5" />
                 <img class="h-8 w-8 min-w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
               </MenuButton>
             </div>
@@ -84,10 +85,12 @@
                     <div class="text-base font-medium text-gray-800">Tom Cook</div>
                     <div class="text-sm font-medium text-gray-500">tom@example.com</div>
                   </div>
-                  <button type="button" class="relative ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none">
-                    <span class="absolute -inset-1.5" />
+                  <a href="/notification" class="relative ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none">
+                    <span class="absolute top-0 right-0 bg-blue-600 text-white font-bold text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                      2
+                    </span>
                     <BellIcon class="h-6 w-6" aria-hidden="true" />
-                  </button>
+                  </a>
                 </div>
                 <div class="space-y-2 py-6">
                   <a
