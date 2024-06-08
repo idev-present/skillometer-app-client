@@ -15,8 +15,8 @@
         </div>
       </div>
       <list-filters class="flex lg:hidden"/>
-      <router-link
-          v-if="!isLoading"
+      <template v-if="!isLoading">
+        <router-link
           v-for="(item, index) in vacancyList"
           :key="index"
           class="relative mt-3 flex justify-between gap-x-6 px-4 py-5 hover:bg-gray-50 sm:px-6 bg-white cursor-pointer shadow-sm ring-1 ring-gray-900/5 rounded-xl"
@@ -59,7 +59,8 @@
         <div class="flex shrink-0 -mr-2 sm:mr-0 items-center">
           <ChevronRightIcon class="h-5 w-5 flex-none text-gray-400" aria-hidden="true" />
         </div>
-      </router-link>
+        </router-link>
+      </template>
       <loading class="py-10" v-else />
     </div>
     <list-filters class="hidden lg:flex"/>

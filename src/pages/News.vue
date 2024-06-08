@@ -3,134 +3,132 @@
     <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900">
       Новости
     </h1>
-    <div class="mx-auto mt-8 sm:mt-12 grid max-w-2xl auto-rows-fr grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-      <article v-for="post in posts" :key="post.id" class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-gray-900 px-8 pb-8 pt-80 sm:pt-48 lg:pt-80">
-        <img :src="post.imageUrl" alt="" class="absolute inset-0 -z-10 h-full w-full object-cover" />
-        <div class="absolute inset-0 -z-10 bg-gradient-to-t from-gray-900 via-gray-900/40" />
-        <div class="absolute inset-0 -z-10 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
-
-        <div class="flex flex-wrap items-center gap-y-1 overflow-hidden text-sm leading-6 text-gray-300">
-          <time :datetime="post.datetime" class="mr-8">{{ post.date }}</time>
-          <div class="-ml-4 flex items-center gap-x-4">
-            <svg viewBox="0 0 2 2" class="-ml-0.5 h-0.5 w-0.5 flex-none fill-white/50">
-              <circle cx="1" cy="1" r="1" />
-            </svg>
-            <div class="flex gap-x-2.5">
-              <img :src="post.author.imageUrl" alt="" class="h-6 w-6 flex-none rounded-full bg-white/10" />
-              {{ post.author.name }}
+    <!-- post -->
+    <!-- <router-link
+          v-if="!isLoading"
+          v-for="(item, index) in posts"
+          :key="index"
+          class="relative mt-3 flex justify-between gap-x-6 px-4 py-5 hover:bg-gray-50 sm:px-6 bg-white cursor-pointer shadow-sm ring-1 ring-gray-900/5 rounded-xl"
+          :to="`/news/${item.id}`"
+      > -->
+    <article
+      v-for="post in posts"
+      :key="post.id"
+      class="mt-6 bg-white py-4 px-4 sm:px-6 sm:py-6 rounded-xl relative isolate flex flex-col gap-8 lg:flex-row"
+    >
+      <div
+        class="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:w-64 lg:shrink-0"
+      >
+        <img
+          :src="post.imageUrl"
+          alt=""
+          class="absolute inset-0 h-full w-full rounded-2xl bg-gray-50 object-cover"
+        />
+        <div
+          class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10"
+        />
+      </div>
+      <div class="w-full">
+        <div class="flex items-center gap-x-4 text-xs">
+          <time :datetime="post.datetime" class="text-gray-500">{{
+            post.date
+          }}</time>
+        </div>
+        <div class="group relative">
+          <h3
+            class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600"
+          >
+            <a :href="post.href">
+              <span class="absolute inset-0" />
+              {{ post.title }}
+            </a>
+          </h3>
+          <p class="mt-5 text-sm leading-6 text-gray-600">
+            {{ post.description }}
+          </p>
+        </div>
+        <div class="mt-6 flex border-t border-gray-900/5 pt-6">
+          <div class="relative flex items-center gap-x-4">
+            <img
+              :src="post.author.imageUrl"
+              alt=""
+              class="h-10 w-10 rounded-full bg-gray-50"
+            />
+            <div class="text-sm leading-6">
+              <p class="font-semibold text-gray-900">
+                <a :href="post.author.href">
+                  <span class="absolute inset-0" />
+                  {{ post.author.name }}
+                </a>
+              </p>
+              <p class="text-gray-600">{{ post.author.role }}</p>
             </div>
           </div>
         </div>
-        <h3 class="mt-3 text-lg font-semibold leading-6 text-white">
-          <a :href="post.href">
-            <span class="absolute inset-0" />
-            {{ post.title }}
-          </a>
-        </h3>
-      </article>
-    </div>
+      </div>
+    </article>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-const posts = [
+import { ref } from "vue";
+const posts = ref([
   {
     id: 1,
-    title: 'Boost your conversion rate',
-    href: '#',
+    title: "Обзор изменений в законодательстве за май 2024 года",
+    href: "#",
     description:
-        'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.',
+      "В обзоре изменений за май 2024 года рассмотрим следующие темы: критическая информационная инфраструктура, безопасность финансовых организаций и другие важные изменения в законодательстве в сфере ИТ и ИБ.",
     imageUrl:
-        'https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80',
-    date: 'Mar 16, 2020',
-    datetime: '2020-03-16',
+      "https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80",
+    date: "Mar 16, 2020",
+    datetime: "2020-03-16",
     author: {
-      name: 'Michael Foster',
+      name: "Michael Foster",
+      role: "Co-Founder / CTO",
+      href: "#",
       imageUrl:
-          'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
     },
   },
   {
-    id: 1,
-    title: 'Boost your conversion rate',
-    href: '#',
+    id: 2,
+    title:
+      "Контроль осанки от Apple, рейтинг университетов и суд на опережение: дайджест главных новостей",
+    href: "#",
     description:
-        'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.',
+      "В Штатах выяснили, какие американские университеты самые изобретательные, Apple будет следить за положением головы и расположением на ней наушников, а Dodo Pizza попытается заставить Telegram изжить в себе захват юзернеймов. Все главные новости в сфере интеллектуальной собственности за неделю — в нашем дайджесте. ",
     imageUrl:
-        'https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80',
-    date: 'Mar 16, 2020',
-    datetime: '2020-03-16',
+      "https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80",
+    date: "Mar 16, 2020",
+    datetime: "2020-03-16",
     author: {
-      name: 'Michael Foster',
+      name: "Michael Foster",
+      role: "Co-Founder / CTO",
+      href: "#",
       imageUrl:
-          'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
     },
   },
   {
-    id: 1,
-    title: 'Boost your conversion rate',
-    href: '#',
+    id: 3,
+    title:
+      "Geometric Future представила Model 0 Flamingo — складной корпус Mini ITX на магнитах для ПК со встроенным GPU",
+    href: "#",
     description:
-        'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.',
+      "Компания Geometric Future (основана бывшими сотрудниками InWin) представила на выставке Computex свой проект Model 0 Flamingo — складной корпус Mini ITX на магнитах и штифтах для небольшого ПК с интегрированной видеокартой.",
     imageUrl:
-        'https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80',
-    date: 'Mar 16, 2020',
-    datetime: '2020-03-16',
+      "https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80",
+    date: "Mar 16, 2020",
+    datetime: "2020-03-16",
     author: {
-      name: 'Michael Foster',
+      name: "Michael Foster",
+      role: "Co-Founder / CTO",
+      href: "#",
       imageUrl:
-          'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
     },
   },
-  {
-    id: 1,
-    title: 'Boost your conversion rate',
-    href: '#',
-    description:
-        'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.',
-    imageUrl:
-        'https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80',
-    date: 'Mar 16, 2020',
-    datetime: '2020-03-16',
-    author: {
-      name: 'Michael Foster',
-      imageUrl:
-          'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-  },
-  {
-    id: 1,
-    title: 'Boost your conversion rate',
-    href: '#',
-    description:
-        'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.',
-    imageUrl:
-        'https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80',
-    date: 'Mar 16, 2020',
-    datetime: '2020-03-16',
-    author: {
-      name: 'Michael Foster',
-      imageUrl:
-          'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-  },
-  {
-    id: 1,
-    title: 'Boost your conversion rate',
-    href: '#',
-    description:
-        'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.',
-    imageUrl:
-        'https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80',
-    date: 'Mar 16, 2020',
-    datetime: '2020-03-16',
-    author: {
-      name: 'Michael Foster',
-      imageUrl:
-          'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-    },
-  },
-  // More posts...
-]
+]);
+const isLoading = ref(false);
 </script>
