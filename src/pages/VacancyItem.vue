@@ -87,18 +87,20 @@
     <!-- description cards -->
     <div class="divide-y mt-3 divide-gray-100 overflow-hidden bg-white shadow-sm ring-1 ring-gray-900/5 rounded-xl">
       <div class="relative flex justify-between gap-x-6 px-4 py-5 sm:px-6">
-        <div class="vacancy_description min-w-0 flex-1">
+        <div class="min-w-0 flex-1">
           <h2 class="text-xl font-bold leading-7 text-gray-900 sm:truncate sm:text-2xl sm:tracking-tight border-b-2 pb-3">
             Описание вакансии
           </h2>
-          <div class="mt-4 " v-html="vacancyItem?.description"/>
-          <div>
-            <div class="mt-4 text-lg font-bold leading-7 text-gray-900 sm:truncate sm:text-xl">О компании</div>
-            <div v-html="vacancyItem?.team"/>
-          </div>
-          <div>
-            <div class="mt-4 text-lg font-bold leading-7 text-gray-900 sm:truncate sm:text-xl">Ожидания от кандидата</div>
-            <div v-html="vacancyItem?.todo"/>
+          <div class="mt-4 vacancy-description">
+            <div v-if="vacancyItem?.description" v-html="vacancyItem?.description"/>
+            <div v-if="vacancyItem?.team" >
+              <div class="mt-4 mb-4 text-lg font-bold leading-7 text-gray-900 sm:truncate sm:text-xl">О компании</div>
+              <div v-html="vacancyItem?.team"/>
+            </div>
+            <div v-if="vacancyItem?.todo">
+              <div class="mt-4 mb-4 text-lg font-bold leading-7 text-gray-900 sm:truncate sm:text-xl">Ожидания от кандидата</div>
+              <div v-html="vacancyItem?.todo"/>
+            </div>
           </div>
         </div>
       </div>
@@ -195,5 +197,25 @@ onMounted(async() => {
 </script>
 
 <style scoped>
-.vacancy_description {}
+:deep(.vacancy-description ul) {
+  @apply space-y-2 mt-3 list-disc ml-4;
+}
+:deep(.vacancy-description ol) {
+  @apply space-y-2 mt-3 list-decimal ml-4;
+}
+:deep(.vacancy-description p) {
+  @apply mt-2;
+}
+:deep(.vacancy-description h2) {
+  @apply mt-3 text-lg font-bold leading-7 text-gray-900 sm:truncate sm:text-xl;
+}
+:deep(.vacancy-description h3) {
+  @apply mt-3 font-bold text-gray-900 sm:truncate text-base sm:text-lg;
+}
+:deep(.vacancy-description h4) {
+  @apply mt-3 font-bold text-gray-900 sm:truncate text-base sm:text-lg;
+}
+:deep(.vacancy-description h5) {
+  @apply mt-3 font-bold text-gray-900 sm:truncate text-base sm:text-lg;
+}
 </style>
