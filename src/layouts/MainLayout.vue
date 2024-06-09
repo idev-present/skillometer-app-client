@@ -22,7 +22,7 @@
             </router-link>
           </div>
         </div>
-        <div class="hidden lg:ml-6 lg:flex lg:items-center">
+        <div v-if="isAuth" class="hidden lg:ml-6 lg:flex lg:items-center">
           <router-link to="/notification" class="relative mr-3 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none">
             <span class="absolute top-0 right-0 bg-blue-600 text-white font-bold text-xs rounded-full w-4 h-4 flex items-center justify-center">
               2
@@ -44,14 +44,22 @@
                     {{ item.name }}
                   </router-link>
                 </MenuItem>
-                <MenuItem v-slot="{ active }">
-                  <span :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer']">
+                <MenuItem @click="logout" v-slot="{ active }">
+                  <div :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700 cursor-pointer']">
                     Выйти
-                  </span>
+                  </div>
                 </MenuItem>
               </MenuItems>
             </transition>
           </Menu>
+        </div>
+        <div
+            v-else
+            @click="singIn"
+            class="hidden lg:flex font-semibold cursor-pointer leading-6 text-gray-600 hover:text-gray-800 transform"
+        >
+          <ArrowLeftEndOnRectangleIcon class="h-6 w-6 mr-1" aria-hidden="true" />
+          Войти
         </div>
       </nav>
       <!--mobile-->
@@ -59,7 +67,7 @@
         <div class="fixed inset-0 z-50" />
         <DialogPanel class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div class="flex items-center justify-between">
-            <router-link to="/" class="-mx-1.5 -mt-2 p-1.5">
+            <router-link to="/" @click="mobileMenuOpen = false" class="-mx-1.5 -mt-2 p-1.5">
               <img class="h-8 w-auto" src="https://www.reksoft.ru/wp-content/uploads/2019/05/logo.png" alt="" />
             </router-link>
             <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700" @click="mobileMenuOpen = false">
@@ -69,15 +77,16 @@
           <div class="mt-6 flow-root">
             <div class="-my-6 divide-y divide-gray-500/10">
               <div class="space-y-2 py-6">
-                <a v-for="item in navigation"
+                <router-link v-for="item in navigation"
                    :key="item.name"
-                   :href="item.href"
+                   :to="item.href"
+                   @click="mobileMenuOpen = false"
                    class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                   {{ item.name }}
-                </a>
+                </router-link>
               </div>
-              <div class="border-t -mx-3 border-gray-200 pb-3 pt-4">
-                <div class="flex items-center px-4">
+              <div v-if="isAuth" class="border-t -mx-3 border-gray-200 pb-3 pt-4">
+                <div class="flex items-center px-3">
                   <div class="flex-shrink-0">
                     <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
                   </div>
@@ -85,24 +94,36 @@
                     <div class="text-base font-medium text-gray-800">Tom Cook</div>
                     <div class="text-sm font-medium text-gray-500">tom@example.com</div>
                   </div>
-                  <a href="/notification" class="relative ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none">
+                  <router-link to="/notification" @click="mobileMenuOpen = false" class="relative ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none">
                     <span class="absolute top-0 right-0 bg-blue-600 text-white font-bold text-xs rounded-full w-4 h-4 flex items-center justify-center">
                       2
                     </span>
                     <BellIcon class="h-6 w-6" aria-hidden="true" />
-                  </a>
+                  </router-link>
                 </div>
                 <div class="space-y-2 py-6">
-                  <a
+                  <router-link
                       v-for="item in userNavigation"
                       :key="item.name"
-                      :href="item.href"
+                      :to="item.href"
+                      @click="mobileMenuOpen = false"
                       class="block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                     {{ item.name }}
-                  </a>
-                  <span class="block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                  </router-link>
+                  <div
+                      @click="logout"
+                      class="block cursor-pointer rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                     Выйти
-                  </span>
+                  </div>
+                </div>
+              </div>
+              <div v-else class="pt-4">
+                <div
+                    @click="singIn"
+                    class="flex items-center cursor-pointer rounded-lg py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >
+                  <ArrowLeftEndOnRectangleIcon class="h-6 w-6 mr-1" aria-hidden="true" />
+                  Войти
                 </div>
               </div>
             </div>
@@ -118,9 +139,10 @@
 
 <script setup>
 import { RouterView } from 'vue-router'
-import { ref } from 'vue'
-import { Dialog, DialogPanel, MenuButton, Menu, MenuItem, MenuItems, DisclosureButton } from '@headlessui/vue'
-import { Bars3Icon, XMarkIcon, BellIcon } from '@heroicons/vue/24/outline'
+import {computed, onMounted, ref} from 'vue'
+import { Dialog, DialogPanel, MenuButton, Menu, MenuItem, MenuItems } from '@headlessui/vue'
+import { Bars3Icon, XMarkIcon, BellIcon, ArrowLeftEndOnRectangleIcon } from '@heroicons/vue/24/outline'
+import {useUserStore} from "@/app/store/modules/user.js";
 
 const navigation = [
   { name: 'Вакансии', href: '/vacancy' },
@@ -130,6 +152,30 @@ const userNavigation = [
   { name: 'Профиль', href: '/profile' },
   { name: 'Резюме', href: '/resume' },
 ]
+const isLoading = ref(false)
+
+//* store
+const userStore = useUserStore()
 
 const mobileMenuOpen = ref(false)
+
+const isAuth = computed(() => {
+  return userStore?.isAuth || false
+})
+
+const singIn = () => {
+
+}
+
+const logout = () => {
+  console.log('logout')
+  mobileMenuOpen.value = false
+}
+
+onMounted(async () => {
+  isLoading.value = true
+  await userStore.fillUser().finally(() => {
+    isLoading.value = false
+  })
+})
 </script>

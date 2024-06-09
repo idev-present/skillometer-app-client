@@ -38,8 +38,8 @@
     <div class="mt-4 bg-white py-4 px-4 sm:px-6 sm:py-6 rounded-xl shadow-sm ring-1 ring-gray-900/5">
       <div class="flex justify-between">
         <div class="flex items-center gap-x-4 text-xs">
-          <date :date="news.date" class="text-gray-500">{{ news.date }}</date>
-          <time :time="news.time" class="text-gray-500">{{ news.time }}</time>
+          <div class="text-gray-500">{{ news.date }}</div>
+          <div class="text-gray-500">{{ news.time }}</div>
         </div>
           <button type="button" class="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
             <EyeIcon class="h-5 w-5" aria-hidden="true" />

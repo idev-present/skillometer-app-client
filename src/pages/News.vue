@@ -5,71 +5,74 @@
     </h1>
     <!-- loading -->
     <div v-if="!isLoading" class="divide-y divide-gray-200 lg:col-span-9">
-    <!-- post -->
-    <router-link
-      v-for="(item, index) in posts"
-      :key="index"
-      :to="`/news/${item.id}`"
-    >
-      <article
-        class="hover:bg-gray-50 mt-4 bg-white py-4 px-4 sm:px-6 sm:py-6 rounded-xl relative isolate flex flex-col gap-8 lg:flex-row shadow-sm ring-1 ring-gray-900/5"
+      <!-- post -->
+      <router-link
+        v-for="(item, index) in posts"
+        :key="index"
+        :to="`/news/${item.id}`"
       >
-        <div
-          class="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:w-64 lg:shrink-0"
+        <article
+          class="hover:bg-gray-50 mt-4 bg-white py-4 px-4 sm:px-6 sm:py-6 rounded-xl relative isolate flex flex-col gap-8 lg:flex-row shadow-sm ring-1 ring-gray-900/5"
         >
-          <img
-            :src="item.imageUrl"
-            alt=""
-            class="absolute inset-0 h-full w-full rounded-2xl bg-gray-50 object-cover"
-          />
           <div
-            class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10"
-          />
-        </div>
-        <div class="w-full flex justify-between flex-col">
-          <div>
-            <div class="flex items-center gap-x-4 text-xs">
-            <date :date="item.date" class="text-gray-500">{{ item.date }}</date>
-            <time :time="item.time" class="text-gray-500">{{ item.time }}</time>
+            class="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:w-64 lg:shrink-0"
+          >
+            <img
+              :src="item.imageUrl"
+              alt=""
+              class="absolute inset-0 h-full w-full rounded-2xl bg-gray-50 object-cover"
+            />
+            <div
+              class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10"
+            />
           </div>
-          <div class="group relative mt-1.5">
-            <h3 class=" text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-              <a :href="item.href">
-                <span class="absolute inset-0" />
-                {{ item.title }}
-              </a>
-            </h3>
-            <p class="mt-4 text-sm leading-6 text-gray-600 line-clamp-4">{{ item.description }}</p>
-          </div>
-          </div>
-          <div class="flex pt-4">
-            <div class="relative flex items-center gap-x-4">
-              <img
-                :src="item.author.imageUrl"
-                alt=""
-                class="h-10 w-10 rounded-full bg-gray-50"
-              />
-              <div class="text-sm leading-6">
-                <p class="font-semibold text-gray-900">
-                  <a :href="item.author.href">
-                    <span class="absolute inset-0" />
-                    {{ item.author.name }}
-                  </a>
-                </p>
-                <p class="text-gray-600">{{ item.author.role }}</p>
+          <div class="w-full flex justify-between flex-col">
+            <div>
+              <div class="flex items-center gap-x-4 text-xs">
+              <div class="text-gray-500">{{ item.date }}</div>
+              <div class="text-gray-500">{{ item.time }}</div>
+            </div>
+            <div class="group relative mt-1.5">
+              <h3 class=" text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+                <a :href="item.href">
+                  <span class="absolute inset-0" />
+                  {{ item.title }}
+                </a>
+              </h3>
+              <p class="mt-4 text-sm leading-6 text-gray-600 line-clamp-4">{{ item.description }}</p>
+            </div>
+            </div>
+            <div class="flex pt-4">
+              <div class="relative flex items-center gap-x-4">
+                <img
+                  :src="item.author.imageUrl"
+                  alt=""
+                  class="h-10 w-10 rounded-full bg-gray-50"
+                />
+                <div class="text-sm leading-6">
+                  <p class="font-semibold text-gray-900">
+                    <a :href="item.author.href">
+                      <span class="absolute inset-0" />
+                      {{ item.author.name }}
+                    </a>
+                  </p>
+                  <p class="text-gray-600">{{ item.author.role }}</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </article>
-    </router-link>
-  </div>
-  <loading class="py-40 divide-y divide-gray-200 lg:col-span-9" v-else />
+        </article>
+      </router-link>
+    </div>
+  <loading v-else class="py-40 divide-y divide-gray-200 lg:col-span-9" />
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
+import Loading from "@/shared/Loading.vue";
+const isLoading = ref(false)
+
 const posts = ref([
   {
     id: 1,
