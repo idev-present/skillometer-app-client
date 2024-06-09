@@ -296,7 +296,7 @@
                       </Listbox>
                     </div>
                   </div>
-
+<!--                  Специализация/зп-->
                   <div class="mt-4 grid grid-cols-12 gap-6">
                     <div class="col-span-12 sm:col-span-6">
                       <Listbox as="div" v-model="user.selectedDivision">
@@ -363,6 +363,31 @@
                     </div>
                   </div>
 
+<!--                  навыки-->
+                  <div class="mt-4 grid grid-cols-12 gap-6">
+                    <div class="col-span-12">
+                      <label class="block text-sm font-medium leading-6 text-gray-900">
+                        Профессиональные навыки
+                      </label>
+                      <p class="mt-0.5 text-sm text-gray-500">
+                        Выберите до десяти своих профессиональных навыков, вначале укажите самые важные. Точный стек навыков поможет нам подбирать для вас подходящие вакансии и курсы.
+                      </p>
+                      <multiselect
+                          class="mt-1"
+                          v-model="valueSkill"
+                          placeholder="Найдите или добавьте тег"
+                          :show-labels="false"
+                          label="name"
+                          track-by="id"
+                          :options="skillList"
+                          :multiple="true"
+                          :taggable="true"
+                          @tag="addTagSkill"
+                      />
+                    </div>
+                  </div>
+
+<!--                  дополнительно-->
                   <div class="mt-4 grid grid-cols-12 gap-6">
                     <div class="col-span-12">
                       <label class="block text-sm font-medium leading-6 text-gray-900">
@@ -396,6 +421,7 @@
                   </div>
                 </div>
 
+<!--                кнопки-->
                 <div class="flex justify-end gap-x-3 px-4 py-4 sm:px-6">
                   <button type="button"
                           class="w-full sm:w-fit border rounded-md bg-white px-5 py-2.5 text-sm font-semibold tr text-gray-600 shadow-sm hover:bg-gray-100 outline-0">
@@ -425,10 +451,6 @@ import {
   ListboxButton, ListboxLabel,
   ListboxOption,
   ListboxOptions,
-  Switch,
-  SwitchDescription,
-  SwitchGroup,
-  SwitchLabel,
 } from '@headlessui/vue'
 import {
   BellIcon,
@@ -437,7 +459,8 @@ import {
 } from '@heroicons/vue/24/outline'
 import {useDirectoriesStore} from "@/app/store/modules/directories.js";
 import {CheckIcon, ChevronUpDownIcon} from "@heroicons/vue/20/solid/index.js";
-// import axios from "axios";
+import Multiselect from 'vue-multiselect'
+import "vue-multiselect/dist/vue-multiselect.css"
 
 const isLoading = ref(false)
 
@@ -493,7 +516,11 @@ const divisionList = computed(() => {
 const cityList = computed(() => {
   return directoriesStore?.cityList || []
 })
+const skillList = computed(() => {
+  return directoriesStore?.skillList || []
+})
 const inputValue = ref('')
+const valueSkill = ref([])
 
 const inputPrice = (value) => {
   const regex = /^(\d+(\.\d{0,2})?)?$/;
@@ -506,11 +533,17 @@ const inputPrice = (value) => {
   }
 }
 
+const addTagSkill = (newTag) => {
+  // this.options.push(newTag)
+  valueSkill.value.push(newTag)
+}
+
 onMounted(async () => {
   isLoading.value = true
   await Promise.all([
     directoriesStore.fillCurrencyList(),
     directoriesStore.fillCityList(),
+    directoriesStore.fillSkillList(),
     directoriesStore.fillEmploymentTypeList(),
     directoriesStore.fillDivisionList(),
     directoriesStore.fillQualificationList(),
@@ -546,3 +579,26 @@ onMounted(async () => {
   });
 })
 </script>
+
+<style scoped>
+:deep(.multiselect__input) {
+  font-size: 14px;
+  outline: none;
+  box-shadow: none;
+}
+:deep(.multiselect__tags) {
+  @apply block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-gray-300 placeholder:text-gray-400 outline-0 sm:text-sm sm:leading-6;
+}
+:deep(.multiselect__option) {
+  font-size: 0.875rem;
+  height: 30px;
+  &:after {
+    display: none;
+  }
+}
+:deep(.multiselect__single) {
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+  margin-top: 0.2rem;
+}
+</style>

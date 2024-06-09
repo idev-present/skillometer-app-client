@@ -12,6 +12,7 @@ export const useDirectoriesStore = defineStore({
             employmentTypeList: [],
             divisionList: [],
             qualificationList: [],
+            skillList: [],
         }
     },
     actions: {
@@ -91,6 +92,22 @@ export const useDirectoriesStore = defineStore({
                     .catch((err) => {
                         console.error(err)
                         toast.error(err?.message || "Ошибка загрузки списка квалификации! Пожалуйста, попробуйте позже")
+                        reject()
+                    })
+            })
+        },
+        // skill List
+        fillSkillList(payload = null) {
+            return new Promise((resolve, reject) => {
+                ApiService
+                    .get("/dict/skill", payload)
+                    .then((res) => {
+                        resolve()
+                        this.skillList = res || []
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        toast.error(err?.message || "Ошибка загрузки списка навыков! Пожалуйста, попробуйте позже")
                         reject()
                     })
             })
