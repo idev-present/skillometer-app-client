@@ -138,7 +138,7 @@
 </template>
 
 <script setup>
-import { RouterView } from 'vue-router'
+import {RouterView} from 'vue-router'
 import {computed, onMounted, ref} from 'vue'
 import { Dialog, DialogPanel, MenuButton, Menu, MenuItem, MenuItems } from '@headlessui/vue'
 import { Bars3Icon, XMarkIcon, BellIcon, ArrowLeftEndOnRectangleIcon } from '@heroicons/vue/24/outline'
@@ -163,8 +163,12 @@ const isAuth = computed(() => {
   return userStore?.isAuth || false
 })
 
-const singIn = () => {
-
+const singIn = async () => {
+  isLoading.value = true
+  const url = window.location.href
+  await userStore.auth(url).finally(() => {
+    isLoading.value = false
+  })
 }
 
 const logout = () => {
