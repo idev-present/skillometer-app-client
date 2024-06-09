@@ -87,27 +87,18 @@
     <!-- description cards -->
     <div class="divide-y mt-3 divide-gray-100 overflow-hidden bg-white shadow-sm ring-1 ring-gray-900/5 rounded-xl">
       <div class="relative flex justify-between gap-x-6 px-4 py-5 sm:px-6">
-        <div class="min-w-0 flex-1">
+        <div class="vacancy_description min-w-0 flex-1">
           <h2 class="text-xl font-bold leading-7 text-gray-900 sm:truncate sm:text-2xl sm:tracking-tight border-b-2 pb-3">
             Описание вакансии
           </h2>
-          <div class="mt-2 flex flex-col text-gray-900">
-            <p class="text-lg font-bold">О компании и команде</p>
-            <p class="mt-2 font-bold">Международная IT-компания, которая существует с 2006 года.</p>
-            <div>
-              <p class="mt-2">В данный момент мы развиваем веб-приложение Guider - это международный IT-стартап, мы создаём справочник компаний с картой городов в Коста-Рике.</p>
-              <p class="mt-2">Помогаем жителям и туристам выбирать, как провести свой досуг и находить актуальную информацию о местных сервисах и услугах.</p>
-              <p class="mt-2">Выпустили MVP, есть первые продажи подписок, находимся на предпосевной стадии финансирования.</p>
-              <p class="mt-2">Все вопросы и предложения присылайте на этот адрес data@guider.pro</p>
-            </div>
+          <div class="mt-4 " v-html="vacancyItem?.description"/>
+          <div>
+            <div class="mt-4 text-lg font-bold leading-7 text-gray-900 sm:truncate sm:text-xl">О компании</div>
+            <div v-html="vacancyItem?.team"/>
           </div>
           <div>
-            <p class="mt-2 text-lg font-bold">Условия работы</p>
-            <p class="mt-2 font-bold">На данный момент наш проект не приносит дохода, поэтому оплата за работу не предусмотрена.</p>
-            <p class="mt-2">Вы можете самостоятельно выбрать, сколько времени будете уделять работе в нашей команде. </p>
-            <p class="mt-2">Мы, безусловно, уделяем больше времени тем, кто достигает больших результатов и приносит больше пользы проекту.</p>
-            <p class="mt-2">Вы будете работать под наставничеством непосредственно опытного Тимлида проекта.</p>
-            <p class="mt-2">Перед началом работы необходимо подписать соглашение о передаче прав на продукт, с которым вы будете работать. Все имущественные права на созданные материалы принадлежат нашей компании.</p>
+            <div class="mt-4 text-lg font-bold leading-7 text-gray-900 sm:truncate sm:text-xl">Ожидания от кандидата</div>
+            <div v-html="vacancyItem?.todo"/>
           </div>
         </div>
       </div>
@@ -120,8 +111,8 @@
           <h2 class="text-xl font-bold leading-7 text-gray-900 sm:truncate sm:text-2xl sm:tracking-tight border-b-2 pb-3">
             Ваш отклик
           </h2>
-          <div class="mt-2 flex flex-col text-gray-900">
-            <p class="text-lg font-bold">Сопроводительное письмо</p>
+          <div class="mt-4 flex flex-col text-gray-900">
+            <p class="text-lg font-bold leading-7 text-gray-900 sm:truncate sm:text-xl">Сопроводительное письмо</p>
             <div>
               <p class="mt-2">Работодатель прежде всего смотрит на ваш профиль, но вы также можете сопроводить свой отклик парой слов, чтобы привлечь внимание к своим самым важным профессиональным или личным качествам.</p>
             </div>
@@ -202,3 +193,7 @@ onMounted(async() => {
   });
 })
 </script>
+
+<style scoped>
+.vacancy_description {}
+</style>
