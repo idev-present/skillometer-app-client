@@ -8,6 +8,7 @@ export const useVacancyStore = defineStore({
     state: () => {
         return {
             vacancyList: [],
+            vacancyItem: null,
         }
     },
     actions: {
@@ -27,5 +28,21 @@ export const useVacancyStore = defineStore({
                     })
             })
         },
+        // Vacancy Item
+        fillVacancyItem(payload = null) {
+        return new Promise((resolve, reject) => {
+            ApiService
+                .get(`/vacancy/${payload}`, null)
+                .then((res) => {
+                    resolve(res)
+                    this.vacancyItem = res || null
+                })
+                .catch((err) => {
+                    console.error(err)
+                    toast.error(err?.message || "Ошибка загрузки вакансии! Пожалуйста, попробуйте позже")
+                    reject()
+                })
+        })
+    },
     },
 })

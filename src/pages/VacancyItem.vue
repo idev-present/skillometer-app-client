@@ -29,8 +29,13 @@
           <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl">
             {{vacancyItem.name}}
           </h2>
-          <div class="mt-2 flex items-center font-bold text-sm text-green-600">
+          <!-- <div class="mt-2 flex items-center font-bold text-sm text-green-600">
             250 000 &ndash; 800 000 ₽
+          </div> -->
+          <div v-if="vacancyItem?.salary_to || vacancyItem?.salary_from" class="mt-1 flex items-center font-bold text-green-600">
+            <span>{{formattedNumberValue(vacancyItem?.salary_from || 0)}}</span>
+            <span v-if="vacancyItem?.salary_to">&nbsp;&ndash; {{formattedNumberValue(vacancyItem?.salary_to || 0) }} </span>
+            <span>&nbsp;{{vacancyItem?.currency?.value || "₽"}}</span>
           </div>
           <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
             <div class="mt-2 flex items-center text-sm text-gray-500">
@@ -106,13 +111,59 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { onMounted, computed, ref } from 'vue'
 import { ChevronRightIcon, BriefcaseIcon, MapPinIcon, CalendarIcon, ChevronLeftIcon } from '@heroicons/vue/20/solid'
+import {useVacancyStore} from "@/app/store/modules/vacancy.js";
+import Loading from "@/shared/Loading.vue";
+import {useDirectoriesStore} from "@/app/store/modules/directories.js";
+import { useRoute } from 'vue-router'
 
-const vacancyItem = ref({
-  name: 'Тестировщик роботизированных процессов',
-  tags: ['Инженер по ручному тестированию', 'Node JS', 'Python'],
-  location: 'Полный рабочий день',
-  typeEmployment: 'Можно удалённо'
+const router = useRoute()
+
+const isLoading = ref(false)
+
+//* store
+const vacancyStore = useVacancyStore()
+const directoriesStore = useDirectoriesStore()
+
+const employmentTypeList = computed(() => {
+  return directoriesStore?.employmentTypeList || []
+})
+const divisionList = computed(() => {
+  return directoriesStore?.divisionList || []
+})
+const qualificationList = computed(() => {
+  return directoriesStore?.qualificationList || []
+})
+const cityList = computed(() => {
+  return directoriesStore?.cityList || []
+})
+
+const vacancyItem = computed(() => {
+  return {
+    ...vacancyStore?.vacancyItem,
+    employmentType: employmentTypeList?.value?.find((type) => type?.id === vacancyStore?.vacancyItem?.employment_type_id) || null,
+    skills: vacancyStore?.vacancyItem?.skill_set?.split(',') || [],
+    division: divisionList?.value?.find((type) => type?.id === vacancyStore?.vacancyItem?.division_id) || null,
+    qualification: qualificationList?.value?.find((type) => type?.id === vacancyStore?.vacancyItem?.qualification_id) || null,
+    city: cityList?.value?.find((type) => type?.habr_alias === vacancyStore?.vacancyItem?.city_id) || null,
+  }
+});
+const formattedNumberValue = ((number) => {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+});
+
+onMounted(async() => {
+  isLoading.value = true
+  await Promise.all([
+    directoriesStore.fillCityList(),
+    directoriesStore.fillEmploymentTypeList(),
+    directoriesStore.fillDivisionList(),
+    directoriesStore.fillQualificationList(),
+  ]).then(() => {
+    vacancyStore.fillVacancyItem(router.params.id)
+  }).finally(() => {
+    isLoading.value = false
+  });
 })
 </script>

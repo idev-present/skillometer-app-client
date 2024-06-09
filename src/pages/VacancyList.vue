@@ -24,7 +24,7 @@
       >
         <div class="min-w-0 flex-1">
           <h2 class="text-xl font-bold leading-7 text-gray-900 sm:text-2xl sm:tracking-tight">
-            {{item.name}}
+            {{item.name}} 
           </h2>
           <div v-if="item?.salary_to || item?.salary_from" class="mt-1 flex items-center font-bold text-green-600">
             <span>{{formattedNumberValue(item?.salary_from || 0)}}</span>
