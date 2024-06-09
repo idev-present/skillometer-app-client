@@ -189,6 +189,35 @@
                 </div>
                 <div class="mt-4 grid grid-cols-12 gap-6">
                   <div class="col-span-12">
+                    <Listbox as="div" v-model="user.city">
+                      <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">
+                        Город
+                      </ListboxLabel>
+                      <div class="relative mt-0.5">
+                        <ListboxButton class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none sm:text-sm sm:leading-6">
+                          <span class="block truncate">{{ user?.city?.name || '&nbsp;' }}</span>
+                          <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                            <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+                          </span>
+                        </ListboxButton>
+                        <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
+                          <ListboxOptions class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                            <ListboxOption as="template" v-for="(item, index) in cityList" :key="index" :value="item" v-slot="{ active, selected }">
+                              <li :class="[active ? 'bg-blue-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
+                                <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">{{ item.name }}</span>
+                                <span v-if="selected" :class="[active ? 'text-white' : 'text-blue-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
+                                  <CheckIcon class="h-5 w-5" aria-hidden="true" />
+                                </span>
+                              </li>
+                            </ListboxOption>
+                          </ListboxOptions>
+                        </transition>
+                      </div>
+                    </Listbox>
+                  </div>
+                </div>
+                <div class="mt-4 grid grid-cols-12 gap-6">
+                  <div class="col-span-12">
                     <label
                         class="block text-sm font-medium leading-6 text-gray-900">
                       О себе
@@ -335,7 +364,6 @@
                   </div>
 
                   <div class="mt-4 grid grid-cols-12 gap-6">
-
                     <div class="col-span-12">
                       <label class="block text-sm font-medium leading-6 text-gray-900">
                         Дополнительно
@@ -351,7 +379,7 @@
                           <label for="relocation" class="font-medium text-gray-900">Готов к переезду</label>
                         </div>
                       </div>
-                      <div class="mt-2 relative flex items-start">
+                      <div class="mt-1 relative flex items-start">
                         <div class="flex h-6 items-center">
                           <input
                               id="remote"
@@ -368,7 +396,7 @@
                   </div>
                 </div>
 
-                <div class="mt-4 flex justify-end gap-x-3 px-4 py-4 sm:px-6">
+                <div class="flex justify-end gap-x-3 px-4 py-4 sm:px-6">
                   <button type="button"
                           class="w-full sm:w-fit border rounded-md bg-white px-5 py-2.5 text-sm font-semibold tr text-gray-600 shadow-sm hover:bg-gray-100 outline-0">
                     Отменить
@@ -431,7 +459,8 @@ const user = ref({
   selectedCurrency: null,
   day: null,
   month: null,
-  year: null
+  year: null,
+  city: null
 })
 const days = ref(Array.from({ length: 31 }, (v, k) => k + 1));
 const months = ref([
@@ -461,29 +490,10 @@ const employmentTypeList = computed(() => {
 const divisionList = computed(() => {
   return directoriesStore?.divisionList || []
 })
+const cityList = computed(() => {
+  return directoriesStore?.cityList || []
+})
 const inputValue = ref('')
-
-// const loadAddressSuggest = async (e) => {
-//   const apiUrl = import.meta.env.VITE_DADATA_API_URL;
-//   const token = import.meta.env.VITE_DADATA_API_KEY;
-//   try {
-//     const res = await axios.post(
-//         apiUrl,
-//         {
-//           query: e,
-//           count: 10,
-//         },
-//         {
-//           headers: {
-//             Authorization: `Token ${token}`,
-//           },
-//         }
-//     );
-//     console.log(1, res.data)
-//   } catch (err) {
-//     console.error(err);
-//   }
-// };
 
 const inputPrice = (value) => {
   const regex = /^(\d+(\.\d{0,2})?)?$/;
