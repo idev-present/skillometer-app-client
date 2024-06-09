@@ -1,5 +1,7 @@
 <template>
   <div class="">
+
+    <!-- navigation -->
     <div>
       <nav class="sm:hidden" aria-label="Back">
         <router-link to="/vacancy" class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700">
@@ -23,42 +25,66 @@
         </ol>
       </nav>
     </div>
+
+    <!-- cards -->
     <div class="divide-y mt-3 divide-gray-100 overflow-hidden bg-white shadow-sm ring-1 ring-gray-900/5 rounded-xl">
       <div class="relative flex justify-between gap-x-6 px-4 py-5 sm:px-6">
         <div class="min-w-0 flex-1">
           <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl">
             {{vacancyItem.name}}
           </h2>
-          <!-- <div class="mt-2 flex items-center font-bold text-sm text-green-600">
-            250 000 &ndash; 800 000 ₽
-          </div> -->
           <div v-if="vacancyItem?.salary_to || vacancyItem?.salary_from" class="mt-1 flex items-center font-bold text-green-600">
             <span>{{formattedNumberValue(vacancyItem?.salary_from || 0)}}</span>
             <span v-if="vacancyItem?.salary_to">&nbsp;&ndash; {{formattedNumberValue(vacancyItem?.salary_to || 0) }} </span>
             <span>&nbsp;{{vacancyItem?.currency?.value || "₽"}}</span>
           </div>
           <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
-            <div class="mt-2 flex items-center text-sm text-gray-500">
+            <div v-if="vacancyItem?.employmentType?.name" class="mt-2 flex items-center text-sm text-gray-500">
               <BriefcaseIcon class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-              Полный рабочий день
+              {{vacancyItem?.employmentType?.name}}
             </div>
-            <div class="mt-2 flex items-center text-sm text-gray-500">
+            <div v-if="vacancyItem?.city?.name" class="mt-2 flex items-center text-sm text-gray-500">
+              <MapIcon class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
+              {{vacancyItem?.city?.name}}
+            </div>
+            <div v-if="vacancyItem?.is_remote" class="mt-2 flex items-center text-sm text-gray-500">
               <MapPinIcon class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-              Удаленная
+              Удаленная работа
             </div>
           </div>
-          <div class="mt-3 flex flex-col sm:flex-row sm:flex-wrap sm:space-x-6">
-            <div v-for="(tag, index) in vacancyItem.tags" :key="index">
-              {{tag}}
+          <div class="mt-3 flex flex-col sm:flex-row sm:flex-wrap sm:space-x-2">
+            <div v-if="vacancyItem?.division?.name" class="flex items-center">
+              {{vacancyItem?.division?.name}}
+              <svg viewBox="0 0 2 2" class="hidden sm:flex h-0.5 w-0.5 ml-2 fill-current">
+                <circle cx="1" cy="1" r="1" />
+              </svg>
+            </div>
+            <div v-if="vacancyItem?.qualification?.name" class="flex items-center">
+              {{vacancyItem?.qualification?.name}}
+              <svg viewBox="0 0 2 2" class="hidden sm:flex h-0.5 w-0.5 ml-2 fill-current">
+                <circle cx="1" cy="1" r="1" />
+              </svg>
+            </div>
+            <div
+                v-for="(skill, index) in vacancyItem.skills"
+                :key="index"
+                class="flex items-center"
+            >
+              <svg v-if="index" viewBox="0 0 2 2" class="hidden sm:flex h-0.5 w-0.5 mr-2 fill-current">
+                <circle cx="1" cy="1" r="1" />
+              </svg>
+              {{skill}}
             </div>
           </div>
           <div class="mt-3 flex items-center text-sm text-gray-500">
             <CalendarIcon class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-            7 июня
+            {{formattedDateValue(vacancyItem.published_at)}}
           </div>
         </div>
       </div>
     </div>
+
+    <!-- description cards -->
     <div class="divide-y mt-3 divide-gray-100 overflow-hidden bg-white shadow-sm ring-1 ring-gray-900/5 rounded-xl">
       <div class="relative flex justify-between gap-x-6 px-4 py-5 sm:px-6">
         <div class="min-w-0 flex-1">
@@ -88,6 +114,8 @@
     </div>
     <div class="divide-y mt-3 divide-gray-100 overflow-hidden bg-white shadow-sm ring-1 ring-gray-900/5 rounded-xl">
       <div class="relative flex justify-between gap-x-6 px-4 py-5 sm:px-6">
+
+        <!-- Response -->
         <div class="min-w-0 flex-1">
           <h2 class="text-xl font-bold leading-7 text-gray-900 sm:truncate sm:text-2xl sm:tracking-tight border-b-2 pb-3">
             Ваш отклик
@@ -112,7 +140,7 @@
 
 <script setup>
 import { onMounted, computed, ref } from 'vue'
-import { ChevronRightIcon, BriefcaseIcon, MapPinIcon, CalendarIcon, ChevronLeftIcon } from '@heroicons/vue/20/solid'
+import { ChevronRightIcon, BriefcaseIcon, MapIcon, MapPinIcon, CalendarIcon, ChevronLeftIcon } from '@heroicons/vue/20/solid'
 import {useVacancyStore} from "@/app/store/modules/vacancy.js";
 import Loading from "@/shared/Loading.vue";
 import {useDirectoriesStore} from "@/app/store/modules/directories.js";
@@ -151,6 +179,13 @@ const vacancyItem = computed(() => {
 });
 const formattedNumberValue = ((number) => {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+});
+const formattedDateValue = ((date) => {
+  const dateRes = new Date(date);
+  const day = String(dateRes.getDate()).padStart(2, '0');
+  const month = String(dateRes.getMonth() + 1).padStart(2, '0');
+  const year = dateRes.getFullYear();
+  return `${day}.${month}.${year}`;
 });
 
 onMounted(async() => {
