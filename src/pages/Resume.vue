@@ -21,193 +21,244 @@
             </aside>
 
             <div v-if="!isLoading" class="divide-y divide-gray-200 lg:col-span-9">
-              <!-- Profile section -->
+              <!-- personal information -->
+              <h1 class="px-4 py-4 sm:p-4 text-2xl sm:text-3xl font-bold tracking-tight text-gray-900">
+                Резюме
+              </h1>
               <div class="px-4 py-6 sm:p-6 lg:pb-8">
                 <div>
-                  <h2 class="text-lg font-medium leading-6 text-gray-900">Резюме</h2>
+                  <h2 class="text-lg font-medium leading-6 text-gray-900">Личная информация</h2>
                   <p class="mt-1 text-sm text-gray-500">
                     Эта информация будет отображаться только работодателям
                   </p>
                 </div>
 
-<!--                <div class="col-span-full flex items-center gap-x-8">-->
-<!--                  <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="h-24 w-24 flex-none rounded-lg bg-gray-800 object-cover" />-->
-<!--                  <div>-->
-<!--                    <button type="button" class="rounded-md bg-white/10 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-white/20">Change avatar</button>-->
-<!--                    <p class="mt-2 text-xs leading-5 text-gray-400">JPG, GIF or PNG. 1MB max.</p>-->
-<!--                  </div>-->
-<!--                </div>-->
-
-                <div class="mt-3 flex flex-col lg:flex-row">
-                  <div class="flex-grow space-y-3">
-                    <div class="col-span-12 sm:col-span-6">
-                      <label
-                          for="first-name"
-                          class="block text-sm font-medium leading-6 text-gray-900">
-                        Имя
-                      </label>
-                      <input
-                          type="text"
-                          name="first-name"
-                          id="first-name"
-                          autocomplete="family-name"
-                          v-model="user.firstName"
-                          class="block mt-1 w-full rounded-md border-0 py-1.5 pl-3 pr-3 text-gray-900 shadow-sm ring-1 ring-gray-300 outline-0 placeholder:text-gray-400 sm:text-sm sm:leading-6">
-                    </div>
-                    <div class="col-span-12 sm:col-span-6">
-                      <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">
-                        Фамилия
-                      </label>
-                      <input type="text"
-                             name="last-name"
-                             id="last-name"
-                             autocomplete="first-name"
-                             v-model="user.lastName"
-                             class="block mt-1 w-full rounded-md border-0 py-1.5 pl-3 pr-3 text-gray-900 shadow-sm ring-1 ring-gray-300 outline-0 placeholder:text-gray-400 sm:text-sm sm:leading-6"
-                      />
-                    </div>
-                  </div>
-
-                  <div class="mt-6 flex-grow lg:ml-6 lg:mt-0 lg:flex-shrink-0 lg:flex-grow-0">
-                    <p class="text-sm font-medium leading-6 text-gray-900" aria-hidden="true">Аватарка</p>
-                    <div class="mt-2 lg:hidden">
-                      <div class="flex items-center">
-                        <div class="inline-block h-12 w-12 flex-shrink-0 overflow-hidden rounded-full" aria-hidden="true">
-                          <img class="h-full w-full rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
-                        </div>
-                        <div class="relative ml-5">
-                          <input id="mobile-user-photo" name="user-photo" type="file" class="peer absolute h-full w-full rounded-md opacity-0" />
-                          <label for="mobile-user-photo" class="pointer-events-none block rounded-md px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 peer-hover:ring-gray-400 peer-focus:ring-2 peer-focus:ring-sky-500">
-                            <span>Загрузить</span>
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="relative hidden overflow-hidden rounded-full lg:block">
-                      <img class="relative mt-1 h-28 w-28 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
-                      <label for="desktop-user-photo" class="absolute inset-0 flex h-full w-full items-center justify-center bg-black bg-opacity-75 text-sm font-medium text-white opacity-0 focus-within:opacity-100 hover:opacity-100">
-                        <span>Загрузить</span>
-                        <input type="file" id="desktop-user-photo" name="user-photo" class="absolute inset-0 h-full w-full cursor-pointer rounded-md border-gray-300 opacity-0" />
-                      </label>
-                    </div>
+                <div class="mt-4 col-span-full flex items-center gap-x-8">
+                  <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="h-24 w-24 flex-none rounded-lg bg-gray-800 object-cover" />
+                  <div>
+                    <button type="button"
+                            class="mt w-full sm:w-fit rounded-md bg-blue-600 px-5 py-2.5 text-sm font-semibold tr text-white shadow-sm hover:bg-blue-700 outline-0">
+                      Загрузить аватарку
+                    </button>
+                    <p class="mt-2 text-xs leading-5 text-gray-500">JPG, GIF or PNG. 1MB max.</p>
                   </div>
                 </div>
 
-                <div class="mt-3 grid grid-cols-12 gap-6">
+                <div class="mt-4 grid grid-cols-12 gap-6">
                   <div class="col-span-12 sm:col-span-6">
-                    <Listbox as="div" v-model="user.selectedEmploymentType">
-                      <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">
-                        Тип занятости
-                      </ListboxLabel>
-                      <div class="relative mt-0.5">
-                        <ListboxButton class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 outline-0 sm:text-sm sm:leading-6">
-                          <span class="block truncate">{{ user?.selectedEmploymentType?.name || '&nbsp;' }}</span>
-                          <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                            <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
-                          </span>
-                        </ListboxButton>
-                        <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
-                          <ListboxOptions class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                            <ListboxOption as="template" v-for="(type, index) in employmentTypeList" :key="index" :value="type" v-slot="{ active, selected }">
-                              <li :class="[active ? 'bg-blue-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
-                                <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">{{ type.name }}</span>
-                                <span v-if="selected" :class="[active ? 'text-white' : 'text-blue-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
-                                  <CheckIcon class="h-5 w-5" aria-hidden="true" />
-                                </span>
-                              </li>
-                            </ListboxOption>
-                          </ListboxOptions>
-                        </transition>
-                      </div>
-                    </Listbox>
-                  </div>
-
-                  <div class="col-span-12 sm:col-span-6">
-                    <Listbox as="div" v-model="user.selectedQualification">
-                      <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">
-                        Квалификация
-                      </ListboxLabel>
-                      <div class="relative mt-0.5">
-                        <ListboxButton class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none sm:text-sm sm:leading-6">
-                          <span class="block truncate">{{ user?.selectedQualification?.name || '&nbsp;' }}</span>
-                          <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                            <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
-                          </span>
-                        </ListboxButton>
-                        <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
-                          <ListboxOptions class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                            <ListboxOption as="template" v-for="(item, index) in qualificationList" :key="index" :value="item" v-slot="{ active, selected }">
-                              <li :class="[active ? 'bg-blue-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
-                                <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">{{ item.name }}</span>
-                                <span v-if="selected" :class="[active ? 'text-white' : 'text-blue-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
-                                  <CheckIcon class="h-5 w-5" aria-hidden="true" />
-                                </span>
-                              </li>
-                            </ListboxOption>
-                          </ListboxOptions>
-                        </transition>
-                      </div>
-                    </Listbox>
-                  </div>
-                </div>
-
-                <div class="mt-3 grid grid-cols-12 gap-6">
-                  <div class="col-span-12 sm:col-span-6">
-                    <Listbox as="div" v-model="user.selectedDivision">
-                      <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">
-                        Профессиональные навыки
-                      </ListboxLabel>
-                      <div class="relative mt-0.5">
-                        <ListboxButton class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none sm:text-sm sm:leading-6">
-                          <span class="block truncate">{{ user?.selectedDivision?.name || '&nbsp;' }}</span>
-                          <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                            <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
-                          </span>
-                        </ListboxButton>
-                        <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
-                          <ListboxOptions class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                            <ListboxOption as="template" v-for="(item, index) in divisionList" :key="index" :value="item" v-slot="{ active, selected }">
-                              <li :class="[active ? 'bg-blue-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
-                                <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">{{ item.name }}</span>
-                                <span v-if="selected" :class="[active ? 'text-white' : 'text-blue-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
-                                  <CheckIcon class="h-5 w-5" aria-hidden="true" />
-                                </span>
-                              </li>
-                            </ListboxOption>
-                          </ListboxOptions>
-                        </transition>
-                      </div>
-                    </Listbox>
-                  </div>
-
-                  <div class="col-span-12 sm:col-span-6">
-                    <label class="block text-sm font-medium leading-6 text-gray-900">
-                      Зарплата
+                    <label
+                        for="first-name"
+                        class="block text-sm font-medium leading-6 text-gray-900">
+                      Имя
                     </label>
-                    <div class="flex items-center">
-                      <input name="price"
-                             class="block mr-2 w-full rounded-md border-0 py-[5px] mt-0.5 pl-3 pr-3 text-gray-900 shadow-sm ring-1 ring-gray-300 outline-0 placeholder:text-gray-400 sm:text-sm sm:leading-6"
-                             @input="inputPrice"
-                             v-model="inputValue"
-                             placeholder="От"
-                      />
-                      <Listbox as="div" v-model="user.selectedCurrency">
-                        <div class="relative mt-0.5 w-[64px]">
+                    <input
+                        type="text"
+                        name="first-name"
+                        id="first-name"
+                        autocomplete="family-name"
+                        v-model="user.firstName"
+                        class="block mt-1 w-full rounded-md border-0 py-1.5 pl-3 pr-3 text-gray-900 shadow-sm ring-1 ring-gray-300 outline-0 placeholder:text-gray-400 sm:text-sm sm:leading-6">
+                  </div>
+                  <div class="col-span-12 sm:col-span-6">
+                    <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">
+                      Фамилия
+                    </label>
+                    <input type="text"
+                           name="last-name"
+                           id="last-name"
+                           autocomplete="first-name"
+                           v-model="user.lastName"
+                           class="block mt-1 w-full rounded-md border-0 py-1.5 pl-3 pr-3 text-gray-900 shadow-sm ring-1 ring-gray-300 outline-0 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
+
+                <div class="mt-4 grid grid-cols-12 gap-6">
+                  <div class="col-span-12">
+                    <label
+                        class="block text-sm font-medium leading-6 text-gray-900">
+                      Пол
+                    </label>
+                    <div class="mt-1 space-y-2">
+                      <div class="flex items-center gap-x-3">
+                        <input
+                            id="push-everything"
+                            name="push-notifications"
+                            type="radio"
+                            class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+                        <label for="push-everything" class="block text-sm font-medium leading-6 text-gray-900">
+                          Мужской
+                        </label>
+                      </div>
+                      <div class="flex items-center gap-x-3">
+                        <input
+                            id="push-email"
+                            name="push-notifications"
+                            type="radio"
+                            class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+                        <label for="push-email" class="block text-sm font-medium leading-6 text-gray-900">
+                          Женский
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-4 grid grid-cols-12 gap-6">
+                  <div class="col-span-12 sm:col-span-4">
+                    <Listbox as="div" v-model="user.day">
+                      <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">
+                        Дата рождения
+                      </ListboxLabel>
+                      <div class="relative mt-0.5">
+                        <ListboxButton class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none sm:text-sm sm:leading-6">
+                          <span class="block truncate">{{ user?.day || 'День' }}</span>
+                          <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                            <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+                          </span>
+                        </ListboxButton>
+                        <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
+                          <ListboxOptions class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                            <ListboxOption as="template" v-for="(item, index) in days" :key="index" :value="item" v-slot="{ active, selected }">
+                              <li :class="[active ? 'bg-blue-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
+                                <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">{{ item }}</span>
+                                <span v-if="selected" :class="[active ? 'text-white' : 'text-blue-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
+                                  <CheckIcon class="h-5 w-5" aria-hidden="true" />
+                                </span>
+                              </li>
+                            </ListboxOption>
+                          </ListboxOptions>
+                        </transition>
+                      </div>
+                    </Listbox>
+                  </div>
+                  <div class="col-span-12 sm:col-span-4">
+                    <Listbox as="div" v-model="user.month">
+                      <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">
+                        &nbsp;
+                      </ListboxLabel>
+                      <div class="relative mt-0.5">
+                        <ListboxButton class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none sm:text-sm sm:leading-6">
+                          <span class="block truncate">{{ user?.month?.name || 'Месяц' }}</span>
+                          <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                            <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+                          </span>
+                        </ListboxButton>
+                        <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
+                          <ListboxOptions class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                            <ListboxOption as="template" v-for="(item, index) in months" :key="index" :value="item" v-slot="{ active, selected }">
+                              <li :class="[active ? 'bg-blue-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
+                                <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">{{ item.name }}</span>
+                                <span v-if="selected" :class="[active ? 'text-white' : 'text-blue-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
+                                  <CheckIcon class="h-5 w-5" aria-hidden="true" />
+                                </span>
+                              </li>
+                            </ListboxOption>
+                          </ListboxOptions>
+                        </transition>
+                      </div>
+                    </Listbox>
+                  </div>
+                  <div class="col-span-12 sm:col-span-4">
+                    <Listbox as="div" v-model="user.year">
+                      <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">
+                        &nbsp;
+                      </ListboxLabel>
+                      <div class="relative mt-0.5">
+                        <ListboxButton class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none sm:text-sm sm:leading-6">
+                          <span class="block truncate">{{ user?.year || 'Год' }}</span>
+                          <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                            <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+                          </span>
+                        </ListboxButton>
+                        <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
+                          <ListboxOptions class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                            <ListboxOption as="template" v-for="(item, index) in years" :key="index" :value="item" v-slot="{ active, selected }">
+                              <li :class="[active ? 'bg-blue-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
+                                <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">{{ item }}</span>
+                                <span v-if="selected" :class="[active ? 'text-white' : 'text-blue-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
+                                  <CheckIcon class="h-5 w-5" aria-hidden="true" />
+                                </span>
+                              </li>
+                            </ListboxOption>
+                          </ListboxOptions>
+                        </transition>
+                      </div>
+                    </Listbox>
+                  </div>
+                </div>
+                <div class="mt-4 grid grid-cols-12 gap-6">
+                  <div class="col-span-12">
+                    <label
+                        class="block text-sm font-medium leading-6 text-gray-900">
+                      О себе
+                    </label>
+                    <p class="mt-0.5 text-sm text-gray-500">
+                      Расскажите о себе в подробностях. Минимальное количество символов — 50 <br/> (это примерно одно среднее предложение)
+                    </p>
+                    <textarea rows="4" name="comment" id="comment" class="mt-2 block px-3 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 placeholder:text-gray-400 outline-0 sm:text-sm sm:leading-6" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- специлизация -->
+              <div class="divide-y divide-gray-200">
+                <div class="px-4 py-6 sm:p-6 lg:pb-8 ">
+                  <div>
+                    <h2 class="text-lg font-medium leading-6 text-gray-900">Специлизация</h2>
+                    <p class="mt-1 text-sm text-gray-500">
+                      Заполните данные, чтобы мы могли рекомендовать вам вакансии, а вас — эйчарам и рекрутерам.
+                    </p>
+                  </div>
+                  <div class="mt-4 grid grid-cols-12 gap-6">
+                    <div class="col-span-12 sm:col-span-6">
+                      <Listbox as="div" v-model="user.selectedEmploymentType">
+                        <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">
+                          Тип занятости
+                        </ListboxLabel>
+                        <div class="relative mt-0.5">
                           <ListboxButton class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 outline-0 sm:text-sm sm:leading-6">
-                            <span class="block truncate">{{ user?.selectedCurrency?.value || '&nbsp;' }}</span>
+                            <span class="block truncate">{{ user?.selectedEmploymentType?.name || '&nbsp;' }}</span>
                             <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                              <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
-                            </span>
+                            <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+                          </span>
                           </ListboxButton>
                           <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
                             <ListboxOptions class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                              <ListboxOption as="template" v-for="(item, index) in currencyList" :key="index" :value="item" v-slot="{ active, selected }">
+                              <ListboxOption as="template" v-for="(type, index) in employmentTypeList" :key="index" :value="type" v-slot="{ active, selected }">
                                 <li :class="[active ? 'bg-blue-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
-                                  <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">{{ item.value }}</span>
+                                  <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">{{ type.name }}</span>
                                   <span v-if="selected" :class="[active ? 'text-white' : 'text-blue-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
-                                    <CheckIcon class="h-5 w-5" aria-hidden="true" />
-                                  </span>
+                                  <CheckIcon class="h-5 w-5" aria-hidden="true" />
+                                </span>
+                                </li>
+                              </ListboxOption>
+                            </ListboxOptions>
+                          </transition>
+                        </div>
+                      </Listbox>
+                    </div>
+
+                    <div class="col-span-12 sm:col-span-6">
+                      <Listbox as="div" v-model="user.selectedQualification">
+                        <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">
+                          Квалификация
+                        </ListboxLabel>
+                        <div class="relative mt-0.5">
+                          <ListboxButton class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none sm:text-sm sm:leading-6">
+                            <span class="block truncate">{{ user?.selectedQualification?.name || '&nbsp;' }}</span>
+                            <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                            <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+                          </span>
+                          </ListboxButton>
+                          <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
+                            <ListboxOptions class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                              <ListboxOption as="template" v-for="(item, index) in qualificationList" :key="index" :value="item" v-slot="{ active, selected }">
+                                <li :class="[active ? 'bg-blue-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
+                                  <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">{{ item.name }}</span>
+                                  <span v-if="selected" :class="[active ? 'text-white' : 'text-blue-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
+                                  <CheckIcon class="h-5 w-5" aria-hidden="true" />
+                                </span>
                                 </li>
                               </ListboxOption>
                             </ListboxOptions>
@@ -216,27 +267,105 @@
                       </Listbox>
                     </div>
                   </div>
-                </div>
-              </div>
 
-              <!-- Privacy section -->
-              <div class="divide-y divide-gray-200 pt-6">
-                <div class="px-4 sm:px-6">
-                  <div>
-                    <h2 class="text-lg font-medium leading-6 text-gray-900">Privacy</h2>
-                    <p class="mt-1 text-sm text-gray-500">Ornare eu a volutpat eget vulputate. Fringilla commodo amet.</p>
-                  </div>
-                  <ul role="list" class="mt-2 divide-y divide-gray-200">
-                    <SwitchGroup as="li" class="flex items-center justify-between py-4">
-                      <div class="flex flex-col">
-                        <SwitchLabel as="p" class="text-sm font-medium leading-6 text-gray-900" passive>Available to hire</SwitchLabel>
-                        <SwitchDescription class="text-sm text-gray-500">Nulla amet tempus sit accumsan. Aliquet turpis sed sit lacinia.</SwitchDescription>
+                  <div class="mt-4 grid grid-cols-12 gap-6">
+                    <div class="col-span-12 sm:col-span-6">
+                      <Listbox as="div" v-model="user.selectedDivision">
+                        <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">
+                          Специализация
+                        </ListboxLabel>
+                        <div class="relative mt-0.5">
+                          <ListboxButton class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none sm:text-sm sm:leading-6">
+                            <span class="block truncate">{{ user?.selectedDivision?.name || '&nbsp;' }}</span>
+                            <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                            <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+                          </span>
+                          </ListboxButton>
+                          <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
+                            <ListboxOptions class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                              <ListboxOption as="template" v-for="(item, index) in divisionList" :key="index" :value="item" v-slot="{ active, selected }">
+                                <li :class="[active ? 'bg-blue-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
+                                  <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">{{ item.name }}</span>
+                                  <span v-if="selected" :class="[active ? 'text-white' : 'text-blue-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
+                                  <CheckIcon class="h-5 w-5" aria-hidden="true" />
+                                </span>
+                                </li>
+                              </ListboxOption>
+                            </ListboxOptions>
+                          </transition>
+                        </div>
+                      </Listbox>
+                    </div>
+
+                    <div class="col-span-12 sm:col-span-6">
+                      <label class="block text-sm font-medium leading-6 text-gray-900">
+                        Зарплата
+                      </label>
+                      <div class="flex items-center">
+                        <input name="price"
+                               class="block mr-2 w-full rounded-md border-0 py-[5px] mt-0.5 pl-3 pr-3 text-gray-900 shadow-sm ring-1 ring-gray-300 outline-0 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                               @input="inputPrice"
+                               v-model="inputValue"
+                               placeholder="От"
+                        />
+                        <Listbox as="div" v-model="user.selectedCurrency">
+                          <div class="relative mt-0.5 w-[64px]">
+                            <ListboxButton class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 outline-0 sm:text-sm sm:leading-6">
+                              <span class="block truncate">{{ user?.selectedCurrency?.value || '&nbsp;' }}</span>
+                              <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                              <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+                            </span>
+                            </ListboxButton>
+                            <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
+                              <ListboxOptions class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                                <ListboxOption as="template" v-for="(item, index) in currencyList" :key="index" :value="item" v-slot="{ active, selected }">
+                                  <li :class="[active ? 'bg-blue-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
+                                    <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">{{ item.value }}</span>
+                                    <span v-if="selected" :class="[active ? 'text-white' : 'text-blue-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
+                                    <CheckIcon class="h-5 w-5" aria-hidden="true" />
+                                  </span>
+                                  </li>
+                                </ListboxOption>
+                              </ListboxOptions>
+                            </transition>
+                          </div>
+                        </Listbox>
                       </div>
-                      <Switch  :class="[true ? 'bg-teal-500' : 'bg-gray-200', 'relative ml-4 inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2']">
-                        <span aria-hidden="true" :class="[true ? 'translate-x-5' : 'translate-x-0', 'inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out']" />
-                      </Switch>
-                    </SwitchGroup>
-                  </ul>
+                    </div>
+                  </div>
+
+                  <div class="mt-4 grid grid-cols-12 gap-6">
+
+                    <div class="col-span-12">
+                      <label class="block text-sm font-medium leading-6 text-gray-900">
+                        Дополнительно
+                      </label>
+                      <div class="mt-1 relative flex items-start">
+                        <div class="flex h-6 items-center">
+                          <input id="relocation" aria-describedby="comments-description"
+                                 name="relocation"
+                                 type="checkbox"
+                                 class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+                        </div>
+                        <div class="ml-3 text-sm leading-6">
+                          <label for="relocation" class="font-medium text-gray-900">Готов к переезду</label>
+                        </div>
+                      </div>
+                      <div class="mt-2 relative flex items-start">
+                        <div class="flex h-6 items-center">
+                          <input
+                              id="remote"
+                              aria-describedby="candidates-description"
+                              name="remote"
+                              type="checkbox"
+                              class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+                        </div>
+                        <div class="ml-3 text-sm leading-6">
+                          <label for="remote" class="font-medium text-gray-900">Готов к удаленной работе</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 <div class="mt-4 flex justify-end gap-x-3 px-4 py-4 sm:px-6">
@@ -280,6 +409,7 @@ import {
 } from '@heroicons/vue/24/outline'
 import {useDirectoriesStore} from "@/app/store/modules/directories.js";
 import {CheckIcon, ChevronUpDownIcon} from "@heroicons/vue/20/solid/index.js";
+// import axios from "axios";
 
 const isLoading = ref(false)
 
@@ -298,8 +428,27 @@ const user = ref({
   selectedDivision: null,
   selectedEmploymentType: null,
   selectedQualification: null,
-  selectedCurrency: null
+  selectedCurrency: null,
+  day: null,
+  month: null,
+  year: null
 })
+const days = ref(Array.from({ length: 31 }, (v, k) => k + 1));
+const months = ref([
+  {key: 1, name: 'Январь'},
+  {key: 2, name: 'Февраль'},
+  {key: 3, name: 'Март'},
+  {key: 4, name: 'Апрель'},
+  {key: 5, name: 'Май'},
+  {key: 6, name: 'Июнь'},
+  {key: 7, name: 'Июль'},
+  {key: 8, name: 'Август'},
+  {key: 9, name: 'Сентябрь'},
+  {key: 10, name: 'Октябрь'},
+  {key: 11, name: 'Ноябрь'},
+  {key: 12, name: 'Декабрь'}
+]);
+const years = ref(Array.from({ length: 2024 - 1917 + 1 }, (_, i) => 1917 + i).reverse());
 const currencyList = computed(() => {
   return directoriesStore?.currencyList || []
 })
@@ -313,6 +462,28 @@ const divisionList = computed(() => {
   return directoriesStore?.divisionList || []
 })
 const inputValue = ref('')
+
+// const loadAddressSuggest = async (e) => {
+//   const apiUrl = import.meta.env.VITE_DADATA_API_URL;
+//   const token = import.meta.env.VITE_DADATA_API_KEY;
+//   try {
+//     const res = await axios.post(
+//         apiUrl,
+//         {
+//           query: e,
+//           count: 10,
+//         },
+//         {
+//           headers: {
+//             Authorization: `Token ${token}`,
+//           },
+//         }
+//     );
+//     console.log(1, res.data)
+//   } catch (err) {
+//     console.error(err);
+//   }
+// };
 
 const inputPrice = (value) => {
   const regex = /^(\d+(\.\d{0,2})?)?$/;
@@ -336,31 +507,32 @@ onMounted(async () => {
   ]).then(() => {
     // await applicantStore.fillApplicantList().then((res) => {
     // })
-  });
-  const res = {
-    "id": "ichiro18",
-    "user_id": "uuid",
-    "title": "Илья Журавлев",
-    "salary_from": 400000,
-    "currency": "RUR",
-    "qualification_id": "middle",
-    "division_id": "frontend_developer",
+  }).finally(() => {
+    const res = {
+      "id": "ichiro18",
+      "user_id": "uuid",
+      "title": "Илья Журавлев",
+      "salary_from": 400000,
+      "currency": "RUR",
+      "qualification_id": "middle",
+      "division_id": "frontend_developer",
 
-    "age": 29,
-    "experience": "8 лет и 7 месяцев",
-    "is_relocation": false,
-    "is_remote": true,
-    "last_visited": "2024-06-08T16:54:15",
-    "registered_at": "2024-06-08T16:54:16",
-    "search_status_id": "passive",
-    "city_id": "kirov",
-    "skill_set": "typescript,html,vue,javascript"
-  }
-  user.value = {
-    ...res,
-    firstName: res?.title?.split(' ')[0] || '',
-    lastName: res?.title?.split(' ')[1] || '',
-  }
-  isLoading.value = false
+      "age": 29,
+      "experience": "8 лет и 7 месяцев",
+      "is_relocation": false,
+      "is_remote": true,
+      "last_visited": "2024-06-08T16:54:15",
+      "registered_at": "2024-06-08T16:54:16",
+      "search_status_id": "passive",
+      "city_id": "kirov",
+      "skill_set": "typescript,html,vue,javascript"
+    }
+    user.value = {
+      ...res,
+      firstName: res?.title?.split(' ')[0] || '',
+      lastName: res?.title?.split(' ')[1] || '',
+    }
+    isLoading.value = false
+  });
 })
 </script>

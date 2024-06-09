@@ -46,7 +46,7 @@
       <div class="w-full mt-4">
         <Listbox as="div" v-model="selectedDivision">
           <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">
-            Профессиональные навыки
+            Специализация
           </ListboxLabel>
           <div class="relative mt-0.5">
             <ListboxButton class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none sm:text-sm sm:leading-6">
