@@ -13,6 +13,7 @@ export const useDirectoriesStore = defineStore({
             divisionList: [],
             qualificationList: [],
             skillList: [],
+            searchStatusList: []
         }
     },
     actions: {
@@ -92,6 +93,22 @@ export const useDirectoriesStore = defineStore({
                     .catch((err) => {
                         console.error(err)
                         toast.error(err?.message || "Ошибка загрузки списка квалификации! Пожалуйста, попробуйте позже")
+                        reject()
+                    })
+            })
+        },
+        // skill List
+        fillSearchStatusList(payload = null) {
+            return new Promise((resolve, reject) => {
+                ApiService
+                    .get("/dict/search_status", payload)
+                    .then((res) => {
+                        resolve()
+                        this.searchStatusList = res || []
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        toast.error(err?.message || "Ошибка загрузки списка статусов! Пожалуйста, попробуйте позже")
                         reject()
                     })
             })

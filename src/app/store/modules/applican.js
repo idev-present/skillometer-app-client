@@ -27,5 +27,20 @@ export const useApplicantStore = defineStore({
                     })
             })
         },
+        // create applicant
+        createApplicant(payload = null) {
+            return new Promise((resolve, reject) => {
+                ApiService
+                    .post("/applicant/", payload)
+                    .then((res) => {
+                        resolve(res)
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        toast.error(err?.message || "Ошибка сохранения личных данных! Пожалуйста, попробуйте позже")
+                        reject()
+                    })
+            })
+        },
     },
 })
