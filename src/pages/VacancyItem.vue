@@ -25,88 +25,87 @@
         </ol>
       </nav>
     </div>
-    <!-- loading -->
-    <div v-if="!isLoading" class="divide-y divide-gray-200 lg:col-span-9">
-    <!-- cards -->
-    <div class="divide-y mt-3 divide-gray-100 overflow-hidden bg-white shadow-sm ring-1 ring-gray-900/5 rounded-xl">
-      <div class="relative flex justify-between gap-x-6 px-4 py-5 sm:px-6">
-        <div class="min-w-0 flex-1">
-          <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl">
-            {{vacancyItem.name}}
-          </h2>
-          <div v-if="vacancyItem?.salary_to || vacancyItem?.salary_from" class="mt-1 flex items-center font-bold text-green-600">
-            <span>{{formattedNumberValue(vacancyItem?.salary_from || 0)}}</span>
-            <span v-if="vacancyItem?.salary_to">&nbsp;&ndash; {{formattedNumberValue(vacancyItem?.salary_to || 0) }} </span>
-            <span>&nbsp;{{vacancyItem?.currency?.value || "₽"}}</span>
-          </div>
-          <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
-            <div v-if="vacancyItem?.employmentType?.name" class="mt-2 flex items-center text-sm text-gray-500">
-              <BriefcaseIcon class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-              {{vacancyItem?.employmentType?.name}}
+    <!-- content -->
+    <div v-if="isLoading" class="divide-y divide-gray-200 lg:col-span-9">
+      <!-- cards -->
+      <div class="divide-y mt-3 divide-gray-100 overflow-hidden bg-white shadow-sm ring-1 ring-gray-900/5 rounded-xl">
+        <div class="relative flex justify-between gap-x-6 px-4 py-5 sm:px-6">
+          <div class="min-w-0 flex-1">
+            <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl">
+              {{vacancyItem.name}}
+            </h2>
+            <div v-if="vacancyItem?.salary_to || vacancyItem?.salary_from" class="mt-1 flex items-center font-bold text-green-600">
+              <span>{{formattedNumberValue(vacancyItem?.salary_from || 0)}}</span>
+              <span v-if="vacancyItem?.salary_to">&nbsp;&ndash; {{formattedNumberValue(vacancyItem?.salary_to || 0) }} </span>
+              <span>&nbsp;{{vacancyItem?.currency?.value || "₽"}}</span>
             </div>
-            <div v-if="vacancyItem?.city?.name" class="mt-2 flex items-center text-sm text-gray-500">
-              <MapIcon class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-              {{vacancyItem?.city?.name}}
+            <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
+              <div v-if="vacancyItem?.employmentType?.name" class="mt-2 flex items-center text-sm text-gray-500">
+                <BriefcaseIcon class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
+                {{vacancyItem?.employmentType?.name}}
+              </div>
+              <div v-if="vacancyItem?.city?.name" class="mt-2 flex items-center text-sm text-gray-500">
+                <MapIcon class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
+                {{vacancyItem?.city?.name}}
+              </div>
+              <div v-if="vacancyItem?.is_remote" class="mt-2 flex items-center text-sm text-gray-500">
+                <MapPinIcon class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
+                Удаленная работа
+              </div>
             </div>
-            <div v-if="vacancyItem?.is_remote" class="mt-2 flex items-center text-sm text-gray-500">
-              <MapPinIcon class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-              Удаленная работа
+            <div class="mt-3 flex flex-col sm:flex-row sm:flex-wrap sm:space-x-2">
+              <div v-if="vacancyItem?.division?.name" class="flex items-center">
+                {{vacancyItem?.division?.name}}
+                <svg viewBox="0 0 2 2" class="hidden sm:flex h-0.5 w-0.5 ml-2 fill-current">
+                  <circle cx="1" cy="1" r="1" />
+                </svg>
+              </div>
+              <div v-if="vacancyItem?.qualification?.name" class="flex items-center">
+                {{vacancyItem?.qualification?.name}}
+                <svg viewBox="0 0 2 2" class="hidden sm:flex h-0.5 w-0.5 ml-2 fill-current">
+                  <circle cx="1" cy="1" r="1" />
+                </svg>
+              </div>
+              <div
+                  v-for="(skill, index) in vacancyItem.skills"
+                  :key="index"
+                  class="flex items-center"
+              >
+                <svg v-if="index" viewBox="0 0 2 2" class="hidden sm:flex h-0.5 w-0.5 mr-2 fill-current">
+                  <circle cx="1" cy="1" r="1" />
+                </svg>
+                {{skill}}
+              </div>
             </div>
-          </div>
-          <div class="mt-3 flex flex-col sm:flex-row sm:flex-wrap sm:space-x-2">
-            <div v-if="vacancyItem?.division?.name" class="flex items-center">
-              {{vacancyItem?.division?.name}}
-              <svg viewBox="0 0 2 2" class="hidden sm:flex h-0.5 w-0.5 ml-2 fill-current">
-                <circle cx="1" cy="1" r="1" />
-              </svg>
-            </div>
-            <div v-if="vacancyItem?.qualification?.name" class="flex items-center">
-              {{vacancyItem?.qualification?.name}}
-              <svg viewBox="0 0 2 2" class="hidden sm:flex h-0.5 w-0.5 ml-2 fill-current">
-                <circle cx="1" cy="1" r="1" />
-              </svg>
-            </div>
-            <div
-                v-for="(skill, index) in vacancyItem.skills"
-                :key="index"
-                class="flex items-center"
-            >
-              <svg v-if="index" viewBox="0 0 2 2" class="hidden sm:flex h-0.5 w-0.5 mr-2 fill-current">
-                <circle cx="1" cy="1" r="1" />
-              </svg>
-              {{skill}}
-            </div>
-          </div>
-          <div class="mt-3 flex items-center text-sm text-gray-500">
-            <CalendarIcon class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-            {{formattedDateValue(vacancyItem.published_at)}}
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- description cards -->
-    <div class="divide-y mt-3 divide-gray-100 overflow-hidden bg-white shadow-sm ring-1 ring-gray-900/5 rounded-xl">
-      <div class="relative flex justify-between gap-x-6 px-4 py-5 sm:px-6">
-        <div class="min-w-0 flex-1">
-          <h2 class="text-xl font-bold leading-7 text-gray-900 sm:truncate sm:text-2xl sm:tracking-tight border-b-2 pb-3">
-            Описание вакансии
-          </h2>
-          <div class="mt-4 vacancy-description">
-            <div v-if="vacancyItem?.description" v-html="vacancyItem?.description"/>
-            <div v-if="vacancyItem?.team" >
-              <div class="mt-4 mb-4 text-lg font-bold leading-7 text-gray-900 sm:truncate sm:text-xl">О компании</div>
-              <div v-html="vacancyItem?.team"/>
-            </div>
-            <div v-if="vacancyItem?.todo">
-              <div class="mt-4 mb-4 text-lg font-bold leading-7 text-gray-900 sm:truncate sm:text-xl">Ожидания от кандидата</div>
-              <div v-html="vacancyItem?.todo"/>
+            <div class="mt-3 flex items-center text-sm text-gray-500">
+              <CalendarIcon class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
+              {{formattedDateValue(vacancyItem.published_at)}}
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="divide-y mt-3 divide-gray-100 overflow-hidden bg-white shadow-sm ring-1 ring-gray-900/5 rounded-xl">
+      <!-- description cards -->
+      <div class="divide-y mt-3 divide-gray-100 overflow-hidden bg-white shadow-sm ring-1 ring-gray-900/5 rounded-xl">
+        <div class="relative flex justify-between gap-x-6 px-4 py-5 sm:px-6">
+          <div class="min-w-0 flex-1">
+            <h2 class="text-xl font-bold leading-7 text-gray-900 sm:truncate sm:text-2xl sm:tracking-tight border-b-2 pb-3">
+              Описание вакансии
+            </h2>
+            <div class="mt-4 vacancy-description">
+              <div v-if="vacancyItem?.description" v-html="vacancyItem?.description"/>
+              <div v-if="vacancyItem?.team" >
+                <div class="mt-4 mb-4 text-lg font-bold leading-7 text-gray-900 sm:truncate sm:text-xl">О компании</div>
+                <div v-html="vacancyItem?.team"/>
+              </div>
+              <div v-if="vacancyItem?.todo">
+                <div class="mt-4 mb-4 text-lg font-bold leading-7 text-gray-900 sm:truncate sm:text-xl">Ожидания от кандидата</div>
+                <div v-html="vacancyItem?.todo"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="divide-y mt-3 divide-gray-100 overflow-hidden bg-white shadow-sm ring-1 ring-gray-900/5 rounded-xl">
       <div class="relative flex justify-between gap-x-6 px-4 py-5 sm:px-6">
 
         <!-- Response -->
