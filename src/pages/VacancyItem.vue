@@ -25,7 +25,8 @@
         </ol>
       </nav>
     </div>
-
+    <!-- loading -->
+    <div v-if="!isLoading" class="divide-y divide-gray-200 lg:col-span-9">
     <!-- cards -->
     <div class="divide-y mt-3 divide-gray-100 overflow-hidden bg-white shadow-sm ring-1 ring-gray-900/5 rounded-xl">
       <div class="relative flex justify-between gap-x-6 px-4 py-5 sm:px-6">
@@ -128,6 +129,8 @@
         </div>
       </div>
     </div>
+  </div>
+  <loading class="py-40 divide-y divide-gray-200 lg:col-span-9" v-else />
   </div>
 </template>
 

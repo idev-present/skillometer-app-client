@@ -3,6 +3,8 @@
     <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900">
       Новости
     </h1>
+    <!-- loading -->
+    <div v-if="!isLoading" class="divide-y divide-gray-200 lg:col-span-9">
     <!-- post -->
     <router-link
       v-for="(item, index) in posts"
@@ -61,6 +63,8 @@
         </div>
       </article>
     </router-link>
+  </div>
+  <loading class="py-40 divide-y divide-gray-200 lg:col-span-9" v-else />
   </div>
 </template>
 
@@ -124,5 +128,4 @@ const posts = ref([
     },
   },
 ]);
-const isLoading = ref(false);
 </script>

@@ -22,14 +22,10 @@
 
             <div v-if="!isLoading" class="divide-y divide-gray-200 lg:col-span-9">
               <!-- Profile section -->
-              <div class="px-4 py-6 sm:p-6 lg:pb-8">
-                <div>
-                  <h2 class="text-lg font-medium leading-6 text-gray-900">Профиль</h2>
-                  <p class="mt-1 text-sm text-gray-500">
-                    123
-                  </p>
-                </div>
-              </div>
+                  <h1 class="px-4 py-4 sm:p-4 text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 border-b pb-3">
+                    Профиль
+                  </h1>
+                  
             </div>
 
             <loading class="py-40 divide-y divide-gray-200 lg:col-span-9" v-else />
@@ -64,7 +60,6 @@ const applicantStore = useApplicantStore()
 const applicantList = computed(() => {
   return applicantStore?.applicantList || []
 })
-
 const subNavigation = [
   { name: 'Профиль', href: '/profile', icon: UserCircleIcon },
   { name: 'Резюме', href: '/resume', icon: CogIcon },
