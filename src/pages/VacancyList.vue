@@ -36,9 +36,13 @@
               <BriefcaseIcon class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
               {{item?.employmentType?.name}}
             </div>
-            <div class="mt-2 flex items-center text-sm text-gray-500">
-              <MapPinIcon class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
+            <div v-if="item?.city?.name" class="mt-2 flex items-center text-sm text-gray-500">
+              <MapIcon class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
               {{item?.city?.name}}
+            </div>
+            <div v-if="item?.is_remote" class="mt-2 flex items-center text-sm text-gray-500">
+              <MapPinIcon class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
+              Удаленная работа
             </div>
           </div>
           <div class="mt-3 flex flex-col sm:flex-row sm:flex-wrap sm:space-x-2">
@@ -83,7 +87,7 @@
 
 <script setup>
 import {computed, onMounted, ref} from "vue"
-import { ChevronRightIcon, MagnifyingGlassIcon, BriefcaseIcon, MapPinIcon, CalendarIcon } from '@heroicons/vue/20/solid'
+import { ChevronRightIcon, MagnifyingGlassIcon, BriefcaseIcon, MapPinIcon, MapIcon, CalendarIcon } from '@heroicons/vue/20/solid'
 import ListFilters from "@/widgets/ListFilters.vue";
 import {useVacancyStore} from "@/app/store/modules/vacancy.js";
 import Loading from "@/shared/Loading.vue";
