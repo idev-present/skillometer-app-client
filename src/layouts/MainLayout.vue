@@ -21,6 +21,7 @@
               {{ item.name }}
             </router-link>
           </div>
+          <button @click="getProfile">getProfile</button>
         </div>
         <div v-if="isAuth" class="hidden lg:ml-6 lg:flex lg:items-center">
           <router-link to="/notification" class="relative mr-3 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none">
@@ -143,6 +144,7 @@ import {computed, onMounted, ref} from 'vue'
 import { Dialog, DialogPanel, MenuButton, Menu, MenuItem, MenuItems } from '@headlessui/vue'
 import { Bars3Icon, XMarkIcon, BellIcon, ArrowLeftEndOnRectangleIcon } from '@heroicons/vue/24/outline'
 import {useUserStore} from "@/app/store/modules/user.js";
+import iamService from "@/shared/services/iam.service.js";
 
 const navigation = [
   { name: 'Вакансии', href: '/vacancy' },
@@ -163,23 +165,33 @@ const isAuth = computed(() => {
   return userStore?.isAuth || false
 })
 
-const singIn = async () => {
-  isLoading.value = true
-  const url = window.location.href
-  await userStore.auth(url).finally(() => {
-    isLoading.value = false
-  })
+const singIn = () => {
+  console.log('#### login click')
+  const targetUrl = iamService.sdk.getSigninUrl()
+  alert(targetUrl)
+  window.location.href = targetUrl
 }
 
-const logout = () => {
+const singUp = () => {
+  console.log('#### registration click')
+  const targetUrl = iamService.sdk.getSignupUrl()
+  alert(targetUrl)
+  window.location.href = targetUrl
+}
+
+const logout = async () => {
   console.log('logout')
+  isLoading.value = true
+  await userStore.logout().finally(() => {
+    isLoading.value = false
+  })
   mobileMenuOpen.value = false
 }
 
-onMounted(async () => {
+const getProfile = async () => {
   isLoading.value = true
   await userStore.fillUser().finally(() => {
     isLoading.value = false
   })
-})
+}
 </script>

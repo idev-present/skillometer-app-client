@@ -8,9 +8,11 @@ const app = createApp(App)
 import store from '@/app/store/index.js'
 import router from '@/app/router/index.js'
 import Toast from "vue-toastification";
+import iamService from "@/shared/services/iam.service.js";
 
 app.use(store)
 app.use(router)
+app.use(iamService.Casdoor, iamService.config)
 app.use(Toast, {})
 
 // init styles

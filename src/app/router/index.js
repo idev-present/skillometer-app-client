@@ -38,6 +38,11 @@ const router = createRouter({
       name: 'Notification',
       component: () => import('@/pages/Notification.vue')
     },
+    {
+      name: 'AuthCallback',
+      path: import.meta.env.VITE_IAM_REDIRECT_URI,
+      component: () => import('@/pages/AuthCallback.vue')
+    },
     // System
     {
       path: '/',
