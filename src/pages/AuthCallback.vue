@@ -3,7 +3,7 @@ import {onMounted} from "vue";
 import iamService from "@/shared/services/iam.service.js";
 
 function login() {
-  iamService.sdk.signin(import.meta.env.VITE_API_URL, ).then((res) => {
+  iamService.sdk.signin(import.meta.env.VITE_API_URL).then((res) => {
     if (res?.access_token) {
       alert('Login success')
       if (inIframe()) {
