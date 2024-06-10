@@ -42,5 +42,20 @@ export const useApplicantStore = defineStore({
                     })
             })
         },
+        // update applicant
+        updateApplicant(payload = null) {
+            return new Promise((resolve, reject) => {
+                ApiService
+                    .put(`/applicant/${payload.id}`, payload.date)
+                    .then((res) => {
+                        resolve(res)
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        toast.error(err?.message || "Ошибка сохранения специализации! Пожалуйста, попробуйте позже")
+                        reject()
+                    })
+            })
+        },
     },
 })

@@ -34,6 +34,11 @@ const router = createRouter({
       component: () => import('@/pages/Resume.vue')
     },
     {
+      path: '/specialization',
+      name: 'SpecializationResume',
+      component: () => import('@/pages/SpecializationResume.vue')
+    },
+    {
       path: '/notification',
       name: 'Notification',
       component: () => import('@/pages/Notification.vue')

@@ -34,19 +34,8 @@
                 </nav>
               </div>
 
-              <!-- Личная информация-->
-              <experience-resume
-                  :city-list="cityList"
-              />
-              <!-- Специализация-->
-              <specialization-resume
-                  :employment-type-list="employmentTypeList"
-                  :qualificationList="qualificationList"
-                  :skill-list="skillList"
-              />
-
               <!-- Опыт работы -->
-              <div v-if="false" class="divide-y divide-gray-200">
+              <div class="divide-y divide-gray-200">
                 <div class="px-4 py-6 sm:p-6 lg:pb-8 ">
                   <div>
                     <h2 class="text-lg font-medium leading-6 text-gray-900">Опыт работы</h2>
@@ -161,7 +150,7 @@
               </div>
 
               <!-- Контакты -->
-              <div v-if="false" class="divide-y divide-gray-200">
+              <div class="divide-y divide-gray-200">
                 <div class="px-4 py-6 sm:p-6 lg:pb-8 ">
                   <div>
                     <h2 class="text-lg font-medium leading-6 text-gray-900">Контакты</h2>
@@ -258,8 +247,6 @@ import {useDirectoriesStore} from "@/app/store/modules/directories.js";
 import {CheckIcon, ChevronUpDownIcon} from "@heroicons/vue/20/solid/index.js";
 import Multiselect from 'vue-multiselect'
 import "vue-multiselect/dist/vue-multiselect.css"
-import ExperienceResume from "@/widgets/resume/ExperienceResume.vue";
-import SpecializationResume from "@/widgets/resume/SpecializationResume.vue";
 
 const isLoading = ref(false)
 
