@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Cookies from "js-cookie"
 
 class ApiFacade {
 
@@ -7,6 +8,20 @@ class ApiFacade {
       baseURL: baseURL || 'https://skillometer.idev-present.com/api/v1/',
       withCredentials: true
     });
+    // Initialize the token
+    this.token = Cookies.get('skillometer_access_token');
+    // Bind the instance method to ensure proper context
+    this._parseError = this._parseError.bind(this);
+    // Add a request interceptor
+    this.client.interceptors.request.use(
+        config => {
+          if (this.token) {
+            config.headers['Authorization'] = `Bearer ${this.token}`;
+          }
+          return config;
+        },
+        error => Promise.reject(error)
+    );
   }
 
   _parseError(err) {
