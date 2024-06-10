@@ -35,7 +35,9 @@
               </div>
 
               <!-- Личная информация-->
-              <experience-resume :city-list="cityList" />
+              <experience-resume
+                  :city-list="cityList"
+              />
               <!-- Специализация-->
               <specialization-resume
                   :employment-type-list="employmentTypeList"
@@ -271,11 +273,11 @@ const subNavigation = [
   { name: 'Уведомления', href: '/notification', icon: BellIcon },
 ]
 const tabs = [
-  { name: 'Личная информация', href: '#', current: true },
-  { name: 'Специализация', href: '#', current: false },
-  { name: 'Опыт работы', href: '#', current: false },
-  { name: 'Образование', href: '#', current: false },
-  { name: 'Контакты', href: '#', current: false },
+  { name: 'Личная информация', href: '/resume' },
+  { name: 'Специализация', href: '#' },
+  { name: 'Опыт работы', href: '#' },
+  { name: 'Образование', href: '#'},
+  { name: 'Контакты', href: '#'},
 ]
 const user = ref({
   selectedDivision: null,

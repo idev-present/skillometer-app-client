@@ -9,6 +9,9 @@ export const useUserStore = defineStore({
         return {
             isAuth: false,
             user: null,
+            skillometer_access_token: '',
+            skillometer_refresh_token: '',
+            expires_in: '',
         }
     },
     actions: {
