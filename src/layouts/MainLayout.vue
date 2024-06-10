@@ -5,12 +5,13 @@
         <div class="flex items-center justify-between w-full lg:justify-start">
           <div class="flex">
             <router-link to="/" class="-mx-1.5 -mt-2 p-1.5">
-              <img class="h-8 w-auto" src="https://www.reksoft.ru/wp-content/uploads/2019/05/logo.png" alt="" />
+              <img class="h-8 w-auto" src="https://www.reksoft.ru/wp-content/uploads/2019/05/logo.png" alt=""/>
             </router-link>
           </div>
           <div class="flex lg:hidden">
-            <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700" @click="mobileMenuOpen = true">
-              <Bars3Icon class="h-6 w-6" aria-hidden="true" />
+            <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+                    @click="mobileMenuOpen = true">
+              <Bars3Icon class="h-6 w-6" aria-hidden="true"/>
             </button>
           </div>
           <div class="hidden ml-12 lg:flex lg:gap-x-8">
@@ -21,26 +22,37 @@
               {{ item.name }}
             </router-link>
           </div>
+          <button @click="getProfile">getProfile</button>
         </div>
         <div v-if="isAuth" class="hidden lg:ml-6 lg:flex lg:items-center">
-          <router-link to="/notification" class="relative mr-3 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none">
-            <span class="absolute top-0 right-0 bg-blue-600 text-white font-bold text-xs rounded-full w-4 h-4 flex items-center justify-center">
+          <router-link to="/notification"
+                       class="relative mr-3 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none">
+            <span
+                class="absolute top-0 right-0 bg-blue-600 text-white font-bold text-xs rounded-full w-4 h-4 flex items-center justify-center">
               2
             </span>
-            <BellIcon class="h-6 w-6" aria-hidden="true" />
+            <BellIcon class="h-6 w-6" aria-hidden="true"/>
           </router-link>
 
           <!-- Profile dropdown -->
           <Menu as="div" class="relative">
             <div>
               <MenuButton class="relative flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none">
-                <img class="h-8 w-8 min-w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+                <img class="h-8 w-8 min-w-8 rounded-full"
+                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                     alt=""/>
               </MenuButton>
             </div>
-            <transition enter-active-class="transition ease-out duration-200" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-              <MenuItems class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <transition enter-active-class="transition ease-out duration-200"
+                        enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100"
+                        leave-active-class="transition ease-in duration-75"
+                        leave-from-class="transform opacity-100 scale-100"
+                        leave-to-class="transform opacity-0 scale-95">
+              <MenuItems
+                  class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                 <MenuItem v-for="item in userNavigation" :key="item.name" v-slot="{ active }">
-                  <router-link :to="item.href" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">
+                  <router-link :to="item.href"
+                               :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">
                     {{ item.name }}
                   </router-link>
                 </MenuItem>
@@ -58,47 +70,52 @@
             @click="singIn"
             class="hidden lg:flex font-semibold cursor-pointer leading-6 text-gray-600 hover:text-gray-800 transform"
         >
-          <ArrowLeftEndOnRectangleIcon class="h-6 w-6 mr-1" aria-hidden="true" />
+          <ArrowLeftEndOnRectangleIcon class="h-6 w-6 mr-1" aria-hidden="true"/>
           Войти
         </div>
       </nav>
       <!--mobile-->
       <Dialog class="lg:hidden" @close="mobileMenuOpen = false" :open="mobileMenuOpen">
-        <div class="fixed inset-0 z-50" />
-        <DialogPanel class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+        <div class="fixed inset-0 z-50"/>
+        <DialogPanel
+            class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div class="flex items-center justify-between">
             <router-link to="/" @click="mobileMenuOpen = false" class="-mx-1.5 -mt-2 p-1.5">
-              <img class="h-8 w-auto" src="https://www.reksoft.ru/wp-content/uploads/2019/05/logo.png" alt="" />
+              <img class="h-8 w-auto" src="https://www.reksoft.ru/wp-content/uploads/2019/05/logo.png" alt=""/>
             </router-link>
             <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700" @click="mobileMenuOpen = false">
-              <XMarkIcon class="h-6 w-6" aria-hidden="true" />
+              <XMarkIcon class="h-6 w-6" aria-hidden="true"/>
             </button>
           </div>
           <div class="mt-6 flow-root">
             <div class="-my-6 divide-y divide-gray-500/10">
               <div class="space-y-2 py-6">
                 <router-link v-for="item in navigation"
-                   :key="item.name"
-                   :to="item.href"
-                   @click="mobileMenuOpen = false"
-                   class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                             :key="item.name"
+                             :to="item.href"
+                             @click="mobileMenuOpen = false"
+                             class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                   {{ item.name }}
                 </router-link>
               </div>
               <div v-if="isAuth" class="border-t -mx-3 border-gray-200 pb-3 pt-4">
                 <div class="flex items-center px-3">
                   <div class="flex-shrink-0">
-                    <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+                    <img class="h-10 w-10 rounded-full"
+                         src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                         alt=""/>
                   </div>
                   <div class="ml-3">
                     <div class="text-base font-medium text-gray-800">Tom Cook</div>
                     <div class="text-sm font-medium text-gray-500">tom@example.com</div>
                   </div>
-                  <router-link to="/notification" @click="mobileMenuOpen = false" class="relative ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none">
-                    <span class="absolute top-0 right-0 bg-blue-600 text-white font-bold text-xs rounded-full w-4 h-4 flex items-center justify-center">
+                  <router-link to="/notification" @click="mobileMenuOpen = false"
+                               class="relative ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none">
+                    <span
+                        class="absolute top-0 right-0 bg-blue-600 text-white font-bold text-xs rounded-full w-4 h-4 flex items-center justify-center">
                       2
                     </span>
-                    <BellIcon class="h-6 w-6" aria-hidden="true" />
+                    <BellIcon class="h-6 w-6" aria-hidden="true"/>
                   </router-link>
                 </div>
                 <div class="space-y-2 py-6">
@@ -122,7 +139,7 @@
                     @click="singIn"
                     class="flex items-center cursor-pointer rounded-lg py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  <ArrowLeftEndOnRectangleIcon class="h-6 w-6 mr-1" aria-hidden="true" />
+                  <ArrowLeftEndOnRectangleIcon class="h-6 w-6 mr-1" aria-hidden="true"/>
                   Войти
                 </div>
               </div>
@@ -132,25 +149,26 @@
       </Dialog>
     </header>
     <div class="mx-auto w-full max-w-7xl px-4 pt-8 pb-16 md:py-16 sm:px-6 lg:px-8">
-      <RouterView />
+      <RouterView/>
     </div>
   </div>
 </template>
 
 <script setup>
-import { RouterView } from 'vue-router'
+import {RouterView} from 'vue-router'
 import {computed, onMounted, ref} from 'vue'
-import { Dialog, DialogPanel, MenuButton, Menu, MenuItem, MenuItems } from '@headlessui/vue'
-import { Bars3Icon, XMarkIcon, BellIcon, ArrowLeftEndOnRectangleIcon } from '@heroicons/vue/24/outline'
+import {Dialog, DialogPanel, MenuButton, Menu, MenuItem, MenuItems} from '@headlessui/vue'
+import {Bars3Icon, XMarkIcon, BellIcon, ArrowLeftEndOnRectangleIcon} from '@heroicons/vue/24/outline'
 import {useUserStore} from "@/app/store/modules/user.js";
+import iamService from "@/shared/services/iam.service.js";
 
 const navigation = [
-  { name: 'Вакансии', href: '/vacancy' },
-  { name: 'Новости', href: '/news' },
+  {name: 'Вакансии', href: '/vacancy'},
+  {name: 'Новости', href: '/news'},
 ]
 const userNavigation = [
-  { name: 'Профиль', href: '/profile' },
-  { name: 'Резюме', href: '/resume' },
+  {name: 'Профиль', href: '/profile'},
+  {name: 'Резюме', href: '/resume'},
 ]
 const isLoading = ref(false)
 
@@ -164,18 +182,32 @@ const isAuth = computed(() => {
 })
 
 const singIn = () => {
-
+  console.log('#### login click')
+  const targetUrl = iamService.sdk.getSigninUrl()
+  alert(targetUrl)
+  window.location.href = targetUrl
 }
 
-const logout = () => {
+const singUp = () => {
+  console.log('#### registration click')
+  const targetUrl = iamService.sdk.getSignupUrl()
+  alert(targetUrl)
+  window.location.href = targetUrl
+}
+
+const logout = async () => {
   console.log('logout')
+  isLoading.value = true
+  await userStore.logout().finally(() => {
+    isLoading.value = false
+  })
   mobileMenuOpen.value = false
 }
 
-onMounted(async () => {
+const getProfile = async () => {
   isLoading.value = true
   await userStore.fillUser().finally(() => {
     isLoading.value = false
   })
-})
+}
 </script>
