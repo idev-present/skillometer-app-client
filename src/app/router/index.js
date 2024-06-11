@@ -29,14 +29,29 @@ const router = createRouter({
       component: () => import('@/pages/Profile.vue')
     },
     {
-      path: '/resume',
-      name: 'Resume',
-      component: () => import('@/pages/Resume.vue')
-    },
-    {
       path: '/specialization',
       name: 'SpecializationResume',
       component: () => import('@/pages/SpecializationResume.vue')
+    },
+    {
+      path: '/experience',
+      name: 'ExperienceResume',
+      component: () => import('@/pages/ExperienceResume.vue')
+    },
+    {
+      path: '/education',
+      name: 'EducationResume',
+      component: () => import('@/pages/EducationResume.vue')
+    },
+    {
+      path: '/contacts',
+      name: 'ContactsResume',
+      component: () => import('@/pages/ContactsResume.vue')
+    },
+    {
+      path: '/resume',
+      name: 'Resume',
+      component: () => import('@/pages/Resume.vue')
     },
     {
       path: '/notification',

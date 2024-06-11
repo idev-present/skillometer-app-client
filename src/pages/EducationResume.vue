@@ -21,19 +21,24 @@
             </aside>
 
             <div v-if="!isLoading" class="divide-y divide-gray-200 lg:col-span-9">
-              <!-- personal information -->
-              <h1 class="px-4 py-4 sm:p-4 text-2xl sm:text-3xl font-bold tracking-tight text-gray-900">
-                Резюме
-              </h1>
+                  <h1 class="px-4 py-4 sm:p-4 text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 border-b pb-3">
+                    Образование
+                  </h1>
               <div class="divide-y divide-gray-200">
                 <div class="px-4 py-6 sm:p-6 lg:pb-8">
                   <!--Заголовок с описанием-->
                   <div>
-                    <h2 class="text-lg font-medium leading-6 text-gray-900">Резюме</h2>
+                    <h2 class="text-lg font-medium leading-6 text-gray-900">Образование</h2>
                     <p class="mt-1 text-sm text-gray-500">
-                      Укажите, как с вами могут связаться работодатели.
+                      Эта информация будет отображаться только работодателям
                     </p>
                   </div>
+                </div>
+                <!--сохранить-->
+                <div class="flex justify-end gap-x-3 px-4 py-4 sm:px-6">
+                  <button @click="saveForm" type="button" class="w-full sm:w-fit rounded-md bg-blue-600 px-5 py-2.5 text-sm font-semibold tr text-white shadow-sm hover:bg-blue-700 outline-0">
+                    Сохранить
+                  </button>
                 </div>
               </div>
             </div>
@@ -51,13 +56,14 @@ import {computed, onMounted, ref} from "vue"
 import {useApplicantStore} from "@/app/store/modules/applican.js";
 import Loading from "@/shared/Loading.vue";
 import {
-  BellIcon,
+  AcademicCapIcon,
+  WrenchScrewdriverIcon,
   CogIcon,
   UserCircleIcon,
+  UserPlusIcon
 } from '@heroicons/vue/24/outline'
 import {useDirectoriesStore} from "@/app/store/modules/directories.js";
-import {BriefcaseIcon} from "@heroicons/vue/20/solid/index.js";
-import {AcademicCapIcon, UserPlusIcon, WrenchScrewdriverIcon} from "@heroicons/vue/24/outline/index.js";
+import {BriefcaseIcon} from "@heroicons/vue/20/solid";
 
 const isLoading = ref(false)
 
@@ -73,43 +79,19 @@ const subNavigation = [
   { name: 'Контакты', href: '/contacts', icon: UserPlusIcon },
   { name: 'Резюме', href: '/resume', icon: WrenchScrewdriverIcon },
 ]
-const user = ref()
+const user = ref({});
+
+const saveForm = () => {
+  console.log('form profile', user.value)
+  // applicantStore.createApplicant()
+}
 
 onMounted(async () => {
   // isLoading.value = true
   // await Promise.all([
-  //   directoriesStore.fillCurrencyList(),
   //   directoriesStore.fillCityList(),
-  //   directoriesStore.fillSkillList(),
-  //   directoriesStore.fillEmploymentTypeList(),
-  //   directoriesStore.fillDivisionList(),
-  //   directoriesStore.fillQualificationList(),
-  //   directoriesStore.fillSearchStatusList(),
   // ]).finally(() => {
   //   isLoading.value = false
   // });
 })
 </script>
-
-<style scoped>
-:deep(.multiselect__input) {
-  font-size: 14px;
-  outline: none;
-  box-shadow: none;
-}
-:deep(.multiselect__tags) {
-  @apply block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-gray-300 placeholder:text-gray-400 outline-0 sm:text-sm sm:leading-6;
-}
-:deep(.multiselect__option) {
-  font-size: 0.875rem;
-  height: 30px;
-  &:after {
-    display: none;
-  }
-}
-:deep(.multiselect__single) {
-  font-size: 0.875rem;
-  margin-bottom: 0.25rem;
-  margin-top: 0.2rem;
-}
-</style>

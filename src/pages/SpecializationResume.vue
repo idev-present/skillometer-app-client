@@ -421,3 +421,26 @@ onMounted(async () => {
   });
 })
 </script>
+
+<style scoped>
+:deep(.multiselect__input) {
+  font-size: 14px;
+  outline: none;
+  box-shadow: none;
+}
+:deep(.multiselect__tags) {
+  @apply block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-gray-300 placeholder:text-gray-400 outline-0 sm:text-sm sm:leading-6;
+}
+:deep(.multiselect__option) {
+  font-size: 0.875rem;
+  height: 30px;
+  &:after {
+    display: none;
+  }
+}
+:deep(.multiselect__single) {
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+  margin-top: 0.2rem;
+}
+</style>

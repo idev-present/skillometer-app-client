@@ -22,124 +22,84 @@
 
             <div v-if="!isLoading" class="divide-y divide-gray-200 lg:col-span-9">
                   <h1 class="px-4 py-4 sm:p-4 text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 border-b pb-3">
-                    Профиль
+                    Опыт работы
                   </h1>
               <div class="divide-y divide-gray-200">
                 <div class="px-4 py-6 sm:p-6 lg:pb-8">
                   <!--Заголовок с описанием-->
                   <div>
-                    <h2 class="text-lg font-medium leading-6 text-gray-900">Личная информация</h2>
+                    <h2 class="text-lg font-medium leading-6 text-gray-900">Опыт работы</h2>
                     <p class="mt-1 text-sm text-gray-500">
-                      Эта информация будет отображаться только работодателям
+                      Укажите ваш опыт работы, чтобы мы могли рекомендовать вам вакансии, а вас — эйчарам и рекрутерам.
                     </p>
                   </div>
-                  <!--Аватар-->
-                  <div class="mt-4 col-span-full flex items-center gap-x-8">
-                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="h-24 w-24 flex-none rounded-lg bg-gray-800 object-cover" />
-                    <div>
-                      <button type="button"
-                              class="mt w-full sm:w-fit rounded-md bg-blue-600 px-5 py-2.5 text-sm font-semibold tr text-white shadow-sm hover:bg-blue-700 outline-0">
-                        Загрузить аватарку
-                      </button>
-                      <p class="mt-2 text-xs leading-5 text-gray-500">JPG, GIF or PNG. 1MB max.</p>
-                    </div>
-                  </div>
-                  <!--Имя/Фамилия-->
+                  <!--Название компании/Местоположение компании-->
                   <div class="mt-4 grid grid-cols-12 gap-6">
                     <div class="col-span-12 sm:col-span-6">
                       <label
-                          for="first-name"
                           class="block text-sm font-medium leading-6 text-gray-900">
-                        Имя
+                        Название компании
                       </label>
                       <input
                           type="text"
-                          name="first-name"
-                          id="first-name"
-                          autocomplete="family-name"
-                          v-model="user.firstName"
+                          v-model="user.nameCompany"
                           class="block mt-1 w-full rounded-md border-0 py-1.5 pl-3 pr-3 text-gray-900 shadow-sm ring-1 ring-gray-300 outline-0 placeholder:text-gray-400 sm:text-sm sm:leading-6">
                     </div>
                     <div class="col-span-12 sm:col-span-6">
-                      <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">
-                        Фамилия
+                      <label class="block text-sm font-medium leading-6 text-gray-900">
+                        Местоположение компании
                       </label>
                       <input type="text"
-                             name="last-name"
-                             id="last-name"
-                             autocomplete="first-name"
-                             v-model="user.lastName"
+                             v-model="user.cityCompany"
                              class="block mt-1 w-full rounded-md border-0 py-1.5 pl-3 pr-3 text-gray-900 shadow-sm ring-1 ring-gray-300 outline-0 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                       />
                     </div>
                   </div>
-                  <!--Пол-->
-                  <div class="mt-4 grid grid-cols-12 gap-6">
-                    <div class="col-span-12">
-                      <label
-                          class="block text-sm font-medium leading-6 text-gray-900">
-                        Пол
-                      </label>
-                      <div class="mt-1 space-y-2">
-                        <div class="flex items-center gap-x-3">
-                          <input
-                              id="men"
-                              v-model="user.gender"
-                              value="men"
-                              name="men"
-                              type="radio"
-                              class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
-                          <label for="men" class="block text-sm font-medium leading-6 text-gray-900">
-                            Мужской
-                          </label>
-                        </div>
-                        <div class="flex items-center gap-x-3">
-                          <input
-                              id="woman"
-                              v-model="user.gender"
-                              value="woman"
-                              name="woman"
-                              type="radio"
-                              class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
-                          <label for="woman" class="block text-sm font-medium leading-6 text-gray-900">
-                            Женский
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!--Дата рождения-->
+                  <!--Специализация/квалификация-->
                   <div class="mt-4 grid grid-cols-12 gap-6">
                     <div class="col-span-12 sm:col-span-6">
-                      <label
-                          class="block mb-1 text-sm font-medium leading-6 text-gray-900">
-                        Дата рождения
-                      </label>
-                      <VueDatePicker
-                          v-model="user.date"
-                          format="dd.MM.yyyy"
-                          auto-apply
-                          locale="ru-RU"
-                      />
-                    </div>
-                  </div>
-                  <!--Город-->
-                  <div class="mt-4 grid grid-cols-12 gap-6">
-                    <div class="col-span-12">
-                      <Listbox as="div" v-model="user.city">
+                      <Listbox as="div" v-model="user.selectedDivision">
                         <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">
-                          Город
+                          Специализация
                         </ListboxLabel>
                         <div class="relative mt-0.5">
                           <ListboxButton class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none sm:text-sm sm:leading-6">
-                            <span class="block truncate">{{ user?.city?.name || '&nbsp;' }}</span>
+                            <span class="block truncate">{{ user?.selectedDivision?.name || '&nbsp;' }}</span>
                             <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                             <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
                           </span>
                           </ListboxButton>
                           <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
                             <ListboxOptions class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                              <ListboxOption as="template" v-for="(item, index) in cityList" :key="index" :value="item" v-slot="{ active, selected }">
+                              <ListboxOption as="template" v-for="(item, index) in divisionList" :key="index" :value="item" v-slot="{ active, selected }">
+                                <li :class="[active ? 'bg-blue-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
+                                  <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">{{ item.name }}</span>
+                                  <span v-if="selected" :class="[active ? 'text-white' : 'text-blue-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
+                                  <CheckIcon class="h-5 w-5" aria-hidden="true" />
+                                </span>
+                                </li>
+                              </ListboxOption>
+                            </ListboxOptions>
+                          </transition>
+                        </div>
+                      </Listbox>
+                    </div>
+
+                    <div class="col-span-12 sm:col-span-6">
+                      <Listbox as="div" v-model="user.selectedQualification">
+                        <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">
+                          Квалификация
+                        </ListboxLabel>
+                        <div class="relative mt-0.5">
+                          <ListboxButton class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none sm:text-sm sm:leading-6">
+                            <span class="block truncate">{{ user?.selectedQualification?.name || '&nbsp;' }}</span>
+                            <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                            <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
+                          </span>
+                          </ListboxButton>
+                          <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
+                            <ListboxOptions class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                              <ListboxOption as="template" v-for="(item, index) in qualificationList" :key="index" :value="item" v-slot="{ active, selected }">
                                 <li :class="[active ? 'bg-blue-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
                                   <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">{{ item.name }}</span>
                                   <span v-if="selected" :class="[active ? 'text-white' : 'text-blue-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
@@ -153,21 +113,26 @@
                       </Listbox>
                     </div>
                   </div>
-                  <!--О себе-->
+                  <!--Навыки-->
                   <div class="mt-4 grid grid-cols-12 gap-6">
                     <div class="col-span-12">
-                      <label
-                          class="block text-sm font-medium leading-6 text-gray-900">
-                        О себе
+                      <label class="block text-sm font-medium leading-6 text-gray-900">
+                        Профессиональные навыки
                       </label>
                       <p class="mt-0.5 text-sm text-gray-500">
-                        Расскажите о себе в подробностях. Минимальное количество символов — 50 <br/> (это примерно одно среднее предложение)
+                        Выберите до десяти своих профессиональных навыков, вначале укажите самые важные. Точный стек навыков поможет нам подбирать для вас подходящие вакансии и курсы.
                       </p>
-                      <textarea
-                          v-model="user.description"
-                          rows="4"
-                          name="comment"
-                          class="mt-2 block px-3 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 placeholder:text-gray-400 outline-0 sm:text-sm sm:leading-6"
+                      <multiselect
+                          class="mt-1"
+                          v-model="user.skill"
+                          placeholder="Найдите или добавьте тег"
+                          :show-labels="false"
+                          label="name"
+                          track-by="id"
+                          :options="skillList"
+                          :multiple="true"
+                          :taggable="true"
+                          @tag="addTagSkill"
                       />
                     </div>
                   </div>
@@ -207,8 +172,8 @@ import {
 import {CheckIcon, ChevronUpDownIcon} from "@heroicons/vue/20/solid/index.js";
 import {useDirectoriesStore} from "@/app/store/modules/directories.js";
 import {BriefcaseIcon} from "@heroicons/vue/20/solid";
-import VueDatePicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css'
+import Multiselect from "vue-multiselect";
+import "vue-multiselect/dist/vue-multiselect.css"
 
 const isLoading = ref(false)
 
@@ -225,35 +190,64 @@ const subNavigation = [
   { name: 'Резюме', href: '/resume', icon: WrenchScrewdriverIcon },
 ]
 const user = ref({
-  firstName: '',
-  lastName: '',
-  date: '',
-  city: null,
-  description: '',
-  gender: ''
+  nameCompany: '',
+  cityCompany: '',
+  selectedDivision: null,
+  selectedQualification: null,
+  skill: [],
 });
 
-const cityList = computed(() => {
-  return directoriesStore?.cityList || []
+const qualificationList = computed(() => {
+  return directoriesStore?.qualificationList || []
+})
+const skillList = computed(() => {
+  return directoriesStore?.skillList || []
+})
+const divisionList = computed(() => {
+  return directoriesStore?.divisionList || []
 })
 
+const addTagSkill = (newTag) => {
+  // this.options.push(newTag)
+  user.value.skill.push(newTag)
+}
+
 const saveForm = () => {
-  console.log('form profile', user.value)
+  console.log('form experience', user.value)
   // applicantStore.createApplicant()
 }
 
 onMounted(async () => {
   isLoading.value = true
   await Promise.all([
-    directoriesStore.fillCityList(),
+    directoriesStore.fillDivisionList(),
+    directoriesStore.fillQualificationList(),
+    directoriesStore.fillSkillList(),
   ]).finally(() => {
     isLoading.value = false
   });
 })
 </script>
 
-<style>
-.dp__input {
-  font-size: 14px !important;
+<style scoped>
+:deep(.multiselect__input) {
+  font-size: 14px;
+  outline: none;
+  box-shadow: none;
+}
+:deep(.multiselect__tags) {
+  @apply block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-gray-300 placeholder:text-gray-400 outline-0 sm:text-sm sm:leading-6;
+}
+:deep(.multiselect__option) {
+  font-size: 0.875rem;
+  height: 30px;
+  &:after {
+    display: none;
+  }
+}
+:deep(.multiselect__single) {
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+  margin-top: 0.2rem;
 }
 </style>
