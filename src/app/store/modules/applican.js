@@ -8,10 +8,11 @@ export const useApplicantStore = defineStore({
     state: () => {
         return {
             applicantList: [],
+            applicant: null
         }
     },
     actions: {
-        // currency List
+        // application List
         fillApplicantList(payload = null) {
             return new Promise((resolve, reject) => {
                 ApiService
@@ -27,17 +28,18 @@ export const useApplicantStore = defineStore({
                     })
             })
         },
-        // create applicant
-        createApplicant(payload = null) {
+        // get application
+        getApplicant(payload = null) {
             return new Promise((resolve, reject) => {
                 ApiService
-                    .post("/applicant/", payload)
+                    .get("/user/applicant_info", payload)
                     .then((res) => {
                         resolve(res)
+                        this.applicant = res
                     })
                     .catch((err) => {
                         console.error(err)
-                        toast.error(err?.message || "Ошибка сохранения личных данных! Пожалуйста, попробуйте позже")
+                        toast.error(err?.message || "Ошибка загрузки специализации! Пожалуйста, попробуйте позже")
                         reject()
                     })
             })
@@ -46,9 +48,10 @@ export const useApplicantStore = defineStore({
         updateApplicant(payload = null) {
             return new Promise((resolve, reject) => {
                 ApiService
-                    .put(`/applicant/${payload.id}`, payload.date)
+                    .put(`/user/applicant_info`, payload)
                     .then((res) => {
                         resolve(res)
+                        toast.success("Успешно")
                     })
                     .catch((err) => {
                         console.error(err)
