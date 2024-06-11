@@ -121,7 +121,7 @@
               <div class="mt-3">
                 <textarea rows="4" name="comment" id="comment" class="block px-3 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 placeholder:text-gray-400 outline-0 sm:text-sm sm:leading-6" />
               </div>
-            <button type="button" class="mt-3 w-full sm:w-fit rounded-md bg-blue-600 px-5 py-2.5 text-sm font-semibold tr text-white shadow-sm hover:bg-blue-700 outline-0">
+            <button type="button" @click="onClickResponse" class="mt-3 w-full sm:w-fit rounded-md bg-blue-600 px-5 py-2.5 text-sm font-semibold tr text-white shadow-sm hover:bg-blue-700 outline-0">
               Откликнуться
             </button>
           </div>
@@ -130,6 +130,22 @@
     </div>
   </div>
   <loading class="py-40 divide-y divide-gray-200 lg:col-span-9" v-else />
+  <modal
+    :is-open="isOpenModal" 
+    title="Вы не авторизованы"
+    description="Пожалуйста войдите для авторизации"
+    @close-modal="closeModal"
+    @submit="singIn"
+    button-name="Авторизоваться"
+  />
+  <modal
+    :is-open="isOpenResumeModal" 
+    title="Заполните резюме"
+    description="Для отклика требуется заполнить резюме"
+    @close-modal="closeModal"
+    @submit="console.log('submit isOpenResumeModal')"
+    button-name="Заполнить резюме"
+  />
   </div>
 </template>
 
@@ -138,15 +154,22 @@ import { onMounted, computed, ref } from 'vue'
 import { ChevronRightIcon, BriefcaseIcon, MapIcon, MapPinIcon, CalendarIcon, ChevronLeftIcon } from '@heroicons/vue/20/solid'
 import {useVacancyStore} from "@/app/store/modules/vacancy.js";
 import Loading from "@/shared/Loading.vue";
+import Modal from "@/shared/Modal.vue";
 import {useDirectoriesStore} from "@/app/store/modules/directories.js";
 import { useRoute } from 'vue-router'
+import { useUserStore } from '@/app/store/modules/user';
+import iamService from "@/shared/services/iam.service.js";
 
 const router = useRoute()
 
 const isLoading = ref(false)
 
+const isOpenModal = ref(false)
+const isOpenResumeModal = ref(false)
+
 //* store
 const vacancyStore = useVacancyStore()
+const userStore = useUserStore()
 const directoriesStore = useDirectoriesStore()
 
 const employmentTypeList = computed(() => {
@@ -183,6 +206,20 @@ const formattedDateValue = ((date) => {
   return `${day}.${month}.${year}`;
 });
 
+const onClickResponse = () => {
+  if(!userStore.isAuth) {
+    isOpenModal.value = true
+  }
+}
+const closeModal = () => {
+  isOpenModal.value = false
+  isOpenResumeModal.value = false
+}
+const singIn = () => {
+  console.log(111);
+  const targetUrl = iamService.sdk.getSigninUrl()
+  window.location.href = targetUrl
+}
 onMounted(async() => {
   isLoading.value = true
   await Promise.all([
