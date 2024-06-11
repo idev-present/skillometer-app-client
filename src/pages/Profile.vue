@@ -59,6 +59,9 @@
                           autocomplete="family-name"
                           v-model="user.firstName"
                           class="block mt-1 w-full rounded-md border-0 py-1.5 pl-3 pr-3 text-gray-900 shadow-sm ring-1 ring-gray-300 outline-0 placeholder:text-gray-400 sm:text-sm sm:leading-6">
+                      <span v-if="errors?.firstName" class="text-red-600 text-sm">
+                        {{errors.firstName}}
+                      </span>
                     </div>
                     <div class="col-span-12 sm:col-span-6">
                       <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">
@@ -71,6 +74,9 @@
                              v-model="user.lastName"
                              class="block mt-1 w-full rounded-md border-0 py-1.5 pl-3 pr-3 text-gray-900 shadow-sm ring-1 ring-gray-300 outline-0 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                       />
+                      <span v-if="errors?.lastName" class="text-red-600 text-sm">
+                        {{errors.lastName}}
+                      </span>
                     </div>
                   </div>
                   <!--Пол-->
@@ -105,6 +111,9 @@
                             Женский
                           </label>
                         </div>
+                        <span v-if="errors?.gender" class="text-red-600 text-sm">
+                          {{errors.gender}}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -121,6 +130,9 @@
                           auto-apply
                           locale="ru-RU"
                       />
+                      <span v-if="errors?.date" class="text-red-600 text-sm">
+                          {{errors.date}}
+                      </span>
                     </div>
                   </div>
                   <!--Город-->
@@ -151,6 +163,9 @@
                           </transition>
                         </div>
                       </Listbox>
+                      <span v-if="errors?.city" class="text-red-600 text-sm">
+                          {{errors.city}}
+                      </span>
                     </div>
                   </div>
                   <!--О себе-->
@@ -169,6 +184,9 @@
                           name="comment"
                           class="mt-2 block px-3 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 placeholder:text-gray-400 outline-0 sm:text-sm sm:leading-6"
                       />
+                      <span v-if="errors?.description" class="text-red-600 text-sm">
+                          {{errors.description}}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -209,6 +227,7 @@ import {useDirectoriesStore} from "@/app/store/modules/directories.js";
 import {BriefcaseIcon} from "@heroicons/vue/20/solid";
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
+import ProfileForm from "@/app/forms/ProfileForm.js";
 
 const isLoading = ref(false)
 
@@ -232,6 +251,14 @@ const user = ref({
   description: '',
   gender: ''
 });
+const errors = ref({
+  firstName: '',
+  lastName: '',
+  date: '',
+  city: '',
+  description: '',
+  gender: ''
+})
 
 const cityList = computed(() => {
   return directoriesStore?.cityList || []
@@ -239,7 +266,15 @@ const cityList = computed(() => {
 
 const saveForm = () => {
   console.log('form profile', user.value)
-  // applicantStore.createApplicant()
+  const payload = {
+    ...user.value
+  }
+  errors.value = ProfileForm.validate(payload)
+  if(!errors.value && !isLoading.value) {
+    isLoading.value = true
+    // await applicantStore.updateApplicant(payload)
+    isLoading.value = false
+  }
 }
 
 onMounted(async () => {

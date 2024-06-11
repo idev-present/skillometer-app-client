@@ -399,7 +399,6 @@ const saveForm = async () => {
     }
   }
   errors.value = SpecializationForm.validate(payload.date)
-  console.log(11, errors.value)
   if(!errors.value && !isLoading.value) {
     isLoading.value = true
     // await applicantStore.updateApplicant(payload)
