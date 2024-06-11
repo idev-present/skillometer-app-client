@@ -21,7 +21,6 @@
               {{ item.name }}
             </router-link>
           </div>
-          <button @click="getProfile">getProfile</button>
         </div>
         <div v-if="isAuth" class="hidden lg:ml-6 lg:flex lg:items-center">
           <router-link to="/notification" class="relative mr-3 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none">
@@ -145,6 +144,7 @@ import { Dialog, DialogPanel, MenuButton, Menu, MenuItem, MenuItems } from '@hea
 import { Bars3Icon, XMarkIcon, BellIcon, ArrowLeftEndOnRectangleIcon } from '@heroicons/vue/24/outline'
 import {useUserStore} from "@/app/store/modules/user.js";
 import iamService from "@/shared/services/iam.service.js";
+import Cookies from "js-cookie"
 
 const navigation = [
   { name: 'Вакансии', href: '/vacancy' },
@@ -166,21 +166,16 @@ const isAuth = computed(() => {
 })
 
 const singIn = () => {
-  console.log('#### login click')
   const targetUrl = iamService.sdk.getSigninUrl()
-  alert(targetUrl)
   window.location.href = targetUrl
 }
 
 const singUp = () => {
-  console.log('#### registration click')
   const targetUrl = iamService.sdk.getSignupUrl()
-  alert(targetUrl)
   window.location.href = targetUrl
 }
 
 const logout = async () => {
-  console.log('logout')
   isLoading.value = true
   await userStore.logout().finally(() => {
     isLoading.value = false
@@ -194,4 +189,8 @@ const getProfile = async () => {
     isLoading.value = false
   })
 }
+
+onMounted(async () => {
+  await getProfile()
+})
 </script>

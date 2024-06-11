@@ -33,107 +33,109 @@
                       Укажите ваш опыт работы, чтобы мы могли рекомендовать вам вакансии, а вас — эйчарам и рекрутерам.
                     </p>
                   </div>
-                  <!--Название компании/Местоположение компании-->
-                  <div class="mt-4 grid grid-cols-12 gap-6">
-                    <div class="col-span-12 sm:col-span-6">
-                      <label
-                          class="block text-sm font-medium leading-6 text-gray-900">
-                        Название компании
-                      </label>
-                      <input
-                          type="text"
-                          v-model="user.nameCompany"
-                          class="block mt-1 w-full rounded-md border-0 py-1.5 pl-3 pr-3 text-gray-900 shadow-sm ring-1 ring-gray-300 outline-0 placeholder:text-gray-400 sm:text-sm sm:leading-6">
+                  <div>
+                    <!--Название компании/Местоположение компании-->
+                    <div class="mt-4 grid grid-cols-12 gap-6">
+                      <div class="col-span-12 sm:col-span-6">
+                        <label
+                            class="block text-sm font-medium leading-6 text-gray-900">
+                          Название компании
+                        </label>
+                        <input
+                            type="text"
+                            v-model="user.nameCompany"
+                            class="block mt-1 w-full rounded-md border-0 py-1.5 pl-3 pr-3 text-gray-900 shadow-sm ring-1 ring-gray-300 outline-0 placeholder:text-gray-400 sm:text-sm sm:leading-6">
+                      </div>
+                      <div class="col-span-12 sm:col-span-6">
+                        <label class="block text-sm font-medium leading-6 text-gray-900">
+                          Местоположение компании
+                        </label>
+                        <input type="text"
+                               v-model="user.cityCompany"
+                               class="block mt-1 w-full rounded-md border-0 py-1.5 pl-3 pr-3 text-gray-900 shadow-sm ring-1 ring-gray-300 outline-0 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                        />
+                      </div>
                     </div>
-                    <div class="col-span-12 sm:col-span-6">
-                      <label class="block text-sm font-medium leading-6 text-gray-900">
-                        Местоположение компании
-                      </label>
-                      <input type="text"
-                             v-model="user.cityCompany"
-                             class="block mt-1 w-full rounded-md border-0 py-1.5 pl-3 pr-3 text-gray-900 shadow-sm ring-1 ring-gray-300 outline-0 placeholder:text-gray-400 sm:text-sm sm:leading-6"
-                      />
-                    </div>
-                  </div>
-                  <!--Специализация/квалификация-->
-                  <div class="mt-4 grid grid-cols-12 gap-6">
-                    <div class="col-span-12 sm:col-span-6">
-                      <Listbox as="div" v-model="user.selectedDivision">
-                        <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">
-                          Специализация
-                        </ListboxLabel>
-                        <div class="relative mt-0.5">
-                          <ListboxButton class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none sm:text-sm sm:leading-6">
-                            <span class="block truncate">{{ user?.selectedDivision?.name || '&nbsp;' }}</span>
-                            <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                    <!--Специализация/квалификация-->
+                    <div class="mt-4 grid grid-cols-12 gap-6">
+                      <div class="col-span-12 sm:col-span-6">
+                        <Listbox as="div" v-model="user.selectedDivision">
+                          <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">
+                            Специализация
+                          </ListboxLabel>
+                          <div class="relative mt-0.5">
+                            <ListboxButton class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none sm:text-sm sm:leading-6">
+                              <span class="block truncate">{{ user?.selectedDivision?.name || '&nbsp;' }}</span>
+                              <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                             <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
                           </span>
-                          </ListboxButton>
-                          <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
-                            <ListboxOptions class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                              <ListboxOption as="template" v-for="(item, index) in divisionList" :key="index" :value="item" v-slot="{ active, selected }">
-                                <li :class="[active ? 'bg-blue-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
-                                  <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">{{ item.name }}</span>
-                                  <span v-if="selected" :class="[active ? 'text-white' : 'text-blue-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
+                            </ListboxButton>
+                            <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
+                              <ListboxOptions class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                                <ListboxOption as="template" v-for="(item, index) in divisionList" :key="index" :value="item" v-slot="{ active, selected }">
+                                  <li :class="[active ? 'bg-blue-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
+                                    <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">{{ item.name }}</span>
+                                    <span v-if="selected" :class="[active ? 'text-white' : 'text-blue-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
                                   <CheckIcon class="h-5 w-5" aria-hidden="true" />
                                 </span>
-                                </li>
-                              </ListboxOption>
-                            </ListboxOptions>
-                          </transition>
-                        </div>
-                      </Listbox>
-                    </div>
+                                  </li>
+                                </ListboxOption>
+                              </ListboxOptions>
+                            </transition>
+                          </div>
+                        </Listbox>
+                      </div>
 
-                    <div class="col-span-12 sm:col-span-6">
-                      <Listbox as="div" v-model="user.selectedQualification">
-                        <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">
-                          Квалификация
-                        </ListboxLabel>
-                        <div class="relative mt-0.5">
-                          <ListboxButton class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none sm:text-sm sm:leading-6">
-                            <span class="block truncate">{{ user?.selectedQualification?.name || '&nbsp;' }}</span>
-                            <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                      <div class="col-span-12 sm:col-span-6">
+                        <Listbox as="div" v-model="user.selectedQualification">
+                          <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">
+                            Квалификация
+                          </ListboxLabel>
+                          <div class="relative mt-0.5">
+                            <ListboxButton class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none sm:text-sm sm:leading-6">
+                              <span class="block truncate">{{ user?.selectedQualification?.name || '&nbsp;' }}</span>
+                              <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                             <ChevronUpDownIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
                           </span>
-                          </ListboxButton>
-                          <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
-                            <ListboxOptions class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                              <ListboxOption as="template" v-for="(item, index) in qualificationList" :key="index" :value="item" v-slot="{ active, selected }">
-                                <li :class="[active ? 'bg-blue-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
-                                  <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">{{ item.name }}</span>
-                                  <span v-if="selected" :class="[active ? 'text-white' : 'text-blue-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
+                            </ListboxButton>
+                            <transition leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
+                              <ListboxOptions class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                                <ListboxOption as="template" v-for="(item, index) in qualificationList" :key="index" :value="item" v-slot="{ active, selected }">
+                                  <li :class="[active ? 'bg-blue-600 text-white' : 'text-gray-900', 'relative cursor-default select-none py-2 pl-3 pr-9']">
+                                    <span :class="[selected ? 'font-semibold' : 'font-normal', 'block truncate']">{{ item.name }}</span>
+                                    <span v-if="selected" :class="[active ? 'text-white' : 'text-blue-600', 'absolute inset-y-0 right-0 flex items-center pr-4']">
                                   <CheckIcon class="h-5 w-5" aria-hidden="true" />
                                 </span>
-                                </li>
-                              </ListboxOption>
-                            </ListboxOptions>
-                          </transition>
-                        </div>
-                      </Listbox>
+                                  </li>
+                                </ListboxOption>
+                              </ListboxOptions>
+                            </transition>
+                          </div>
+                        </Listbox>
+                      </div>
                     </div>
-                  </div>
-                  <!--Навыки-->
-                  <div class="mt-4 grid grid-cols-12 gap-6">
-                    <div class="col-span-12">
-                      <label class="block text-sm font-medium leading-6 text-gray-900">
-                        Профессиональные навыки
-                      </label>
-                      <p class="mt-0.5 text-sm text-gray-500">
-                        Выберите до десяти своих профессиональных навыков, вначале укажите самые важные. Точный стек навыков поможет нам подбирать для вас подходящие вакансии и курсы.
-                      </p>
-                      <multiselect
-                          class="mt-1"
-                          v-model="user.skill"
-                          placeholder="Найдите или добавьте тег"
-                          :show-labels="false"
-                          label="name"
-                          track-by="id"
-                          :options="skillList"
-                          :multiple="true"
-                          :taggable="true"
-                          @tag="addTagSkill"
-                      />
+                    <!--Навыки-->
+                    <div class="mt-4 grid grid-cols-12 gap-6">
+                      <div class="col-span-12">
+                        <label class="block text-sm font-medium leading-6 text-gray-900">
+                          Профессиональные навыки
+                        </label>
+                        <p class="mt-0.5 text-sm text-gray-500">
+                          Выберите до десяти своих профессиональных навыков, вначале укажите самые важные. Точный стек навыков поможет нам подбирать для вас подходящие вакансии и курсы.
+                        </p>
+                        <multiselect
+                            class="mt-1"
+                            v-model="user.skill"
+                            placeholder="Найдите или добавьте тег"
+                            :show-labels="false"
+                            label="name"
+                            track-by="id"
+                            :options="skillList"
+                            :multiple="true"
+                            :taggable="true"
+                            @tag="addTagSkill"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>

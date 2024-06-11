@@ -1,6 +1,7 @@
 import { defineStore } from "pinia"
 import { useToast } from "vue-toastification"
 import ApiService from "@/shared/services/api.service.js"
+import Cookies from "js-cookie";
 
 const toast = useToast()
 export const useUserStore = defineStore({
@@ -18,7 +19,7 @@ export const useUserStore = defineStore({
         fillUser(payload = null) {
             return new Promise((resolve, reject) => {
                 ApiService
-                    .get(`/user/me`, null)
+                    .get(`/user/profile`, null)
                     .then((res) => {
                         resolve(res || null)
                         this.user = res || null
@@ -36,25 +37,31 @@ export const useUserStore = defineStore({
             })
         },
         logout(payload = null) {
-            return new Promise((resolve, reject) => {
-                ApiService
-                    .post(`/user/logout`, null)
-                    .then((res) => {
-                        console.log(res)
-                        resolve(res || null)
-                        this.user = null
-                        this.isAuth = false
-                    })
-                    .catch((err) => {
-                        if(!err?.response?.data?.detail) {
-                            console.error(err)
-                            toast.error(err?.message || "Ошибка авторизации! Пожалуйста, попробуйте позже")
-                        } else {
-                            this.isAuth = false
-                        }
-                        reject()
-                    })
-            })
+            // return new Promise((resolve, reject) => {
+            //     ApiService
+            //         .post(`/user/logout`, null)
+            //         .then((res) => {
+            //             console.log(res)
+            //             resolve(res || null)
+            //             this.user = null
+            //             this.isAuth = false
+            //         })
+            //         .catch((err) => {
+            //             if(!err?.response?.data?.detail) {
+            //                 console.error(err)
+            //                 toast.error(err?.message || "Ошибка авторизации! Пожалуйста, попробуйте позже")
+            //             } else {
+            //                 this.isAuth = false
+            //             }
+            //             reject()
+            //         })
+            // })
+            Cookies.remove('skillometer_access_token');
+            Cookies.remove('skillometer_refresh_token');
+            Cookies.remove('expires_in');
+            Cookies.remove('skillometer_session_id');
+            this.isAuth = false
+            this.user = null
         },
     },
 })
