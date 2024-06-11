@@ -36,6 +36,25 @@ export const useUserStore = defineStore({
                     })
             })
         },
+        updateUser(payload = null) {
+            return new Promise((resolve, reject) => {
+                ApiService
+                    .put(`/user/profile`, payload)
+                    .then((res) => {
+                        resolve(res || null)
+                        toast.success("Успешно")
+                    })
+                    .catch((err) => {
+                        if(!err?.response?.data?.detail) {
+                            console.error(err)
+                            toast.error(err?.message || "Ошибка редактирования профиля! Пожалуйста, попробуйте позже")
+                        } else {
+                            this.isAuth = false
+                        }
+                        reject()
+                    })
+            })
+        },
         logout(payload = null) {
             // return new Promise((resolve, reject) => {
             //     ApiService

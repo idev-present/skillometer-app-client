@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useUserStore } from '@/app/store/modules/user';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,37 +27,58 @@ const router = createRouter({
     {
       path: '/profile',
       name: 'Profile',
-      component: () => import('@/pages/Profile.vue')
+      component: () => import('@/pages/Profile.vue'),
+      meta: {
+        requiresAuth: true,
+      }
     },
     {
       path: '/specialization',
       name: 'SpecializationResume',
-      component: () => import('@/pages/SpecializationResume.vue')
+      component: () => import('@/pages/SpecializationResume.vue'),
+      meta: {
+        requiresAuth: true,
+      }
     },
     {
       path: '/experience',
       name: 'ExperienceResume',
-      component: () => import('@/pages/ExperienceResume.vue')
+      component: () => import('@/pages/ExperienceResume.vue'),
+      meta: {
+        requiresAuth: true,
+      }
     },
     {
       path: '/education',
       name: 'EducationResume',
-      component: () => import('@/pages/EducationResume.vue')
+      component: () => import('@/pages/EducationResume.vue'),
+      meta: {
+        requiresAuth: true,
+      }
     },
     {
       path: '/contacts',
       name: 'ContactsResume',
-      component: () => import('@/pages/ContactsResume.vue')
+      component: () => import('@/pages/ContactsResume.vue'),
+      meta: {
+        requiresAuth: true,
+      }
     },
     {
       path: '/resume',
       name: 'Resume',
-      component: () => import('@/pages/Resume.vue')
+      component: () => import('@/pages/Resume.vue'),
+      meta: {
+        requiresAuth: true,
+      }
     },
     {
       path: '/notification',
       name: 'Notification',
-      component: () => import('@/pages/Notification.vue')
+      component: () => import('@/pages/Notification.vue'),
+      meta: {
+        requiresAuth: true,
+      }
     },
     {
       name: 'AuthCallback',
@@ -79,5 +101,15 @@ const router = createRouter({
     },
   ]
 })
+
+// router.beforeEach((to, from, next) => {
+//   const authStore = useUserStore();
+//
+//   if (to.meta.requiresAuth && !authStore.isAuth) {
+//     next({ name: 'VacancyList' });
+//   } else {
+//     next();
+//   }
+// });
 
 export default router

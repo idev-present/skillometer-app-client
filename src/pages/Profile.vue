@@ -35,7 +35,11 @@
                   </div>
                   <!--Аватар-->
                   <div class="mt-4 col-span-full flex items-center gap-x-8">
-                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="h-24 w-24 flex-none rounded-lg bg-gray-800 object-cover" />
+                    <img
+                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        alt=""
+                        class="h-24 w-24 flex-none rounded-lg bg-gray-800 object-cover"
+                    />
                     <div>
                       <button type="button"
                               class="mt w-full sm:w-fit rounded-md bg-blue-600 px-5 py-2.5 text-sm font-semibold tr text-white shadow-sm hover:bg-blue-700 outline-0">
@@ -89,25 +93,25 @@
                       <div class="mt-1 space-y-2">
                         <div class="flex items-center gap-x-3">
                           <input
-                              id="men"
+                              id="male"
                               v-model="user.gender"
-                              value="men"
-                              name="men"
+                              value="male"
+                              name="male"
                               type="radio"
                               class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
-                          <label for="men" class="block text-sm font-medium leading-6 text-gray-900">
+                          <label for="male" class="block text-sm font-medium leading-6 text-gray-900">
                             Мужской
                           </label>
                         </div>
                         <div class="flex items-center gap-x-3">
                           <input
-                              id="woman"
+                              id="female"
                               v-model="user.gender"
-                              value="woman"
-                              name="woman"
+                              value="female"
+                              name="female"
                               type="radio"
                               class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
-                          <label for="woman" class="block text-sm font-medium leading-6 text-gray-900">
+                          <label for="female" class="block text-sm font-medium leading-6 text-gray-900">
                             Женский
                           </label>
                         </div>
@@ -209,7 +213,6 @@
 
 <script setup>
 import {computed, onMounted, ref} from "vue"
-import {useApplicantStore} from "@/app/store/modules/applican.js";
 import Loading from "@/shared/Loading.vue";
 import {
   Listbox,
@@ -228,11 +231,12 @@ import {BriefcaseIcon} from "@heroicons/vue/20/solid";
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import ProfileForm from "@/app/forms/ProfileForm.js";
+import {useUserStore} from "@/app/store/modules/user.js";
 
 const isLoading = ref(false)
 
 //* store
-const applicantStore = useApplicantStore()
+const userStore = useUserStore()
 const directoriesStore = useDirectoriesStore()
 
 const subNavigation = [
@@ -264,16 +268,24 @@ const cityList = computed(() => {
   return directoriesStore?.cityList || []
 })
 
-const saveForm = () => {
+const saveForm = async () => {
   console.log('form profile', user.value)
   const payload = {
-    ...user.value
+    avatar: user?.value?.avatar || '',
+    gender: user?.value?.gender || '',
+    first_name: user?.value?.firstName || '',
+    last_name: user?.value?.lastName || '',
+    birthday: user?.value?.date || '',
+    city: user?.value?.city?.id || '',
+    bio: user?.value?.description || '',
   }
+  console.log(payload)
   errors.value = ProfileForm.validate(payload)
   if(!errors.value && !isLoading.value) {
     isLoading.value = true
-    // await applicantStore.updateApplicant(payload)
-    isLoading.value = false
+    await userStore.updateUser(payload).finally(() => {
+      isLoading.value = false
+    })
   }
 }
 
@@ -282,6 +294,16 @@ onMounted(async () => {
   await Promise.all([
     directoriesStore.fillCityList(),
   ]).finally(() => {
+    user.value = {
+      ...userStore.user,
+      firstName: userStore?.user?.first_name || '',
+      lastName: userStore?.user?.last_name || '',
+      date: userStore?.user?.birthday || '',
+      city: cityList?.value?.find((item) => item.id === (userStore?.user?.city || '')) || null,
+      description: userStore?.user?.bio || '',
+      gender: userStore?.user?.gender || ''
+    }
+    userStore.fillUser()
     isLoading.value = false
   });
 })
