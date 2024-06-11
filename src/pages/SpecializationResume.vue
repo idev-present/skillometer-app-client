@@ -61,6 +61,9 @@
                           </transition>
                         </div>
                       </Listbox>
+                      <span v-if="errors?.search_status_id" class="text-red-600 text-sm">
+                        {{errors.search_status_id}}
+                      </span>
                     </div>
                   </div>
                   <!--Тип занятости/Квалификация-->
@@ -119,6 +122,9 @@
                           </transition>
                         </div>
                       </Listbox>
+                      <span v-if="errors?.qualification_id" class="text-red-600 text-sm">
+                        {{errors.qualification_id}}
+                      </span>
                     </div>
                   </div>
                   <!--Специализация/зп-->
@@ -149,6 +155,9 @@
                           </transition>
                         </div>
                       </Listbox>
+                      <span v-if="errors?.division_id" class="text-red-600 text-sm">
+                        {{errors.division_id}}
+                      </span>
                     </div>
 
                     <div class="col-span-12 sm:col-span-6">
@@ -159,7 +168,7 @@
                         <input name="price"
                                class="block mr-2 w-full rounded-md border-0 py-[5px] mt-0.5 pl-3 pr-3 text-gray-900 shadow-sm ring-1 ring-gray-300 outline-0 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                                @input="inputPrice"
-                               v-model="user.price"
+                               :value="user.price"
                                placeholder="От"
                         />
                         <Listbox as="div" v-model="user.selectedCurrency">
@@ -185,6 +194,9 @@
                           </div>
                         </Listbox>
                       </div>
+                      <span v-if="errors?.salary_from" class="text-red-600 text-sm">
+                        {{errors.salary_from}}
+                      </span>
                     </div>
                   </div>
 
@@ -209,6 +221,9 @@
                           :taggable="true"
                           @tag="addTagSkill"
                       />
+                      <span v-if="errors?.skill_set" class="text-red-600 text-sm">
+                        {{errors.skill_set}}
+                      </span>
                     </div>
                   </div>
 
@@ -285,6 +300,7 @@ import {useDirectoriesStore} from "@/app/store/modules/directories.js";
 import {BriefcaseIcon} from "@heroicons/vue/20/solid";
 import Multiselect from "vue-multiselect";
 import "vue-multiselect/dist/vue-multiselect.css"
+import SpecializationForm from "@/app/forms/SpecializationForm.js";
 
 const isLoading = ref(false)
 
@@ -309,6 +325,15 @@ const user = ref({
   price: '',
   isRelocation: false,
   isRemove: false,
+})
+
+const errors = ref({
+  salary_from: '',
+  currency: '',
+  search_status_id: '',
+  qualification_id: '',
+  division_id: '',
+  skill_set: '',
 })
 
 const searchStatusList = computed(() => {
@@ -348,14 +373,20 @@ const addTagSkill = (newTag) => {
   user.value.skill.push(newTag)
 }
 
-const saveForm = () => {
+const clearError = (field) => {
+  if (errors.value[field]) {
+    errors.value[field] = "";
+  }
+};
+
+const saveForm = async () => {
   console.log('form profile', user.value)
   const skills = user.value?.skill?.map((item => item.id) || []).join(',');
   const payload = {
     id: 'ichiro18',
     date: {
       title: "123",
-      salary_from: user?.value?.price || 0,
+      salary_from: Number(user?.value?.price || 0),
       currency: user?.value?.selectedCurrency?.key || '',
       age: 123,
       is_relocation: user?.value?.isRelocation || false,
@@ -367,7 +398,13 @@ const saveForm = () => {
       skill_set: skills
     }
   }
-  applicantStore.updateApplicant(payload)
+  errors.value = SpecializationForm.validate(payload.date)
+  console.log(11, errors.value)
+  if(!errors.value && !isLoading.value) {
+    isLoading.value = true
+    // await applicantStore.updateApplicant(payload)
+    isLoading.value = false
+  }
 }
 
 onMounted(async () => {
