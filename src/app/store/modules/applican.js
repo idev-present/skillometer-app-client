@@ -60,5 +60,21 @@ export const useApplicantStore = defineStore({
                     })
             })
         },
+        // create work
+        createWorkXp(payload = null) {
+            return new Promise((resolve, reject) => {
+                ApiService
+                    .post(`/user/work_xp`, payload)
+                    .then((res) => {
+                        resolve(res)
+                        toast.success("Успешно")
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        toast.error(err?.message || "Ошибка сохранения опыта работы! Пожалуйста, попробуйте позже")
+                        reject()
+                    })
+            })
+        },
     },
 })

@@ -188,8 +188,8 @@
                           name="comment"
                           class="mt-2 block px-3 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 placeholder:text-gray-400 outline-0 sm:text-sm sm:leading-6"
                       />
-                      <span v-if="errors?.description" class="text-red-600 text-sm">
-                          {{errors.description}}
+                      <span v-if="errors?.bio" class="text-red-600 text-sm">
+                          {{errors.bio}}
                       </span>
                     </div>
                   </div>
@@ -269,7 +269,6 @@ const cityList = computed(() => {
 })
 
 const saveForm = async () => {
-  console.log('form profile', user.value)
   const payload = {
     avatar: user?.value?.avatar || '',
     gender: user?.value?.gender || '',
@@ -279,7 +278,6 @@ const saveForm = async () => {
     city: user?.value?.city?.id || '',
     bio: user?.value?.description || '',
   }
-  console.log(payload)
   errors.value = ProfileForm.validate(payload)
   if(!errors.value && !isLoading.value) {
     isLoading.value = true
