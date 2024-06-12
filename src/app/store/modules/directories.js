@@ -9,6 +9,7 @@ export const useDirectoriesStore = defineStore({
         return {
             currencyList: [],
             cityList: [],
+            contactsList: [],
             employmentTypeList: [],
             divisionList: [],
             qualificationList: [],
@@ -45,6 +46,22 @@ export const useDirectoriesStore = defineStore({
                     .catch((err) => {
                         console.error(err)
                         toast.error(err?.message || "Ошибка загрузки списка городов! Пожалуйста, попробуйте позже")
+                        reject()
+                    })
+            })
+        },
+        // contacts List
+        fillContactsList(payload = null) {
+            return new Promise((resolve, reject) => {
+                ApiService
+                    .get("/dict/contacts", payload)
+                    .then((res) => {
+                        resolve()
+                        this.contactsList = res || []
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        toast.error(err?.message || "Ошибка загрузки списка контактов! Пожалуйста, попробуйте позже")
                         reject()
                     })
             })

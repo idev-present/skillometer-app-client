@@ -33,7 +33,7 @@
                       Укажите, как с вами могут связаться работодатели.
                     </p>
                   </div>
-                  <!--Почта/Тг-->
+                  <!--Почта/Телефон-->
                   <div class="mt-4 grid grid-cols-12 gap-6">
                     <div class="col-span-12 sm:col-span-6">
                       <label
@@ -48,22 +48,10 @@
                           autocomplete="email"
                           v-model="user.email"
                           class="block mt-1 w-full rounded-md border-0 py-1.5 pl-3 pr-3 text-gray-900 shadow-sm ring-1 ring-gray-300 outline-0 placeholder:text-gray-400 sm:text-sm sm:leading-6">
-                    </div>
-                    <div class="col-span-12 sm:col-span-6">
-                      <label for="telegram" class="block text-sm font-medium leading-6 text-gray-900">
-                        Telegram
-                      </label>
-                      <input type="text"
-                             name="telegram"
-                             id="telegram"
-                             autocomplete="telegram"
-                             v-model="user.telegram"
-                             class="block mt-1 w-full rounded-md border-0 py-1.5 pl-3 pr-3 text-gray-900 shadow-sm ring-1 ring-gray-300 outline-0 placeholder:text-gray-400 sm:text-sm sm:leading-6"
-                      />
-                    </div>
-                  </div>
-                  <!--Телефон/Сайт-->
-                  <div class="mt-4 grid grid-cols-12 gap-6">
+                        <span v-if="errors?.email" class="text-red-600 text-sm">
+                          {{ errors.email }}
+                        </span>
+                        </div>
                     <div class="col-span-12 sm:col-span-6">
                       <label
                           for="phone"
@@ -77,6 +65,26 @@
                           autocomplete="phone"
                           v-model="user.phone"
                           class="block mt-1 w-full rounded-md border-0 py-1.5 pl-3 pr-3 text-gray-900 shadow-sm ring-1 ring-gray-300 outline-0 placeholder:text-gray-400 sm:text-sm sm:leading-6">
+                          <span v-if="errors?.phone" class="text-red-600 text-sm">
+                          {{ errors.phone }}
+                        </span>
+                        </div>
+                  </div>
+
+                  <!--Телеграм/Сайт-->
+
+                  <!-- <div class="mt-4 grid grid-cols-12 gap-6">
+                    <div class="col-span-12 sm:col-span-6">
+                      <label for="telegram" class="block text-sm font-medium leading-6 text-gray-900">
+                        Telegram
+                      </label>
+                      <input type="text"
+                             name="telegram"
+                             id="telegram"
+                             autocomplete="telegram"
+                             v-model="user.telegram"
+                             class="block mt-1 w-full rounded-md border-0 py-1.5 pl-3 pr-3 text-gray-900 shadow-sm ring-1 ring-gray-300 outline-0 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                      />
                     </div>
                     <div class="col-span-12 sm:col-span-6">
                       <label for="web" class="block text-sm font-medium leading-6 text-gray-900">
@@ -90,7 +98,7 @@
                              class="block mt-1 w-full rounded-md border-0 py-1.5 pl-3 pr-3 text-gray-900 shadow-sm ring-1 ring-gray-300 outline-0 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                       />
                     </div>
-                  </div>
+                  </div> -->
                 </div>
                 <!--сохранить-->
                 <div class="flex justify-end gap-x-3 px-4 py-4 sm:px-6">
@@ -122,6 +130,7 @@ import {
 } from '@heroicons/vue/24/outline'
 import {useDirectoriesStore} from "@/app/store/modules/directories.js";
 import {BriefcaseIcon} from "@heroicons/vue/20/solid";
+import ContactsForm from "@/app/forms/ContactsForm";
 
 const isLoading = ref(false)
 
@@ -139,22 +148,31 @@ const subNavigation = [
 ]
 const user = ref({
   email: '',
-  telegram: '',
   phone: '',
-  web: null,
+  // telegram: '',
+  // web: null,
 });
-
-const saveForm = () => {
-  console.log('form profile', user.value)
-  // applicantStore.createApplicant()
-}
-
-onMounted(async () => {
-  // isLoading.value = true
-  // await Promise.all([
-  //   directoriesStore.fillCityList(),
-  // ]).finally(() => {
-  //   isLoading.value = false
-  // });
+const errors = ref ({
+  email: '',
+  phone: '',
 })
+
+const contactsList = computed(() => {
+  return directoriesStore?.contactsList || []
+})
+
+const saveForm = async () => {
+  const payload = {
+    email: user?.value?.email || '',
+    phone: user?.value?.phone || '',
+    }
+  errors.value = ContactsForm.validate(payload)
+  if(!errors.value && !isLoading.value) {
+    console.log(123)
+    // isLoading.value = true
+    // await userStore.updateUser(payload).finally(() => {
+    //   isLoading.value = false
+    // })
+  }
+}
 </script>

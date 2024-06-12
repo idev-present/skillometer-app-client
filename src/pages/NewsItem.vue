@@ -298,6 +298,9 @@ const news = ref({
   time: "10:20",
   views: "2.7k",
 });
+const comments = ref({
+  title: '',
+});
 const questions = [
   {
     id: "1",
