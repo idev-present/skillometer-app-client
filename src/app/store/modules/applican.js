@@ -11,6 +11,7 @@ export const useApplicantStore = defineStore({
             applicant: null,
             contactsList: [],
             contacts: null,
+            worksList: [],
         }
     },
     actions: {
@@ -58,6 +59,22 @@ export const useApplicantStore = defineStore({
                     .catch((err) => {
                         console.error(err)
                         toast.error(err?.message || "Ошибка сохранения специализации! Пожалуйста, попробуйте позже")
+                        reject()
+                    })
+            })
+        },
+        // list works
+        getWorksList(payload = null) {
+            return new Promise((resolve, reject) => {
+                ApiService
+                    .get("/user/work_xp", payload)
+                    .then((res) => {
+                        resolve(res)
+                        this.worksList = res
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        toast.error(err?.message || "Ошибка загрузки опыта работы! Пожалуйста, попробуйте позже")
                         reject()
                     })
             })
