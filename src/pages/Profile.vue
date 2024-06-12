@@ -292,6 +292,7 @@ onMounted(async () => {
   await Promise.all([
     directoriesStore.fillCityList(),
   ]).finally(() => {
+    userStore.fillUser()
     user.value = {
       ...userStore.user,
       firstName: userStore?.user?.first_name || '',
@@ -301,7 +302,6 @@ onMounted(async () => {
       description: userStore?.user?.bio || '',
       gender: userStore?.user?.gender || ''
     }
-    userStore.fillUser()
     isLoading.value = false
   });
 })

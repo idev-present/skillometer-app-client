@@ -8,7 +8,9 @@ export const useApplicantStore = defineStore({
     state: () => {
         return {
             applicantList: [],
-            applicant: null
+            applicant: null,
+            contactsList: [],
+            contacts: null,
         }
     },
     actions: {
@@ -72,6 +74,38 @@ export const useApplicantStore = defineStore({
                     .catch((err) => {
                         console.error(err)
                         toast.error(err?.message || "Ошибка сохранения опыта работы! Пожалуйста, попробуйте позже")
+                        reject()
+                    })
+            })
+        },
+        // get contacts
+        getContacts(payload = null) {
+            return new Promise((resolve, reject) => {
+                ApiService
+                    .get("/user/...", payload)
+                    .then((res) => {
+                        resolve(res)
+                        this.contacts = res
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        toast.error(err?.message || "Ошибка загрузки контактов! Пожалуйста, попробуйте позже")
+                        reject()
+                    })
+            })
+        },
+        // update contacts
+        updateContacts(payload = null) {
+            return new Promise((resolve, reject) => {
+                ApiService
+                    .put(`/user/...`, payload)
+                    .then((res) => {
+                        resolve(res)
+                        toast.success("Успешно")
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        toast.error(err?.message || "Ошибка сохранения контактов! Пожалуйста, попробуйте позже")
                         reject()
                     })
             })

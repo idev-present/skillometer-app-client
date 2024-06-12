@@ -169,10 +169,21 @@ const saveForm = async () => {
   errors.value = ContactsForm.validate(payload)
   if(!errors.value && !isLoading.value) {
     console.log(123)
-    // isLoading.value = true
-    // await userStore.updateUser(payload).finally(() => {
-    //   isLoading.value = false
-    // })
+    isLoading.value = true
+    await applicantStore.updateUser(payload).finally(() => {
+      isLoading.value = false
+    })
   }
 }
+
+onMounted(async () => {
+  isLoading.value = false
+  await applicantStore.getContacts().finally(() => {
+    user.value = {
+      email: applicantStore?.contacts?.email || '',
+      phone: applicantStore?.contacts?.phone || '',
+    }
+    isLoading.value = false
+  })
+})
 </script>
