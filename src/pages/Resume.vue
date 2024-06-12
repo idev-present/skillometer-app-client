@@ -21,21 +21,35 @@
             </aside>
 
             <div v-if="!isLoading" class="divide-y divide-gray-200 lg:col-span-9">
-              <!-- personal information -->
               <h1 class="px-4 py-4 sm:p-4 text-2xl sm:text-3xl font-bold tracking-tight text-gray-900">
                 Резюме
               </h1>
-              <div class="divide-y divide-gray-200">
-                <div class="px-4 py-6 sm:p-6 lg:pb-8">
-                  <!--Заголовок с описанием-->
-                  <div>
-                    <h2 class="text-lg font-medium leading-6 text-gray-900">Резюме</h2>
-                    <p class="mt-1 text-sm text-gray-500">
-                      Укажите, как с вами могут связаться работодатели.
-                    </p>
-                  </div>
-                </div>
-              </div>
+                <div class="px-4 sm:px-6">
+                        <div class="">
+                          <dl class="grid grid-cols-1 sm:grid-cols-2">
+                            <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                              <dt class="text-sm font-medium leading-6 text-gray-900">Имя Фамилия </dt>
+                              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Должность</dd>
+                            </div>
+                            <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                              <dt class="text-sm font-medium leading-6 text-gray-900">Игорь Журавлев</dt>
+                              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Frontend Developer</dd>
+                            </div>
+                            <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                              <dt class="text-sm font-medium leading-6 text-gray-900">Дата рождения</dt>
+                              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Зарплата</dd>
+                            </div>
+                            <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                              <dt class="text-sm font-medium leading-6 text-gray-900">11.11.2211</dt>
+                              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">$120,000</dd>
+                            </div>
+                            <div class="border-t border-gray-100 px-4 py-6 sm:col-span-2 sm:px-0">
+                              <dt class="text-sm font-medium leading-6 text-gray-900">About</dt>
+                              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim incididunt cillum culpa consequat. Excepteur qui ipsum aliquip consequat sint. Sit id mollit nulla mollit nostrud in ea officia proident. Irure nostrud pariatur mollit ad adipisicing reprehenderit deserunt qui eu.</dd>
+                            </div>
+                          </dl>
+                        </div>
+                      </div>
             </div>
 
             <loading class="py-40 divide-y divide-gray-200 lg:col-span-9" v-else />
@@ -90,26 +104,3 @@ onMounted(async () => {
   // });
 })
 </script>
-
-<style scoped>
-:deep(.multiselect__input) {
-  font-size: 14px;
-  outline: none;
-  box-shadow: none;
-}
-:deep(.multiselect__tags) {
-  @apply block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-gray-300 placeholder:text-gray-400 outline-0 sm:text-sm sm:leading-6;
-}
-:deep(.multiselect__option) {
-  font-size: 0.875rem;
-  height: 30px;
-  &:after {
-    display: none;
-  }
-}
-:deep(.multiselect__single) {
-  font-size: 0.875rem;
-  margin-bottom: 0.25rem;
-  margin-top: 0.2rem;
-}
-</style>
