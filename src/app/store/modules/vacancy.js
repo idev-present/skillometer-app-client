@@ -30,19 +30,35 @@ export const useVacancyStore = defineStore({
         },
         // Vacancy Item
         fillVacancyItem(payload = null) {
-        return new Promise((resolve, reject) => {
-            ApiService
-                .get(`/vacancy/${payload}`, null)
-                .then((res) => {
-                    resolve(res)
-                    this.vacancyItem = res || null
-                })
-                .catch((err) => {
-                    console.error(err)
-                    toast.error(err?.message || "Ошибка загрузки вакансии! Пожалуйста, попробуйте позже")
-                    reject()
-                })
-        })
-    },
+            return new Promise((resolve, reject) => {
+                ApiService
+                    .get(`/vacancy/${payload}`, null)
+                    .then((res) => {
+                        resolve(res)
+                        this.vacancyItem = res || null
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        toast.error(err?.message || "Ошибка загрузки вакансии! Пожалуйста, попробуйте позже")
+                        reject()
+                    })
+            })
+        },
+        // Vacancy Item
+        replyVacancyItem(payload = null) {
+            return new Promise((resolve, reject) => {
+                ApiService
+                    .post(`/vacancy/${payload}/reply`, null)
+                    .then((res) => {
+                        resolve(res)
+                        toast.success("Успешно")
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        toast.error(err?.message || "Ошибка отправки отклика! Пожалуйста, попробуйте позже")
+                        reject()
+                    })
+            })
+        },
     },
 })

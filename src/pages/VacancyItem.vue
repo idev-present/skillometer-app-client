@@ -209,6 +209,8 @@ const formattedDateValue = ((date) => {
 const onClickResponse = () => {
   if(!userStore.isAuth) {
     isOpenModal.value = true
+  } else {
+    vacancyStore.replyVacancyItem(router.params.id)
   }
 }
 const closeModal = () => {
@@ -216,7 +218,6 @@ const closeModal = () => {
   isOpenResumeModal.value = false
 }
 const singIn = () => {
-  console.log(111);
   const targetUrl = iamService.sdk.getSigninUrl()
   window.location.href = targetUrl
 }
