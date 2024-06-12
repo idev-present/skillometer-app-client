@@ -82,7 +82,7 @@ export const useApplicantStore = defineStore({
         getContacts(payload = null) {
             return new Promise((resolve, reject) => {
                 ApiService
-                    .get("/user/...", payload)
+                    .get("/user/contacts", payload)
                     .then((res) => {
                         resolve(res)
                         this.contacts = res
@@ -98,7 +98,7 @@ export const useApplicantStore = defineStore({
         updateContacts(payload = null) {
             return new Promise((resolve, reject) => {
                 ApiService
-                    .put(`/user/...`, payload)
+                    .put(`/user/contacts`, payload)
                     .then((res) => {
                         resolve(res)
                         toast.success("Успешно")

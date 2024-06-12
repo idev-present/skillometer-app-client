@@ -14,16 +14,17 @@
                     :aria-current="item.href === $route.path ? 'page' : undefined">
                   <component
                       :is="item.icon"
-                      :class="[item.href === $route.path ? 'text-blue-500 group-hover:text-blue-500' : 'text-gray-400 group-hover:text-gray-500', '-ml-1 mr-3 h-6 w-6 flex-shrink-0']" aria-hidden="true" />
+                      :class="[item.href === $route.path ? 'text-blue-500 group-hover:text-blue-500' : 'text-gray-400 group-hover:text-gray-500', '-ml-1 mr-3 h-6 w-6 flex-shrink-0']"
+                      aria-hidden="true"/>
                   <span class="truncate">{{ item.name }}</span>
                 </router-link>
               </nav>
             </aside>
 
             <div v-if="!isLoading" class="divide-y divide-gray-200 lg:col-span-9">
-                  <h1 class="px-4 py-4 sm:p-4 text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 border-b pb-3">
-                    Контакты
-                  </h1>
+              <h1 class="px-4 py-4 sm:p-4 text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 border-b pb-3">
+                Контакты
+              </h1>
               <div class="divide-y divide-gray-200">
                 <div class="px-4 py-6 sm:p-6 lg:pb-8">
                   <!--Заголовок с описанием-->
@@ -48,10 +49,10 @@
                           autocomplete="email"
                           v-model="user.email"
                           class="block mt-1 w-full rounded-md border-0 py-1.5 pl-3 pr-3 text-gray-900 shadow-sm ring-1 ring-gray-300 outline-0 placeholder:text-gray-400 sm:text-sm sm:leading-6">
-                        <span v-if="errors?.email" class="text-red-600 text-sm">
-                          {{ errors.email }}
-                        </span>
-                        </div>
+                      <span v-if="errors?.email" class="text-red-600 text-sm">
+                        {{ errors.email }}
+                      </span>
+                    </div>
                     <div class="col-span-12 sm:col-span-6">
                       <label
                           for="phone"
@@ -63,53 +64,26 @@
                           name="phone"
                           id="phone"
                           autocomplete="phone"
+                          v-maska="'+7(###)###-##-##'"
                           v-model="user.phone"
                           class="block mt-1 w-full rounded-md border-0 py-1.5 pl-3 pr-3 text-gray-900 shadow-sm ring-1 ring-gray-300 outline-0 placeholder:text-gray-400 sm:text-sm sm:leading-6">
-                          <span v-if="errors?.phone" class="text-red-600 text-sm">
-                          {{ errors.phone }}
-                        </span>
-                        </div>
+                      <span v-if="errors?.phone" class="text-red-600 text-sm">
+                        {{ errors.phone }}
+                      </span>
+                    </div>
                   </div>
-
-                  <!--Телеграм/Сайт-->
-
-                  <!-- <div class="mt-4 grid grid-cols-12 gap-6">
-                    <div class="col-span-12 sm:col-span-6">
-                      <label for="telegram" class="block text-sm font-medium leading-6 text-gray-900">
-                        Telegram
-                      </label>
-                      <input type="text"
-                             name="telegram"
-                             id="telegram"
-                             autocomplete="telegram"
-                             v-model="user.telegram"
-                             class="block mt-1 w-full rounded-md border-0 py-1.5 pl-3 pr-3 text-gray-900 shadow-sm ring-1 ring-gray-300 outline-0 placeholder:text-gray-400 sm:text-sm sm:leading-6"
-                      />
-                    </div>
-                    <div class="col-span-12 sm:col-span-6">
-                      <label for="web" class="block text-sm font-medium leading-6 text-gray-900">
-                        Личный сайт или профиль в соцсетях
-                      </label>
-                      <input type="text"
-                             name="web"
-                             id="web"
-                             autocomplete="web"
-                             v-model="user.web"
-                             class="block mt-1 w-full rounded-md border-0 py-1.5 pl-3 pr-3 text-gray-900 shadow-sm ring-1 ring-gray-300 outline-0 placeholder:text-gray-400 sm:text-sm sm:leading-6"
-                      />
-                    </div>
-                  </div> -->
                 </div>
                 <!--сохранить-->
                 <div class="flex justify-end gap-x-3 px-4 py-4 sm:px-6">
-                  <button @click="saveForm" type="button" class="w-full sm:w-fit rounded-md bg-blue-600 px-5 py-2.5 text-sm font-semibold tr text-white shadow-sm hover:bg-blue-700 outline-0">
+                  <button @click="saveForm" type="button"
+                          class="w-full sm:w-fit rounded-md bg-blue-600 px-5 py-2.5 text-sm font-semibold tr text-white shadow-sm hover:bg-blue-700 outline-0">
                     Сохранить
                   </button>
                 </div>
               </div>
             </div>
 
-            <loading class="py-40 divide-y divide-gray-200 lg:col-span-9" v-else />
+            <loading class="py-40 divide-y divide-gray-200 lg:col-span-9" v-else/>
           </div>
         </div>
       </main>
@@ -118,7 +92,7 @@
 </template>
 
 <script setup>
-import {computed, onMounted, ref} from "vue"
+import {onMounted, ref} from "vue"
 import {useApplicantStore} from "@/app/store/modules/applican.js";
 import Loading from "@/shared/Loading.vue";
 import {
@@ -131,6 +105,7 @@ import {
 import {useDirectoriesStore} from "@/app/store/modules/directories.js";
 import {BriefcaseIcon} from "@heroicons/vue/20/solid";
 import ContactsForm from "@/app/forms/ContactsForm";
+import { vMaska } from 'maska/vue'
 
 const isLoading = ref(false)
 
@@ -149,35 +124,30 @@ const subNavigation = [
 const user = ref({
   email: '',
   phone: '',
-  // telegram: '',
-  // web: null,
 });
 const errors = ref ({
   email: '',
   phone: '',
 })
 
-const contactsList = computed(() => {
-  return directoriesStore?.contactsList || []
-})
-
 const saveForm = async () => {
+  const cleaned = user?.value?.phone?.replace(/[^\d]/g, '') || ''
+  const resPhone = cleaned.startsWith('7') ? cleaned.substring(1) : cleaned;
   const payload = {
     email: user?.value?.email || '',
-    phone: user?.value?.phone || '',
-    }
+    phone: resPhone || '',
+  }
   errors.value = ContactsForm.validate(payload)
   if(!errors.value && !isLoading.value) {
-    console.log(123)
     isLoading.value = true
-    await applicantStore.updateUser(payload).finally(() => {
+    await applicantStore.updateContacts(payload).finally(() => {
       isLoading.value = false
     })
   }
 }
 
 onMounted(async () => {
-  isLoading.value = false
+  isLoading.value = true
   await applicantStore.getContacts().finally(() => {
     user.value = {
       email: applicantStore?.contacts?.email || '',
