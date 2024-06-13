@@ -2,7 +2,7 @@
   <div class="">
     <div class="bg-white shadow-sm ring-1 lg:mb-5 ring-gray-900/5 rounded-xl">
       <main class="relative mt-2">
-        <div class="overflow-hidden rounded-lg bg-white shadow">
+        <div class="rounded-lg bg-white shadow">
           <div class="divide-y divide-gray-200 lg:grid lg:grid-cols-12 lg:divide-x lg:divide-y-0">
             <aside class="py-6 lg:col-span-3">
               <nav class="space-y-1">
@@ -22,14 +22,14 @@
 
             <div v-if="!isLoading" class="divide-y divide-gray-200 lg:col-span-9">
                   <h1 class="px-4 py-4 sm:p-4 text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 border-b pb-3">
-                    Образования
+                    Образование
                   </h1>
               <div class="divide-y divide-gray-200">
                 <div class="px-4 py-6 sm:p-6 lg:pb-8">
                   <!--Заголовок с описанием-->
                   <div>
                     <h2 class="text-lg font-medium leading-6 text-gray-900">
-                      {{route?.params?.id === 'new' ? 'Добавление образования' : 'Редактирование образования'}}
+                      {{route?.params?.id === 'new' ? 'Добавление образование' : 'Редактирование образование'}}
                     </h2>
                   </div>
                   <div>

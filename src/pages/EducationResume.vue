@@ -23,7 +23,7 @@
             <div v-if="!isLoading" class="divide-y divide-gray-300 lg:col-span-9">
               <div class="px-4 py-4 sm:p-4 border-b pb-3 flex justify-between items-center">
                 <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900">
-                  Образования
+                  Образование
                 </h1>
                 <router-link
                     class="cursor-pointer flex items-center font-bold text-sm text-blue-600 hover:text-blue-700"
