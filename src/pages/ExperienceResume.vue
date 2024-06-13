@@ -26,9 +26,13 @@
                   Опыт работы
                 </h1>
                 <router-link
-                    class="cursor-pointer font-bold text-sm text-blue-600 hover:text-blue-700"
+                    class="cursor-pointer flex items-center font-bold text-sm text-blue-600 hover:text-blue-700"
                     to="/experience/new"
                 >
+                  <PlusIcon
+                      class="mr-1 h-5 w-5 flex-shrink-0"
+                      aria-hidden="true"
+                  />
                   Добавить опыт работы
                 </router-link>
               </div>
@@ -114,6 +118,21 @@
                   </div>
                 </div>
               </div>
+              <div v-if="!worksList?.length"
+                   class="w-full flex flex-col items-center py-28"
+              >
+                <span class="text-lg mb-3">Список пуст</span>
+                <router-link
+                    class="cursor-pointer flex items-center font-bold text-lg text-blue-600 hover:text-blue-700"
+                    to="/experience/new"
+                >
+                  <PlusIcon
+                      class="mr-1 -mb-0.5 h-6 w-6 flex-shrink-0"
+                      aria-hidden="true"
+                  />
+                  Добавить опыт работы
+                </router-link>
+              </div>
             </div>
 
             <loading class="py-40 divide-y divide-gray-200 lg:col-span-9" v-else />
@@ -146,7 +165,7 @@ import {
   TrashIcon
 } from '@heroicons/vue/24/outline'
 import {useDirectoriesStore} from "@/app/store/modules/directories.js";
-import {BriefcaseIcon, CalendarIcon} from "@heroicons/vue/20/solid";
+import {BriefcaseIcon, CalendarIcon, PlusIcon} from "@heroicons/vue/20/solid";
 import Modal from "@/shared/Modal.vue";
 
 const isLoading = ref(false)
