@@ -201,6 +201,7 @@ const openModalDelete = (work) => {
 const deleteWork = async () => {
   if(selectedWork?.value?.id) {
     await applicantStore.removeWorkXp(selectedWork.value.id)
+    await applicantStore.getWorksList()
   } else {
     console.error('ID опыта работы не найдено')
   }
