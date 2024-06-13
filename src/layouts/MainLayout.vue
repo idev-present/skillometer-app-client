@@ -91,8 +91,12 @@
                     <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
                   </div>
                   <div class="ml-3">
-                    <div class="text-base font-medium text-gray-800">Tom Cook</div>
-                    <div class="text-sm font-medium text-gray-500">tom@example.com</div>
+                    <div class="text-base font-medium text-gray-800">
+                      {{userStore?.user?.first_name || ''}} {{userStore?.user?.last_name || ''}}
+                    </div>
+                    <div class="text-sm font-medium text-gray-500">
+                      {{userStore?.user?.email || ''}}
+                    </div>
                   </div>
                   <router-link to="/notification" @click="mobileMenuOpen = false" class="relative ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none">
                     <span class="absolute top-0 right-0 bg-blue-600 text-white font-bold text-xs rounded-full w-4 h-4 flex items-center justify-center">
@@ -144,7 +148,6 @@ import { Dialog, DialogPanel, MenuButton, Menu, MenuItem, MenuItems } from '@hea
 import { Bars3Icon, XMarkIcon, BellIcon, ArrowLeftEndOnRectangleIcon } from '@heroicons/vue/24/outline'
 import {useUserStore} from "@/app/store/modules/user.js";
 import iamService from "@/shared/services/iam.service.js";
-import Cookies from "js-cookie"
 
 const navigation = [
   { name: 'Вакансии', href: '/vacancy' },
@@ -153,6 +156,7 @@ const navigation = [
 const userNavigation = [
   { name: 'Профиль', href: '/profile' },
   { name: 'Резюме', href: '/resume' },
+  { name: 'Отклики', href: '/reply' },
 ]
 const isLoading = ref(false)
 
