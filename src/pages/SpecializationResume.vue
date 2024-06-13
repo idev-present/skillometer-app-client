@@ -381,7 +381,7 @@ onMounted(async () => {
         selectedSearchStatus: searchStatusList?.value?.find((e) => e.id === res?.search_status_id) || null,
         selectedQualification: qualificationList?.value?.find((e) => e.id === res?.qualification_id) || null,
         price: res?.salary_from || '',
-        selectedCurrency: currencyList?.value?.find((e) => e.key === res?.currency) || null,
+        selectedCurrency: currencyList?.value?.find((e) => e.key === res?.currency?.key) || null,
         selectedDivision: divisionList?.value?.find((e) => e.id === res?.division_id) || null,
         skill: skillList?.value?.filter((obj) => res?.skill_set?.includes(obj.id)) || null,
         isRelocation: res?.is_relocation || false,
