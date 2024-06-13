@@ -122,7 +122,7 @@ export const useApplicantStore = defineStore({
                     })
                     .catch((err) => {
                         console.error(err)
-                        toast.error(err?.message || "Ошибка изменения опыта работы! Пожалуйста, попробуйте позже")
+                        toast.error(err?.message || "Ошибка удаления опыта работы! Пожалуйста, попробуйте позже")
                         reject()
                     })
             })
