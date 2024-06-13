@@ -12,7 +12,8 @@ export const useApplicantStore = defineStore({
             contactsList: [],
             contacts: null,
             worksList: [],
-            educationList: []
+            educationList: [],
+            resume: null,
         }
     },
     actions: {
@@ -220,6 +221,22 @@ export const useApplicantStore = defineStore({
                     .catch((err) => {
                         console.error(err)
                         toast.error(err?.message || "Ошибка удаления образования! Пожалуйста, попробуйте позже")
+                        reject()
+                    })
+            })
+        },
+        // resume
+        fillResume(payload = null) {
+            return new Promise((resolve, reject) => {
+                ApiService
+                    .get("/user/cv", payload)
+                    .then((res) => {
+                        resolve(res || [])
+                        this.resume = res || []
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        toast.error(err?.message || "Ошибка загрузки резюме! Пожалуйста, попробуйте позже")
                         reject()
                     })
             })
