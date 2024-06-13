@@ -49,7 +49,7 @@
                     </div>
                   </div>
                   <!--Имя/Фамилия-->
-                  <div class="mt-4 grid grid-cols-12 gap-6">
+                  <div class="mt-4 grid grid-cols-12 gap-4 sm:gap-6">
                     <div class="col-span-12 sm:col-span-6">
                       <label
                           for="first-name"

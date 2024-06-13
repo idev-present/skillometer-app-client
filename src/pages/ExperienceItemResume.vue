@@ -21,6 +21,7 @@
             </aside>
 
             <div v-if="!isLoading" class="divide-y divide-gray-200 lg:col-span-9">
+              
                   <h1 class="px-4 py-4 sm:p-4 text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 border-b pb-3">
                     Опыт работы
                   </h1>
@@ -32,6 +33,7 @@
                       {{route?.params?.id === 'new' ? 'Добавление опыта работы' : 'Редактирование опыта работы'}}
                     </h2>
                   </div>
+                
                   <div>
                     <!--Название компании/Должность-->
                     <div class="mt-4 grid grid-cols-12 gap-6">

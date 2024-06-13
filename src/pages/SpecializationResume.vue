@@ -34,7 +34,7 @@
                     </p>
                   </div>
                   <!--Готовность к работе/Квалификация-->
-                  <div class="mt-4 grid grid-cols-12 gap-6">
+                  <div class="mt-4 grid grid-cols-12 gap-4 sm:gap-6">
                     <div class="col-span-12 sm:col-span-6">
                       <Listbox as="div" v-model="user.selectedSearchStatus">
                         <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">
@@ -98,7 +98,7 @@
                     </div>
                   </div>
                   <!--Специализация/зп-->
-                  <div class="mt-4 grid grid-cols-12 gap-6">
+                  <div class="mt-4 grid grid-cols-12 gap-4 sm:gap-6">
                     <div class="col-span-12 sm:col-span-6">
                       <Listbox as="div" v-model="user.selectedDivision">
                         <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">

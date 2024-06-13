@@ -21,12 +21,12 @@
             </aside>
 
             <div v-if="!isLoading" class="divide-y divide-gray-300 lg:col-span-9">
-              <div class="px-4 py-4 sm:p-4 border-b pb-3 flex justify-between items-center">
+              <div class="px-4 py-4 sm:p-4 border-b pb-3 sm:flex justify-between items-center">
                 <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900">
                   Опыт работы
                 </h1>
                 <router-link
-                    class="cursor-pointer flex items-center font-bold text-sm text-blue-600 hover:text-blue-700"
+                    class="mt-2 sm:mt-0 cursor-pointer flex items-center font-bold text-sm text-blue-600 hover:text-blue-700"
                     to="/experience/new"
                 >
                   <PlusIcon
@@ -54,7 +54,7 @@
                       <div class="mt-0.5 text-sm leading-6 text-gray-700">{{item.description}}</div>
                     </div>
                   </div>
-                  <div class="pt-4 grid grid-cols-12 gap-6">
+                  <div class="pt-4 grid grid-cols-6 gap-4 sm:grid-cols-12 sm:gap-6">
                     <div class="col-span-6">
                       <div class="text-sm font-medium leading-6 text-gray-900">Начало работы</div>
                       <div class="mt-0.5 flex items-center text-sm leading-6 text-gray-700">
@@ -97,7 +97,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="pt-5 grid grid-cols-12 gap-6">
+                  <div class="pt-5 grid grid-cols-12 gap-4 sm:gap-6">
                     <div class="col-span-12 flex items-center">
                       <router-link :to="`/experience/${item.id}`" class="flex text-sm font-bold items-center text-gray-600 hover:text-gray-900 cursor-pointer">
                         <PencilIcon

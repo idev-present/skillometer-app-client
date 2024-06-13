@@ -21,12 +21,12 @@
             </aside>
 
             <div v-if="!isLoading" class="divide-y divide-gray-200 lg:col-span-9">
-              <div class="px-4 py-4 sm:p-4 pb-3 flex justify-between items-center">
+              <div class="px-4 py-4 sm:p-4 pb-3 sm:flex justify-between items-center">
               <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900">
                 Резюме
               </h1>
               <router-link
-                    class="cursor-pointer flex items-center font-bold text-sm text-blue-600 hover:text-blue-700"
+                    class="mt-2 sm:mt-0 cursor-pointer flex items-center font-bold text-sm text-blue-600 hover:text-blue-700"
                     to="/resume/new"
                 >
                 <PencilIcon
@@ -39,22 +39,22 @@
                 <div class="px-4 sm:px-6">
                         <div class="">
                           <!-- Личная информация -->
-                          <div class="px-4 py-6 sm:col-span-2 sm:px-0">
+                          <div class=" py-6 sm:col-span-2">
                           <dt class="text-xl font-medium leading-6 text-gray-900">Личная информация</dt>
                           <dl class="grid grid-cols-2">
-                            <div class=" border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                            <div class=" border-gray-100 py-6 sm:col-span-1">
                                 <dt class="text-sm font-medium leading-6 text-gray-900">Имя Фамилия </dt>
                                 <dd class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Пол</dd>
                             </div> 
-                            <div class="border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                            <div class="border-gray-100 py-6 sm:col-span-1">
                               <dt class="text-sm leading-6 text-gray-700">Игорь Журавлев</dt>
                               <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Мужской</dd>
                             </div>
-                            <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                            <div class="border-t border-gray-100 py-6 sm:col-span-1">
                               <dt class="text-sm font-medium leading-6 text-gray-900">Дата рождения</dt>
                               <dd class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Город</dd>
                             </div>
-                            <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                            <div class="border-t border-gray-100 py-6 sm:col-span-1">
                               <div class="flex items-center">
                                   <CalendarIcon
                                     class="mr-2 h-5 w-5 text-gray-500"
@@ -67,7 +67,7 @@
                           </dl>
                           </div>
                           <!-- О себе  -->
-                            <div class="border-t border-b border-gray-200 px-4 py-6 sm:col-span-2 sm:px-0">
+                            <div class="border-t border-b border-gray-200 py-6 sm:col-span-2">
                               <dt class="text-xl font-medium leading-6 text-gray-900">О себе</dt>
                               <dt class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Профессиональные навыки</dt>
                               <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Технологии HTML/CSS(SCSS, SASS), БЭМ, JavaScript, PHP, Git, Node JS, Vue JS, React JS, Nuxt JS, Firebase, TypeScript, Flutter, WordPress, Docker, Leaflet. Работал с Jira, YouTrack и bitrix24. Хорошее знание немецкого языка. Английский язык читаю и перевожу со словарем.</dd>
@@ -75,35 +75,35 @@
                               <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Ответственность, организованность, целеустремленность, трудолюбие, коммуникабельность, пунктуальность, умение работать в команде, быстрая обучаемость, аналитический склад ума.</dd>
                             </div>
                             <!-- Специализация -->
-                            <div class="border-b border-gray-200 px-4 py-6 sm:col-span-2 sm:px-0">
+                            <div class="border-b border-gray-200 py-6 sm:col-span-2">
                               <dt class="text-xl font-medium leading-6 text-gray-900">Специализация</dt>
                               <dl class="grid grid-cols-2">
-                                <div class=" border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                                <div class=" border-gray-100 py-6 sm:col-span-1">
                                   <dd class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Квалификация</dd>
                                   <dt class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Готовность к работе </dt>
                                 </div> 
-                                <div class="border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                                <div class="border-gray-100 py-6 sm:col-span-1">
                                   <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Средний (Middle)</dd>
                                   <dt class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">В активном поиске</dt>
                                 </div>
-                                <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                                <div class="border-t border-gray-100 py-6 sm:col-span-1">
                                   <dt class="text-sm font-medium leading-6 text-gray-900">Специализация</dt>
                                   <dd class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Зарплата</dd>
                                 </div>
-                                <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                                <div class="border-t border-gray-100 py-6 sm:col-span-1">
                                   <dt class="text-sm leading-6 text-gray-700">Фронтенд разработчик</dt>
                                   <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">200000</dd>
                                 </div>
-                                <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                                <div class="border-t border-gray-100 py-6 sm:col-span-1">
                                   <dt class="text-sm font-medium leading-6 text-gray-900">Дополнительно</dt>
                                 </div>
-                                <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                                <div class="border-t border-gray-100 py-6 sm:col-span-1">
                                   <dt class="text-sm leading-6 text-gray-700">Готов к переезду</dt>
                                 </div>
                               </dl>
                             </div>
                             <!-- Опыт работы -->
-                            <div class="border-b border-gray-200 px-4 py-6 sm:col-span-2 sm:px-0">
+                            <div class="border-b border-gray-200 py-6 sm:col-span-2">
                               <dt class="text-xl font-medium leading-6 text-gray-900">Опыт работы</dt>
                               <dt class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Тестовая работа</dt>
                               <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Инженер по ручному тестированию</dd>
@@ -131,27 +131,27 @@
                               </div>
                             </div>
                             <!-- Образование -->
-                            <div class="border-b border-gray-200 px-4 py-6 sm:col-span-2 sm:px-0">
+                            <div class="border-b border-gray-200 py-6 sm:col-span-2 ">
                               <dt class="text-xl font-medium leading-6 text-gray-900">Образование</dt>
                               <dl class="grid grid-cols-2">
-                                <div class=" border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                                <div class=" border-gray-100 py-6 sm:col-span-1">
                                   <dd class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Университет</dd>
                                   <dt class="mt-10 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Город</dt>
                                 </div> 
-                                <div class="border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                                <div class="border-gray-100 py-6 sm:col-span-1">
                                   <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Вятская государственная сельскохозяйственная академия</dd>
                                   <dt class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Киров</dt>
                                 </div>
-                                <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                                <div class="border-t border-gray-100 py-6 sm:col-span-1">
                                   <dt class="text-sm font-medium leading-6 text-gray-900">Специализация</dt>
                                   <dd class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Факультет</dd>
                                 </div>
-                                <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                                <div class="border-t border-gray-100 py-6 sm:col-span-1">
                                   <dt class="text-sm leading-6 text-gray-700">35.03.06</dt>
                                   <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Инженерный</dd>
                                 </div>
                               </dl>
-                              <div class="grid grid-cols-2 px-4 py-6 sm:col-span-2 sm:px-0 ">
+                              <div class="grid grid-cols-2 py-6 sm:col-span-2">
                                 <dt class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Начачло обучения</dt>
                                 <div class="flex items-center">
                                   <CalendarIcon
@@ -171,16 +171,16 @@
                               </div>
                             </div>
                             <!-- Контакты -->
-                              <div class="px-4 py-6 sm:col-span-2 sm:px-0">
+                              <div class="py-6 sm:col-span-2">
                                 <dt class="text-xl font-medium leading-6 text-gray-900">Контакты</dt>
                                   <dl class="grid grid-cols-2">
-                                  <div class=" border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                                  <div class=" border-gray-100 py-6 sm:col-span-1">
                                     <dt class="text-sm font-medium leading-6 text-gray-900">Электронная почта</dt>
                                     <dd class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Телефон</dd>
                                   </div> 
-                                  <div class="border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                                  <div class="border-gray-100 py-6 sm:col-span-1">
                                     <dt class="text-sm leading-6 text-gray-700">ya@ro.ru</dt>
-                                    <dd class="mt-7 text-sm leading-6 text-gray-700 sm:mt-2">+7(987)654-32-21</dd>
+                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">+7(987)654-32-21</dd>
                                   </div>
                                 </dl>
                               </div>

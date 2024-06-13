@@ -21,12 +21,12 @@
             </aside>
 
             <div v-if="!isLoading" class="divide-y divide-gray-300 lg:col-span-9">
-              <div class="px-4 py-4 sm:p-4 border-b pb-3 flex justify-between items-center">
+              <div class="px-4 py-4 sm:p-4 border-b pb-3 sm:flex justify-between items-center">
                 <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900">
                   Образование
                 </h1>
                 <router-link
-                    class="cursor-pointer flex items-center font-bold text-sm text-blue-600 hover:text-blue-700"
+                    class="mt-2 sm:mt-0 cursor-pointer flex items-center font-bold text-sm text-blue-600 hover:text-blue-700"
                     to="/education/new"
                 >
                   <PlusIcon
@@ -48,7 +48,7 @@
                     </div>
                     <div class="col-span-12 mt-0.5 text-sm leading-6 text-gray-700">{{item?.faculty_name || ''}}</div>
                   </div>
-                  <div class="pt-4 grid grid-cols-12 gap-6">
+                  <div class="pt-4 grid sm:grid-cols-12 gap-4 sm:gap-6">
                     <div class="col-span-6">
                       <div class="text-sm font-medium leading-6 text-gray-900">Местоположение учебного заведения</div>
                       <div class="mt-0.5 flex items-center text-sm leading-6 text-gray-700">
@@ -62,7 +62,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="pt-4 grid grid-cols-12 gap-6">
+                  <div class="pt-4 grid sm:grid-cols-12 gap-4 sm:gap-6">
                     <div class="col-span-6">
                       <div class="text-sm font-medium leading-6 text-gray-900">Начало учебы</div>
                       <div class="mt-0.5 flex items-center text-sm leading-6 text-gray-700">
