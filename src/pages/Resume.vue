@@ -26,28 +26,140 @@
               </h1>
                 <div class="px-4 sm:px-6">
                         <div class="">
+                          <div class="px-4 py-6 sm:col-span-2 sm:px-0">
+                          <dt class="text-xl font-medium leading-6 text-gray-900">Личная информация</dt>
                           <dl class="grid grid-cols-1 sm:grid-cols-2">
-                            <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
-                              <dt class="text-sm font-medium leading-6 text-gray-900">Имя Фамилия </dt>
-                              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Должность</dd>
-                            </div>
-                            <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
-                              <dt class="text-sm font-medium leading-6 text-gray-900">Игорь Журавлев</dt>
-                              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Frontend Developer</dd>
+                            <div class=" border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                                <dt class="text-sm font-medium leading-6 text-gray-900">Имя Фамилия </dt>
+                                <dd class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Пол</dd>
+                            </div> 
+                            <div class="border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                              <dt class="text-sm leading-6 text-gray-700">Игорь Журавлев</dt>
+                              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Мужской</dd>
                             </div>
                             <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
                               <dt class="text-sm font-medium leading-6 text-gray-900">Дата рождения</dt>
-                              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Зарплата</dd>
+                              <dd class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Город</dd>
                             </div>
                             <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
-                              <dt class="text-sm font-medium leading-6 text-gray-900">11.11.2211</dt>
-                              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">$120,000</dd>
-                            </div>
-                            <div class="border-t border-gray-100 px-4 py-6 sm:col-span-2 sm:px-0">
-                              <dt class="text-sm font-medium leading-6 text-gray-900">About</dt>
-                              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim incididunt cillum culpa consequat. Excepteur qui ipsum aliquip consequat sint. Sit id mollit nulla mollit nostrud in ea officia proident. Irure nostrud pariatur mollit ad adipisicing reprehenderit deserunt qui eu.</dd>
+                              <dt class="text-sm leading-6 text-gray-700">11.11.2211</dt>
+                              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Киров</dd>
                             </div>
                           </dl>
+                          </div>
+                            <div class="border-t border-b border-gray-200 px-4 py-6 sm:col-span-2 sm:px-0">
+                              <dt class="text-xl font-medium leading-6 text-gray-900">О себе</dt>
+                              <dt class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Профессиональные навыки</dt>
+                              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Технологии HTML/CSS(SCSS, SASS), БЭМ, JavaScript, PHP, Git, Node JS, Vue JS, React JS, Nuxt JS, Firebase, TypeScript, Flutter, WordPress, Docker, Leaflet. Работал с Jira, YouTrack и bitrix24. Хорошее знание немецкого языка. Английский язык читаю и перевожу со словарем.</dd>
+                              <dt class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Личные качества</dt>
+                              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Ответственность, организованность, целеустремленность, трудолюбие, коммуникабельность, пунктуальность, умение работать в команде, быстрая обучаемость, аналитический склад ума.</dd>
+                            </div>
+                            <div class="border-b border-gray-200 px-4 py-6 sm:col-span-2 sm:px-0">
+                              <dt class="text-xl font-medium leading-6 text-gray-900">Специализация</dt>
+                              <dl class="grid grid-cols-1 sm:grid-cols-2">
+                                <div class=" border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                                  <dd class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Квалификация</dd>
+                                  <dt class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Готовность к работе </dt>
+                                </div> 
+                                <div class="border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                                  <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Средний (Middle)</dd>
+                                  <dt class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">В активном поиске</dt>
+                                </div>
+                                <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                                  <dt class="text-sm font-medium leading-6 text-gray-900">Специализация</dt>
+                                  <dd class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Зарплата</dd>
+                                </div>
+                                <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                                  <dt class="text-sm leading-6 text-gray-700">Фронтенд разработчик</dt>
+                                  <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">200000</dd>
+                                </div>
+                                <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                                  <dt class="text-sm font-medium leading-6 text-gray-900">Дополнительно</dt>
+                                </div>
+                                <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                                  <dt class="text-sm leading-6 text-gray-700">Готов к переезду</dt>
+                                </div>
+                              </dl>
+                            </div>
+                            <div class="border-b border-gray-200 px-4 py-6 sm:col-span-2 sm:px-0">
+                              <dt class="text-xl font-medium leading-6 text-gray-900">Опыт работы</dt>
+                              <dt class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Тестовая работа</dt>
+                              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Инженер по ручному тестированию</dd>
+                              <dt class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Ваши обязанности и достижения</dt>
+                              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Расскажите о своем опыте в подробностях. Минимальное количество символов — 50 Расскажите о своем опыте в подробностях. Минимальное количество символов — 50 Расскажите о своем опыте в подробностях. Минимальное количество символов — 50</dd>
+                              <dt class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Применяемые вами навыки</dt>
+                              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">nodejs typescript html</dd>
+                              <div class="grid grid-cols-1 sm:grid-cols-2">
+                                <div class="flex items-center">
+                                  <CalendarIcon
+                                    class="mr-2 h-5 w-5 text-gray-500"
+                                    aria-hidden="true"
+                                    />
+                                  <dt class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Начачло работы</dt>
+                                </div>
+                                <div class="flex items-center">
+                                  <CalendarIcon
+                                  class="mr-2 h-5 w-5 text-gray-500"
+                                  aria-hidden="true"
+                                  />
+                                  <dt class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Окончание работы</dt>
+                                  </div>
+                                <dd class="mt-1  text-sm leading-6 text-gray-700 sm:mt-2 ml-7">11.11.1111</dd>
+                                <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2 ml-7">22.22.2222</dd>
+                              </div>
+                            </div>
+                            <div class="border-b border-gray-200 px-4 py-6 sm:col-span-2 sm:px-0">
+                              <dt class="text-xl font-medium leading-6 text-gray-900">Образование</dt>
+                              <dl class="grid grid-cols-1 sm:grid-cols-2">
+                                <div class=" border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                                  <dd class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Университет</dd>
+                                  <dt class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Город</dt>
+                                </div> 
+                                <div class="border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                                  <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Вятская государственная сельскохозяйственная академия</dd>
+                                  <dt class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Киров</dt>
+                                </div>
+                                <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                                  <dt class="text-sm font-medium leading-6 text-gray-900">Специализация</dt>
+                                  <dd class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Факультет</dd>
+                                </div>
+                                <div class="border-t border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                                  <dt class="text-sm leading-6 text-gray-700">35.03.06</dt>
+                                  <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Инженерный</dd>
+                                </div>
+                              </dl>
+                                <div class="grid grid-cols-1 sm:grid-cols-2">
+                                <div class="flex items-center">
+                                  <CalendarIcon
+                                    class="mr-2 h-5 w-5 text-gray-500"
+                                    aria-hidden="true"
+                                    />
+                                  <dt class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Начачло обучения</dt>
+                                </div>
+                                <div class="flex items-center">
+                                  <CalendarIcon
+                                  class="mr-2 h-5 w-5 text-gray-500"
+                                  aria-hidden="true"
+                                  />
+                                  <dt class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Окончание обучения</dt>
+                                  </div>
+                                <dd class="mt-1  text-sm leading-6 text-gray-700 sm:mt-2 ml-7">11.11.1111</dd>
+                                <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2 ml-7">22.22.2222</dd>
+                              </div>
+                            </div>
+                              <div class="px-4 py-6 sm:col-span-2 sm:px-0">
+                                <dt class="text-xl font-medium leading-6 text-gray-900">Контакты</dt>
+                                  <dl class="grid grid-cols-1 sm:grid-cols-2">
+                                  <div class=" border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                                    <dt class="text-sm font-medium leading-6 text-gray-900">Электронная почта</dt>
+                                    <dd class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Телефон</dd>
+                                  </div> 
+                                  <div class="border-gray-100 px-4 py-6 sm:col-span-1 sm:px-0">
+                                    <dt class="text-sm leading-6 text-gray-700">ya@ro.ru</dt>
+                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">+7(987)654-32-21</dd>
+                                  </div>
+                                </dl>
+                              </div>
                         </div>
                       </div>
             </div>
@@ -70,7 +182,7 @@ import {
   UserCircleIcon,
 } from '@heroicons/vue/24/outline'
 import {useDirectoriesStore} from "@/app/store/modules/directories.js";
-import {BriefcaseIcon} from "@heroicons/vue/20/solid/index.js";
+import {BriefcaseIcon, CalendarIcon} from "@heroicons/vue/20/solid/index.js";
 import {AcademicCapIcon, UserPlusIcon, WrenchScrewdriverIcon} from "@heroicons/vue/24/outline/index.js";
 
 const isLoading = ref(false)
