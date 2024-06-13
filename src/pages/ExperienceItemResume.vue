@@ -110,6 +110,9 @@
                             auto-apply
                             locale="ru-RU"
                         />
+                        <p class="mt-0.5 mb-1 text-sm text-gray-500">
+                          Если работаете по настоящее время, дату окончания работы указывать не нужно
+                        </p>
                         <span v-if="errors?.end_date" class="text-red-600 text-sm">
                           {{errors.end_date}}
                         </span>

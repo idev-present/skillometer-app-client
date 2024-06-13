@@ -72,7 +72,7 @@
                             class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-500"
                             aria-hidden="true"
                         />
-                        {{formatDate(item?.end_date) || 'По настоящее время'}}
+                        {{item?.end_date ? formatDate(item?.end_date) : 'По настоящее время'}}
                       </div>
                     </div>
                   </div>

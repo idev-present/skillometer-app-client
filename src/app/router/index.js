@@ -65,6 +65,14 @@ const router = createRouter({
       }
     },
     {
+      path: '/education/:id',
+      name: 'EducationItemResume',
+      component: () => import('@/pages/EducationItemResume.vue'),
+      meta: {
+        requiresAuth: true,
+      }
+    },
+    {
       path: '/contacts',
       name: 'ContactsResume',
       component: () => import('@/pages/ContactsResume.vue'),

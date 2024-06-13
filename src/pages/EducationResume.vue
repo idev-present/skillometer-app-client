@@ -20,26 +20,105 @@
               </nav>
             </aside>
 
-            <div v-if="!isLoading" class="divide-y divide-gray-200 lg:col-span-9">
-                  <h1 class="px-4 py-4 sm:p-4 text-2xl sm:text-3xl font-bold tracking-tight text-gray-900 border-b pb-3">
-                    Образование
-                  </h1>
-              <div class="divide-y divide-gray-200">
+            <div v-if="!isLoading" class="divide-y divide-gray-300 lg:col-span-9">
+              <div class="px-4 py-4 sm:p-4 border-b pb-3 flex justify-between items-center">
+                <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900">
+                  Образования
+                </h1>
+                <router-link
+                    class="cursor-pointer flex items-center font-bold text-sm text-blue-600 hover:text-blue-700"
+                    to="/education/new"
+                >
+                  <PlusIcon
+                      class="mr-1 h-5 w-5 flex-shrink-0"
+                      aria-hidden="true"
+                  />
+                  Добавить образование
+                </router-link>
+              </div>
+              <div
+                  v-for="(item, index) in educationList"
+                  :key="index"
+                  class=""
+              >
                 <div class="px-4 py-6 sm:p-6 lg:pb-8">
-                  <!--Заголовок с описанием-->
-                  <div>
-                    <h2 class="text-lg font-medium leading-6 text-gray-900">Образование</h2>
-                    <p class="mt-1 text-sm text-gray-500">
-                      Эта информация будет отображаться только работодателям
-                    </p>
+                  <div class="grid grid-cols-12">
+                    <div class="col-span-12 text-lg font-bold leading-6 text-gray-900">
+                      {{item?.university_name || ''}}
+                    </div>
+                    <div class="col-span-12 mt-0.5 text-sm leading-6 text-gray-700">{{item?.faculty_name || ''}}</div>
+                  </div>
+                  <div class="pt-4 grid grid-cols-12 gap-6">
+                    <div class="col-span-6">
+                      <div class="text-sm font-medium leading-6 text-gray-900">Местоположение учебного заведения</div>
+                      <div class="mt-0.5 flex items-center text-sm leading-6 text-gray-700">
+                        {{item?.city?.name || 'Не указано'}}
+                      </div>
+                    </div>
+                    <div class="col-span-6">
+                      <div class="text-sm font-medium leading-6 text-gray-900">Специализация</div>
+                      <div class="mt-0.5 flex items-center text-sm leading-6 text-gray-700">
+                        {{item?.specialization || ''}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="pt-4 grid grid-cols-12 gap-6">
+                    <div class="col-span-6">
+                      <div class="text-sm font-medium leading-6 text-gray-900">Начало учебы</div>
+                      <div class="mt-0.5 flex items-center text-sm leading-6 text-gray-700">
+                        <CalendarIcon
+                            class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-500"
+                            aria-hidden="true"
+                        />
+                        {{formatDate(item.start_date)}}
+                      </div>
+                    </div>
+                    <div class="col-span-6">
+                      <div class="text-sm font-medium leading-6 text-gray-900">Завершение учебы</div>
+                      <div class="mt-0.5 flex items-center text-sm leading-6 text-gray-700">
+                        <CalendarIcon
+                            class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-500"
+                            aria-hidden="true"
+                        />
+                        {{item?.end_date ? formatDate(item?.end_date) : 'По настоящее время'}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="pt-5 grid grid-cols-12 gap-6">
+                    <div class="col-span-12 flex items-center">
+                      <router-link :to="`/education/${item.id}`" class="flex text-sm font-bold items-center text-gray-600 hover:text-gray-900 cursor-pointer">
+                        <PencilIcon
+                            class="mr-1.5 h-5 w-5 flex-shrink-0"
+                            aria-hidden="true"
+                        />
+                        Редактировать
+                      </router-link>
+                      <div @click="openModalDelete(item)"
+                           class="ml-5 text-sm flex items-center font-bold text-gray-600 hover:text-gray-900 cursor-pointer">
+                        <TrashIcon
+                            class="mr-1.5 h-5 w-5 flex-shrink-0"
+                            aria-hidden="true"
+                        />
+                        Удалить
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <!--сохранить-->
-                <div class="flex justify-end gap-x-3 px-4 py-4 sm:px-6">
-                  <button @click="saveForm" type="button" class="w-full sm:w-fit rounded-md bg-blue-600 px-5 py-2.5 text-sm font-semibold tr text-white shadow-sm hover:bg-blue-700 outline-0">
-                    Сохранить
-                  </button>
-                </div>
+              </div>
+              <div v-if="!educationList?.length"
+                   class="w-full flex flex-col items-center py-28"
+              >
+                <span class="text-lg mb-3">Список пуст</span>
+                <router-link
+                    class="cursor-pointer flex items-center font-bold text-lg text-blue-600 hover:text-blue-700"
+                    to="/education/new"
+                >
+                  <PlusIcon
+                      class="mr-1 -mb-0.5 h-6 w-6 flex-shrink-0"
+                      aria-hidden="true"
+                  />
+                  Добавить образование
+                </router-link>
               </div>
             </div>
 
@@ -48,6 +127,14 @@
         </div>
       </main>
     </div>
+    <modal
+        :is-open="isOpenModalDelete"
+        title="Вы действительно ходите удалить?"
+        :description="`Образование в '${selectedEducation?.company_name || ''}'`"
+        @close-modal="closeModal"
+        @submit="deleteEducation"
+        button-name="Удалить"
+    />
   </div>
 </template>
 
@@ -60,12 +147,17 @@ import {
   WrenchScrewdriverIcon,
   CogIcon,
   UserCircleIcon,
-  UserPlusIcon
+  UserPlusIcon,
+  PencilIcon,
+  TrashIcon
 } from '@heroicons/vue/24/outline'
 import {useDirectoriesStore} from "@/app/store/modules/directories.js";
-import {BriefcaseIcon} from "@heroicons/vue/20/solid";
+import {BriefcaseIcon, CalendarIcon, PlusIcon} from "@heroicons/vue/20/solid";
+import Modal from "@/shared/Modal.vue";
 
 const isLoading = ref(false)
+const isOpenModalDelete = ref(false)
+const selectedEducation = ref(null)
 
 //* store
 const applicantStore = useApplicantStore()
@@ -79,19 +171,51 @@ const subNavigation = [
   { name: 'Контакты', href: '/contacts', icon: UserPlusIcon },
   { name: 'Резюме', href: '/resume', icon: WrenchScrewdriverIcon },
 ]
-const user = ref({});
 
-const saveForm = () => {
-  console.log('form profile', user.value)
-  // applicantStore.createApplicant()
+const cityList = computed(() => {
+  return directoriesStore?.cityList || []
+})
+const educationList = computed(() => {
+  return applicantStore?.educationList?.map((item) => ({
+    ...item,
+    city: cityList?.value?.find((e) => e.id === (item?.city_id || '')) || null,
+  })) || []
+})
+
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+  return `${day}.${month}.${year}`;
+}
+
+const closeModal = () => {
+  isOpenModalDelete.value = false
+}
+
+const openModalDelete = (work) => {
+  selectedEducation.value = work
+  isOpenModalDelete.value = true
+}
+
+const deleteEducation = async () => {
+  if(selectedEducation?.value?.id) {
+    await applicantStore.removeWorkXp(selectedEducation.value.id)
+    await applicantStore.getEducationList()
+    closeModal()
+  } else {
+    console.error('ID образования не найдено')
+  }
 }
 
 onMounted(async () => {
-  // isLoading.value = true
-  // await Promise.all([
-  //   directoriesStore.fillCityList(),
-  // ]).finally(() => {
-  //   isLoading.value = false
-  // });
+  isLoading.value = true
+  await Promise.all([
+    directoriesStore.fillCityList(),
+  ]).finally(() => {
+    applicantStore.getEducationList()
+    isLoading.value = false
+  });
 })
 </script>

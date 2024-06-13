@@ -12,6 +12,7 @@ export const useApplicantStore = defineStore({
             contactsList: [],
             contacts: null,
             worksList: [],
+            educationList: []
         }
     },
     actions: {
@@ -155,6 +156,70 @@ export const useApplicantStore = defineStore({
                     .catch((err) => {
                         console.error(err)
                         toast.error(err?.message || "Ошибка сохранения контактов! Пожалуйста, попробуйте позже")
+                        reject()
+                    })
+            })
+        },
+        // list education
+        getEducationList(payload = null) {
+            return new Promise((resolve, reject) => {
+                ApiService
+                    .get("/user/education", payload)
+                    .then((res) => {
+                        resolve(res)
+                        this.educationList = res
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        toast.error(err?.message || "Ошибка загрузки образования! Пожалуйста, попробуйте позже")
+                        reject()
+                    })
+            })
+        },
+        // create education
+        createEducation(payload = null) {
+            return new Promise((resolve, reject) => {
+                ApiService
+                    .post(`/user/education`, payload.data)
+                    .then((res) => {
+                        resolve(res)
+                        toast.success("Успешно")
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        toast.error(err?.message || "Ошибка сохранения образования! Пожалуйста, попробуйте позже")
+                        reject()
+                    })
+            })
+        },
+        // update education
+        updateEducation(payload = null) {
+            return new Promise((resolve, reject) => {
+                ApiService
+                    .put(`/user/education/${payload.id}`, payload.data)
+                    .then((res) => {
+                        resolve(res)
+                        toast.success("Успешно")
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        toast.error(err?.message || "Ошибка изменения образования! Пожалуйста, попробуйте позже")
+                        reject()
+                    })
+            })
+        },
+        // remove education
+        removeEducation(payload = null) {
+            return new Promise((resolve, reject) => {
+                ApiService
+                    .delete(`/user/education/${payload}`, null)
+                    .then((res) => {
+                        resolve(res)
+                        toast.success("Успешно")
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        toast.error(err?.message || "Ошибка удаления образования! Пожалуйста, попробуйте позже")
                         reject()
                     })
             })
