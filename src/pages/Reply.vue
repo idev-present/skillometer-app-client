@@ -30,64 +30,99 @@
                   class=""
               >
                 <div class="px-4 py-6 sm:p-6 lg:pb-8">
-                  <div class="grid grid-cols-12">
-                    <div class="col-span-12 text-lg font-bold leading-6 text-gray-900">
-                      {{item?.university_name || ''}}
-                    </div>
-                    <div class="col-span-12 mt-0.5 text-sm leading-6 text-gray-700">{{item?.faculty_name || ''}}</div>
-                  </div>
-                  <div class="pt-4 grid sm:grid-cols-12 gap-4 sm:gap-6">
-                    <div class="col-span-6">
-                      <div class="text-sm font-medium leading-6 text-gray-900">Местоположение учебного заведения</div>
-                      <div class="mt-0.5 flex items-center text-sm leading-6 text-gray-700">
-                        {{item?.city?.name || 'Не указано'}}
+                  <div class="relative flex justify-between gap-x-6 rounded-xl">
+                    <div class="min-w-0 flex-1">
+                      <h2
+                          class="text-xl font-bold leading-7 text-gray-900 sm:text-2xl sm:tracking-tight"
+                      >
+                        {{ item?.vacancy?.name }}
+                      </h2>
+                      <div
+                          v-if="item?.vacancy?.salary_to || item?.vacancy?.salary_from"
+                          class="mt-1 flex items-center font-bold text-green-600"
+                      >
+                        <span>{{ formattedNumberValue(item?.vacancy?.salary_from || 0) }}</span>
+                        <span v-if="item?.vacancy?.salary_to"
+                          >&nbsp;&ndash; {{ formattedNumberValue(item?.vacancy?.salary_to || 0) }}
+                        </span>
+                        <span>&nbsp;{{ item?.vacancy?.currency?.value || "₽" }}</span>
                       </div>
-                    </div>
-                    <div class="col-span-6">
-                      <div class="text-sm font-medium leading-6 text-gray-900">Специализация</div>
-                      <div class="mt-0.5 flex items-center text-sm leading-6 text-gray-700">
-                        {{item?.specialization || ''}}
+                      <div
+                          class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6"
+                      >
+                        <div
+                            v-if="item?.vacancy?.employmentType?.name"
+                            class="mt-2 flex items-center text-sm text-gray-500"
+                        >
+                          <BriefcaseIcon
+                              class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+                              aria-hidden="true"
+                          />
+                          {{ item?.vacancy?.employmentType?.name }}
+                        </div>
+                        <div
+                            v-if="item?.vacancy?.city?.name"
+                            class="mt-2 flex items-center text-sm text-gray-500"
+                        >
+                          <MapIcon
+                              class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+                              aria-hidden="true"
+                          />
+                          {{ item?.vacancy?.city?.name }}
+                        </div>
+                        <div
+                            v-if="item?.vacancy?.is_remote"
+                            class="mt-2 flex items-center text-sm text-gray-500"
+                        >
+                          <MapPinIcon
+                              class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
+                              aria-hidden="true"
+                          />
+                          Удаленная работа
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <div class="pt-4 grid sm:grid-cols-12 gap-4 sm:gap-6">
-                    <div class="col-span-6">
-                      <div class="text-sm font-medium leading-6 text-gray-900">Начало учебы</div>
-                      <div class="mt-0.5 flex items-center text-sm leading-6 text-gray-700">
+                      <div
+                          class="mt-3 flex flex-col sm:flex-row sm:flex-wrap sm:space-x-2"
+                      >
+                        <div v-if="item?.vacancy?.division?.name" class="flex items-center">
+                          {{ item?.vacancy?.division?.name }}
+                          <svg
+                              viewBox="0 0 2 2"
+                              class="hidden sm:flex h-0.5 w-0.5 ml-2 fill-current"
+                          >
+                            <circle cx="1" cy="1" r="1" />
+                          </svg>
+                        </div>
+                        <div v-if="item?.vacancy?.qualification?.name" class="flex items-center">
+                          {{ item?.vacancy?.qualification?.name }}
+                          <svg
+                              viewBox="0 0 2 2"
+                              class="hidden sm:flex h-0.5 w-0.5 ml-2 fill-current"
+                          >
+                            <circle cx="1" cy="1" r="1" />
+                          </svg>
+                        </div>
+                        <div
+                            v-for="(skill, index) in item.vacancy.skills"
+                            :key="index"
+                            class="flex items-center"
+                        >
+                          <svg
+                              v-if="index"
+                              viewBox="0 0 2 2"
+                              class="hidden sm:flex h-0.5 w-0.5 mr-2 fill-current"
+                          >
+                            <circle cx="1" cy="1" r="1" />
+                          </svg>
+                          {{ skill }}
+                        </div>
+                      </div>
+                      <div class="mt-3 flex items-center text-sm text-gray-500">
                         <CalendarIcon
-                            class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-500"
+                            class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400"
                             aria-hidden="true"
                         />
-                        {{formatDate(item.start_date)}}
-                      </div>
-                    </div>
-                    <div class="col-span-6">
-                      <div class="text-sm font-medium leading-6 text-gray-900">Завершение учебы</div>
-                      <div class="mt-0.5 flex items-center text-sm leading-6 text-gray-700">
-                        <CalendarIcon
-                            class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-500"
-                            aria-hidden="true"
-                        />
-                        {{item?.end_date ? formatDate(item?.end_date) : 'По настоящее время'}}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="pt-5 grid grid-cols-12 gap-6">
-                    <div class="col-span-12 flex items-center">
-                      <router-link :to="`/education/${item.id}`" class="flex text-sm font-bold items-center text-gray-600 hover:text-gray-900 cursor-pointer">
-                        <PencilIcon
-                            class="mr-1.5 h-5 w-5 flex-shrink-0"
-                            aria-hidden="true"
-                        />
-                        Редактировать
-                      </router-link>
-                      <div @click="openModalDelete(item)"
-                           class="ml-5 text-sm flex items-center font-bold text-gray-600 hover:text-gray-900 cursor-pointer">
-                        <TrashIcon
-                            class="mr-1.5 h-5 w-5 flex-shrink-0"
-                            aria-hidden="true"
-                        />
-                        Удалить
+                        {{ formattedDateValue(item?.vacancy.published_at) }}
                       </div>
                     </div>
                   </div>
@@ -120,17 +155,21 @@ import Loading from "@/shared/Loading.vue";
 import {
   BellIcon,
   EnvelopeIcon,
+  BriefcaseIcon,
+  MapPinIcon,
+  MapIcon,
+  CalendarIcon,
 } from '@heroicons/vue/24/outline'
 import {useUserStore} from "@/app/store/modules/user.js";
 import {useDirectoriesStore} from "@/app/store/modules/directories.js";
-import {PencilIcon, TrashIcon} from "@heroicons/vue/24/outline/index.js";
-import {CalendarIcon} from "@heroicons/vue/20/solid/index.js";
+import {useVacancyStore} from "@/app/store/modules/vacancy.js";
 
 const isLoading = ref(false)
 
 //* store
 const userStore = useUserStore()
 const directoriesStore = useDirectoriesStore()
+const vacancyStore = useVacancyStore()
 
 const subNavigation = [
   { name: 'Отклики', href: '/reply', icon: EnvelopeIcon },
@@ -138,18 +177,74 @@ const subNavigation = [
 ]
 
 const replyList = computed(() => {
-  // return userStore?.userReplyList || []
-  return []
+  return userStore?.userReplyList.map((item) => ({
+    ...item,
+    vacancy: vacancyList?.value?.find((e) => e?.id === item?.vacancy_id) || null,
+  })) || []
 })
+
+const employmentTypeList = computed(() => {
+  return directoriesStore?.employmentTypeList || [];
+});
+const divisionList = computed(() => {
+  return directoriesStore?.divisionList || [];
+});
+const qualificationList = computed(() => {
+  return directoriesStore?.qualificationList || [];
+});
+const cityList = computed(() => {
+  return directoriesStore?.cityList || [];
+});
+const vacancyList = computed(() => {
+  return (
+      vacancyStore?.vacancyList?.map((item) => ({
+        ...item,
+        employmentType:
+            employmentTypeList?.value?.find(
+                (type) => type?.id === item?.employment_type_id
+            ) || null,
+        skills: item?.skill_set?.split(",") || [],
+        division:
+            divisionList?.value?.find((type) => type?.id === item?.division_id) ||
+            null,
+        qualification:
+            qualificationList?.value?.find(
+                (type) => type?.id === item?.qualification_id
+            ) || null,
+        city:
+            cityList?.value?.find((type) => type?.habr_alias === item?.city_id) ||
+            null,
+      })) || []
+  );
+});
+
+
+const formattedNumberValue = (number) => {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+};
+const formattedDateValue = (date) => {
+  const dateRes = new Date(date);
+  const day = String(dateRes.getDate()).padStart(2, "0");
+  const month = String(dateRes.getMonth() + 1).padStart(2, "0");
+  const year = dateRes.getFullYear();
+  return `${day}.${month}.${year}`;
+};
 
 onMounted(async () => {
   isLoading.value = true
   await Promise.all([
-    directoriesStore.fillReplyStatusList()
+    directoriesStore.fillReplyStatusList(),
+    directoriesStore.fillCurrencyList(),
+    directoriesStore.fillCityList(),
+    directoriesStore.fillEmploymentTypeList(),
+    directoriesStore.fillDivisionList(),
+    directoriesStore.fillQualificationList(),
   ]).finally(async () => {
-    await userStore.fillUserReplyList().finally(() => {
-      isLoading.value = false
-    })
+    await userStore.fillUserReplyList()
+    if(!vacancyStore?.vacancyList?.length) {
+      await vacancyStore.fillVacancyList()
+    }
+    isLoading.value = false
   });
 })
 </script>
