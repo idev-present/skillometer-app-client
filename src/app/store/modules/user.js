@@ -13,6 +13,7 @@ export const useUserStore = defineStore({
             skillometer_access_token: '',
             skillometer_refresh_token: '',
             expires_in: '',
+            userReplyList: [],
         }
     },
     actions: {
@@ -81,6 +82,22 @@ export const useUserStore = defineStore({
             Cookies.remove('skillometer_session_id');
             this.isAuth = false
             this.user = null
+        },
+        // list reply
+        fillUserReplyList(payload = null) {
+            return new Promise((resolve, reject) => {
+                ApiService
+                    .get(`/user/reply/history`, payload)
+                    .then((res) => {
+                        resolve(res || null)
+                        this.userReplyList = res
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        toast.error(err?.message || "Ошибка загрузки откликов! Пожалуйста, попробуйте позже")
+                        reject()
+                    })
+            })
         },
     },
 })

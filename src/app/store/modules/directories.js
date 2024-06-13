@@ -14,7 +14,8 @@ export const useDirectoriesStore = defineStore({
             divisionList: [],
             qualificationList: [],
             skillList: [],
-            searchStatusList: []
+            searchStatusList: [],
+            replyStatusList: [],
         }
     },
     actions: {
@@ -142,6 +143,22 @@ export const useDirectoriesStore = defineStore({
                     .catch((err) => {
                         console.error(err)
                         toast.error(err?.message || "Ошибка загрузки списка навыков! Пожалуйста, попробуйте позже")
+                        reject()
+                    })
+            })
+        },
+        // reply status list
+        fillReplyStatusList(payload = null) {
+            return new Promise((resolve, reject) => {
+                ApiService
+                    .get("/dict/reply_status", payload)
+                    .then((res) => {
+                        resolve()
+                        this.replyStatusList = res || []
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        toast.error(err?.message || "Ошибка загрузки списка статусов отклика! Пожалуйста, попробуйте позже")
                         reject()
                     })
             })

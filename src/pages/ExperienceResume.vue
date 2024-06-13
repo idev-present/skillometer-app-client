@@ -121,15 +121,11 @@
               <div v-if="!worksList?.length"
                    class="w-full flex flex-col items-center py-28"
               >
-                <span class="text-lg mb-3">Список пуст</span>
+                <span class="text-lg mb-3">Список опыта работы пуст</span>
                 <router-link
-                    class="cursor-pointer flex items-center font-bold text-lg text-blue-600 hover:text-blue-700"
+                    class="w-fit rounded-md bg-blue-600 px-5 py-2.5 text-sm font-semibold tr text-white shadow-sm hover:bg-blue-700 outline-0"
                     to="/experience/new"
                 >
-                  <PlusIcon
-                      class="mr-1 -mb-0.5 h-6 w-6 flex-shrink-0"
-                      aria-hidden="true"
-                  />
                   Добавить опыт работы
                 </router-link>
               </div>
