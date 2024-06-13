@@ -83,7 +83,7 @@ export const useApplicantStore = defineStore({
         createWorkXp(payload = null) {
             return new Promise((resolve, reject) => {
                 ApiService
-                    .post(`/user/work_xp`, payload)
+                    .post(`/user/work_xp`, payload.data)
                     .then((res) => {
                         resolve(res)
                         toast.success("Успешно")
@@ -91,6 +91,38 @@ export const useApplicantStore = defineStore({
                     .catch((err) => {
                         console.error(err)
                         toast.error(err?.message || "Ошибка сохранения опыта работы! Пожалуйста, попробуйте позже")
+                        reject()
+                    })
+            })
+        },
+        // update work
+        updateWorkXp(payload = null) {
+            return new Promise((resolve, reject) => {
+                ApiService
+                    .put(`/user/work_xp/${payload.id}`, payload.data)
+                    .then((res) => {
+                        resolve(res)
+                        toast.success("Успешно")
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        toast.error(err?.message || "Ошибка изменения опыта работы! Пожалуйста, попробуйте позже")
+                        reject()
+                    })
+            })
+        },
+        // remove work
+        removeWorkXp(payload = null) {
+            return new Promise((resolve, reject) => {
+                ApiService
+                    .delete(`/user/work_xp/${payload}`, null)
+                    .then((res) => {
+                        resolve(res)
+                        toast.success("Успешно")
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        toast.error(err?.message || "Ошибка изменения опыта работы! Пожалуйста, попробуйте позже")
                         reject()
                     })
             })

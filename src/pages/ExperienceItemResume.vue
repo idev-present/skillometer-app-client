@@ -273,18 +273,28 @@ const changePosition = (event) => {
 const saveForm = async () => {
   const skills = user.value?.skill?.map((item => item.id) || []).join(',');
   const payload = {
-    company_name: user?.value?.nameCompany || '',
-    position: user?.value?.position?.name || user?.value?.position || '',
-    start_date: user?.value?.startDate || '',
-    end_date: user?.value?.endDate || null,
-    description: user?.value?.description || '',
-    skill_set: skills
+    data: {
+      company_name: user?.value?.nameCompany || '',
+      position: user?.value?.position?.name || user?.value?.position || '',
+      start_date: user?.value?.startDate || '',
+      end_date: user?.value?.endDate || null,
+      description: user?.value?.description || '',
+      skill_set: skills
+    }
   }
-  errors.value = ExperienceForm.validate(payload)
+  errors.value = ExperienceForm.validate(payload.data)
   if(!errors.value && !isLoading.value) {
     isLoading.value = true
     if(route.params.id === 'new') {
       await applicantStore.createWorkXp(payload).then(() => {
+        applicantStore.getWorksList()
+        router.push('/experience')
+      }).finally(() => {
+        isLoading.value = false
+      })
+    } else {
+      payload.id = route.params.id
+      await applicantStore.updateWorkXp(payload).then(() => {
         applicantStore.getWorksList()
         router.push('/experience')
       }).finally(() => {
@@ -299,9 +309,24 @@ onMounted(async () => {
   await Promise.all([
     directoriesStore.fillDivisionList(),
     directoriesStore.fillSkillList(),
-  ]).finally(() => {
+  ]).finally(async () => {
     if(route.params.id !== 'new') {
-      console.log(777)
+      if(!applicantStore?.worksList?.length) {
+        await applicantStore.getWorksList()
+      }
+      const workItem = applicantStore.worksList?.find((item) => item.id === route.params.id)
+      if(workItem) {
+        user.value = {
+          nameCompany: workItem?.company_name || '',
+          position: workItem?.position || '',
+          startDate: workItem?.start_date || '',
+          endDate: workItem?.end_date || '',
+          description: workItem?.description || '',
+          skill: skillList?.value?.filter((obj) => workItem?.skill_set?.includes(obj.id)) || null,
+        }
+      } else {
+        await router.push('/experience')
+      }
     }
     isLoading.value = false
   });

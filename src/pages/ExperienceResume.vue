@@ -95,14 +95,15 @@
                   </div>
                   <div class="pt-5 grid grid-cols-12 gap-6">
                     <div class="col-span-12 flex items-center">
-                      <div class="flex text-sm items-center text-gray-700 hover:text-gray-900 cursor-pointer">
+                      <router-link :to="`/experience/${item.id}`" class="flex text-sm font-bold items-center text-gray-600 hover:text-gray-900 cursor-pointer">
                         <PencilIcon
                             class="mr-1.5 h-5 w-5 flex-shrink-0"
                             aria-hidden="true"
                         />
                         Редактировать
-                      </div>
-                      <div class="ml-5 text-sm flex items-center text-gray-700 hover:text-gray-900 cursor-pointer">
+                      </router-link>
+                      <div @click="openModalDelete(item)"
+                          class="ml-5 text-sm flex items-center font-bold text-gray-600 hover:text-gray-900 cursor-pointer">
                         <TrashIcon
                             class="mr-1.5 h-5 w-5 flex-shrink-0"
                             aria-hidden="true"
@@ -120,6 +121,14 @@
         </div>
       </main>
     </div>
+    <modal
+        :is-open="isOpenModalDelete"
+        title="Вы действительно ходите удалить?"
+        :description="`Опыт работы '${selectedWork?.company_name || ''}'`"
+        @close-modal="closeModal"
+        @submit="deleteWork"
+        button-name="Удалить"
+    />
   </div>
 </template>
 
@@ -138,8 +147,11 @@ import {
 } from '@heroicons/vue/24/outline'
 import {useDirectoriesStore} from "@/app/store/modules/directories.js";
 import {BriefcaseIcon, CalendarIcon} from "@heroicons/vue/20/solid";
+import Modal from "@/shared/Modal.vue";
 
 const isLoading = ref(false)
+const isOpenModalDelete = ref(false)
+const selectedWork = ref(null)
 
 //* store
 const applicantStore = useApplicantStore()
@@ -175,6 +187,23 @@ const formatDate = (dateString) => {
 
   // Форматируем дату в нужный формат
   return `${day}.${month}.${year}`;
+}
+
+const closeModal = () => {
+  isOpenModalDelete.value = false
+}
+
+const openModalDelete = (work) => {
+  selectedWork.value = work
+  isOpenModalDelete.value = true
+}
+
+const deleteWork = async () => {
+  if(selectedWork?.value?.id) {
+    await applicantStore.removeWorkXp(selectedWork.value.id)
+  } else {
+    console.error('ID опыта работы не найдено')
+  }
 }
 
 onMounted(async () => {
