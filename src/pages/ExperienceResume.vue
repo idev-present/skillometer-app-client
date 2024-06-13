@@ -38,32 +38,44 @@
                   class=""
               >
                 <div class="px-4 py-6 sm:p-6 lg:pb-8">
-                  <div class="grid grid-cols-12 gap-1">
+                  <div class="grid grid-cols-12">
                     <div class="col-span-12 text-lg font-bold leading-6 text-gray-900">
                       {{item.company_name}}
                     </div>
-                    <div class="mt-1 text-sm leading-6 text-gray-700">{{item.position}}</div>
+                    <div class="col-span-12 mt-0.5 text-sm leading-6 text-gray-700">{{item.position}}</div>
                   </div>
                   <div class="pt-4 grid grid-cols-12 gap-6">
                     <div class="col-span-12">
                       <div class="text-sm font-medium leading-6 text-gray-900">Ваши обязанности и достижения</div>
-                      <div class="mt-1 text-sm leading-6 text-gray-700">{{item.description}}</div>
+                      <div class="mt-0.5 text-sm leading-6 text-gray-700">{{item.description}}</div>
                     </div>
                   </div>
                   <div class="pt-4 grid grid-cols-12 gap-6">
                     <div class="col-span-6">
                       <div class="text-sm font-medium leading-6 text-gray-900">Начало работы</div>
-                      <div class="mt-1 text-sm leading-6 text-gray-700">{{item.start_date}}</div>
+                      <div class="mt-0.5 flex items-center text-sm leading-6 text-gray-700">
+                        <CalendarIcon
+                            class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-500"
+                            aria-hidden="true"
+                        />
+                        {{formatDate(item.start_date)}}
+                      </div>
                     </div>
                     <div class="col-span-6">
                       <div class="text-sm font-medium leading-6 text-gray-900">Окончание работы</div>
-                      <div class="mt-1 text-sm leading-6 text-gray-700">{{item?.end_date || 'По настоящее время'}}</div>
+                      <div class="mt-0.5 flex items-center text-sm leading-6 text-gray-700">
+                        <CalendarIcon
+                            class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-500"
+                            aria-hidden="true"
+                        />
+                        {{formatDate(item?.end_date) || 'По настоящее время'}}
+                      </div>
                     </div>
                   </div>
                   <div class="mt-4 grid grid-cols-12 gap-6">
                     <div class="col-span-12">
                       <div class="text-sm font-medium leading-6 text-gray-900">Применяемые вами навыки</div>
-                      <div class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2 flex items-center">
+                      <div class="mt-0.5 text-sm leading-6 text-gray-700 flex items-center">
                         <div
                             v-for="(skill, indexSkills) in item.skills"
                             :key="indexSkills"
@@ -72,12 +84,30 @@
                           <svg
                               v-if="indexSkills"
                               viewBox="0 0 2 2"
-                              class="hidden sm:flex h-0.5 w-0.5 mr-2 fill-current"
+                              class="hidden sm:flex h-0.5 w-0.5 mx-2 fill-current"
                           >
                             <circle cx="1" cy="1" r="1" />
                           </svg>
                           {{skill}}
                         </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="pt-5 grid grid-cols-12 gap-6">
+                    <div class="col-span-12 flex items-center">
+                      <div class="flex text-sm items-center text-gray-700 hover:text-gray-900 cursor-pointer">
+                        <PencilIcon
+                            class="mr-1.5 h-5 w-5 flex-shrink-0"
+                            aria-hidden="true"
+                        />
+                        Редактировать
+                      </div>
+                      <div class="ml-5 text-sm flex items-center text-gray-700 hover:text-gray-900 cursor-pointer">
+                        <TrashIcon
+                            class="mr-1.5 h-5 w-5 flex-shrink-0"
+                            aria-hidden="true"
+                        />
+                        Удалить
                       </div>
                     </div>
                   </div>
@@ -102,10 +132,12 @@ import {
   WrenchScrewdriverIcon,
   CogIcon,
   UserCircleIcon,
-  UserPlusIcon
+  UserPlusIcon,
+  PencilIcon,
+  TrashIcon
 } from '@heroicons/vue/24/outline'
 import {useDirectoriesStore} from "@/app/store/modules/directories.js";
-import {BriefcaseIcon} from "@heroicons/vue/20/solid";
+import {BriefcaseIcon, CalendarIcon} from "@heroicons/vue/20/solid";
 
 const isLoading = ref(false)
 
@@ -134,6 +166,16 @@ const worksList = computed(() => {
     skills: item?.skill_set?.split(",") || [],
   })) || []
 })
+
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Месяцы начинаются с 0
+  const year = date.getFullYear();
+
+  // Форматируем дату в нужный формат
+  return `${day}.${month}.${year}`;
+}
 
 onMounted(async () => {
   isLoading.value = true

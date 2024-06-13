@@ -285,6 +285,7 @@ const saveForm = async () => {
     isLoading.value = true
     if(route.params.id === 'new') {
       await applicantStore.createWorkXp(payload).then(() => {
+        applicantStore.getWorksList()
         router.push('/experience')
       }).finally(() => {
         isLoading.value = false
