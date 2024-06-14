@@ -27,12 +27,26 @@
               <div
                   v-for="(item, index) in replyList"
                   :key="index"
-                  class=""
+                  class="cursor-pointer"
+                  @click="redirect(`/reply/${item.id}`)"
               >
                 <div class="px-4 py-6 sm:p-6 lg:pb-8">
-                  <div class="relative flex justify-between gap-x-6 rounded-xl">
+                  <span
+                      class="mb-2 flex w-fit items-center gap-x-1.5 rounded-md px-2 py-1 text-xs font-medium text-blue-700"
+                      :class="[item.status.bgColor, item.status.textColor]"
+                  >
+                    <svg
+                        class="h-1.5 w-1.5 fill-blue-500"
+                        :class="[item.status.fillColor]"
+                        viewBox="0 0 6 6" aria-hidden="true">
+                      <circle cx="3" cy="3" r="3" />
+                    </svg>
+                    {{item?.status?.value}}
+                  </span>
+                  <div v-if="item?.vacancy" class="relative flex justify-between gap-x-6 rounded-xl">
                     <div class="min-w-0 flex-1">
                       <h2
+                          @click.stop="redirect(`/vacancy/${item.vacancy_id}`)"
                           class="text-xl font-bold leading-7 text-gray-900 sm:text-2xl sm:tracking-tight"
                       >
                         {{ item?.vacancy?.name }}
@@ -126,6 +140,13 @@
                       </div>
                     </div>
                   </div>
+                  <div v-else>
+                    <h2
+                        class="text-xl font-bold leading-7 text-gray-900 sm:text-2xl sm:tracking-tight"
+                    >
+                      Вакансия удалена
+                    </h2>
+                  </div>
                 </div>
               </div>
               <div v-if="!replyList?.length"
@@ -163,8 +184,12 @@ import {
 import {useUserStore} from "@/app/store/modules/user.js";
 import {useDirectoriesStore} from "@/app/store/modules/directories.js";
 import {useVacancyStore} from "@/app/store/modules/vacancy.js";
+import {useRouter} from "vue-router";
+import {REPLY_STATUS_COLOR} from "@/app/constants/replyStatusColor.js"
 
 const isLoading = ref(false)
+
+const router = useRouter()
 
 //* store
 const userStore = useUserStore()
@@ -180,6 +205,7 @@ const replyList = computed(() => {
   return userStore?.userReplyList.map((item) => ({
     ...item,
     vacancy: vacancyList?.value?.find((e) => e?.id === item?.vacancy_id) || null,
+    status: replyStatusList?.value?.find((e) => e?.key === item?.status) || null,
   })) || []
 })
 
@@ -194,6 +220,12 @@ const qualificationList = computed(() => {
 });
 const cityList = computed(() => {
   return directoriesStore?.cityList || [];
+});
+const replyStatusList = computed(() => {
+  return directoriesStore?.replyStatusList?.map((item) => ({
+    ...item,
+    ...REPLY_STATUS_COLOR[item?.key] || null,
+  })) || [];
 });
 const vacancyList = computed(() => {
   return (
@@ -230,15 +262,37 @@ const formattedDateValue = (date) => {
   return `${day}.${month}.${year}`;
 };
 
+const redirect = (url) => {
+  if(url) {
+    router.push(url)
+  }
+}
+
+const loadDirectories = async () => {
+  if(!directoriesStore?.replyStatusList?.length) {
+    await directoriesStore.fillReplyStatusList()
+  }
+  if(!directoriesStore?.currencyList?.length) {
+    await directoriesStore.fillCurrencyList()
+  }
+  if(!directoriesStore?.cityList?.length) {
+    await directoriesStore.fillCityList()
+  }
+  if(!directoriesStore?.employmentTypeList?.length) {
+    await directoriesStore.fillEmploymentTypeList()
+  }
+  if(!directoriesStore?.divisionList?.length) {
+    await directoriesStore.fillDivisionList()
+  }
+  if(!directoriesStore?.qualificationList?.length) {
+    await directoriesStore.fillQualificationList()
+  }
+}
+
 onMounted(async () => {
   isLoading.value = true
   await Promise.all([
-    directoriesStore.fillReplyStatusList(),
-    directoriesStore.fillCurrencyList(),
-    directoriesStore.fillCityList(),
-    directoriesStore.fillEmploymentTypeList(),
-    directoriesStore.fillDivisionList(),
-    directoriesStore.fillQualificationList(),
+    loadDirectories()
   ]).finally(async () => {
     await userStore.fillUserReplyList()
     if(!vacancyStore?.vacancyList?.length) {

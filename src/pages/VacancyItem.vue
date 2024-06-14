@@ -229,7 +229,9 @@ onMounted(async() => {
     directoriesStore.fillDivisionList(),
     directoriesStore.fillQualificationList(),
   ]).then(() => {
-    vacancyStore.fillVacancyItem(router.params.id)
+    if(router?.params?.id) {
+      vacancyStore.fillVacancyItem(router.params.id)
+    }
   }).finally(() => {
     isLoading.value = false
   });
