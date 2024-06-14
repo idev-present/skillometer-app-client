@@ -14,6 +14,7 @@ export const useUserStore = defineStore({
             skillometer_refresh_token: '',
             expires_in: '',
             userReplyList: [],
+            userReplyItem: null,
         }
     },
     actions: {
@@ -95,6 +96,38 @@ export const useUserStore = defineStore({
                     .catch((err) => {
                         console.error(err)
                         toast.error(err?.message || "Ошибка загрузки откликов! Пожалуйста, попробуйте позже")
+                        reject()
+                    })
+            })
+        },
+        // get reply item
+        fillUserReplyItem(payload = null) {
+            return new Promise((resolve, reject) => {
+                ApiService
+                    .get(`/reply/${payload}`, null)
+                    .then((res) => {
+                        resolve(res || null)
+                        this.userReplyItem = res
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        toast.error(err?.message || "Ошибка загрузки отклика! Пожалуйста, попробуйте позже")
+                        reject()
+                    })
+            })
+        },
+        // change Status To Declined
+        changeStatusToDeclined(payload = null) {
+            return new Promise((resolve, reject) => {
+                ApiService
+                    .post(`/reply/${payload.id}/status`, payload.data)
+                    .then((res) => {
+                        resolve(res)
+                        toast.success("Успешно")
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        toast.error(err?.message || "Ошибка отказа отклика! Пожалуйста, попробуйте позже")
                         reject()
                     })
             })

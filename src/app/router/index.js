@@ -97,6 +97,14 @@ const router = createRouter({
       }
     },
     {
+      path: '/reply/:id',
+      name: 'ReplyItem',
+      component: () => import('@/pages/ReplyItem.vue'),
+      meta: {
+        requiresAuth: true,
+      }
+    },
+    {
       path: '/notification',
       name: 'Notification',
       component: () => import('@/pages/Notification.vue'),

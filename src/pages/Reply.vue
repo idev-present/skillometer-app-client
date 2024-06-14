@@ -294,10 +294,10 @@ onMounted(async () => {
   await Promise.all([
     loadDirectories()
   ]).finally(async () => {
-    await userStore.fillUserReplyList()
     if(!vacancyStore?.vacancyList?.length) {
       await vacancyStore.fillVacancyList()
     }
+    await userStore.fillUserReplyList()
     isLoading.value = false
   });
 })
