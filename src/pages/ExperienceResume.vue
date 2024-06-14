@@ -181,12 +181,6 @@ const subNavigation = [
   { name: 'Резюме', href: '/resume', icon: WrenchScrewdriverIcon },
 ]
 
-const skillList = computed(() => {
-  return directoriesStore?.skillList || []
-})
-const divisionList = computed(() => {
-  return directoriesStore?.divisionList || []
-})
 const worksList = computed(() => {
   return applicantStore?.worksList?.map((item) => ({
     ...item,
@@ -197,10 +191,8 @@ const worksList = computed(() => {
 const formatDate = (dateString) => {
   const date = new Date(dateString);
   const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0'); // Месяцы начинаются с 0
+  const month = String(date.getMonth() + 1).padStart(2, '0');
   const year = date.getFullYear();
-
-  // Форматируем дату в нужный формат
   return `${day}.${month}.${year}`;
 }
 
@@ -225,12 +217,8 @@ const deleteWork = async () => {
 
 onMounted(async () => {
   isLoading.value = true
-  await Promise.all([
-    directoriesStore.fillDivisionList(),
-    directoriesStore.fillSkillList(),
-  ]).finally(() => {
-    applicantStore.getWorksList()
+  await applicantStore.getWorksList().finally(() => {
     isLoading.value = false
-  });
+  })
 })
 </script>

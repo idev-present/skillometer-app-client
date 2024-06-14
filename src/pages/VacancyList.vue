@@ -214,17 +214,33 @@ const formattedDateValue = (date) => {
   return `${day}.${month}.${year}`;
 };
 
+const loadDirectories = async () => {
+  if(!directoriesStore?.currencyList?.length) {
+    await directoriesStore.fillCurrencyList()
+  }
+  if(!directoriesStore?.cityList?.length) {
+    await directoriesStore.fillCityList()
+  }
+  if(!directoriesStore?.employmentTypeList?.length) {
+    await directoriesStore.fillEmploymentTypeList()
+  }
+  if(!directoriesStore?.divisionList?.length) {
+    await directoriesStore.fillDivisionList()
+  }
+  if(!directoriesStore?.qualificationList?.length) {
+    await directoriesStore.fillQualificationList()
+  }
+}
+
 onMounted(async () => {
   isLoading.value = true;
   await Promise.all([
-    directoriesStore.fillCurrencyList(),
-    directoriesStore.fillCityList(),
-    directoriesStore.fillEmploymentTypeList(),
-    directoriesStore.fillDivisionList(),
-    directoriesStore.fillQualificationList(),
-  ]).then(() => {
-    vacancyStore.fillVacancyList();
+    loadDirectories()
+  ]).finally(async () => {
+    if(!vacancyStore?.vacancyList?.length) {
+      await vacancyStore.fillVacancyList();
+    }
+    isLoading.value = false;
   });
-  isLoading.value = false;
 });
 </script>

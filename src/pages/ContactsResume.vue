@@ -102,7 +102,6 @@ import {
   UserCircleIcon,
   UserPlusIcon
 } from '@heroicons/vue/24/outline'
-import {useDirectoriesStore} from "@/app/store/modules/directories.js";
 import {BriefcaseIcon} from "@heroicons/vue/20/solid";
 import ContactsForm from "@/app/forms/ContactsForm";
 import { vMaska } from 'maska/vue'
@@ -111,7 +110,6 @@ const isLoading = ref(false)
 
 //* store
 const applicantStore = useApplicantStore()
-const directoriesStore = useDirectoriesStore()
 
 const subNavigation = [
   { name: 'Профиль', href: '/profile', icon: UserCircleIcon },

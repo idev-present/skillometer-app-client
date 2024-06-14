@@ -309,18 +309,26 @@ const saveForm = async () => {
   }
 }
 
+const loadDirectories = async () => {
+  if(!directoriesStore?.skillList?.length) {
+    await directoriesStore.fillSkillList()
+  }
+  if(!directoriesStore?.divisionList?.length) {
+    await directoriesStore.fillDivisionList()
+  }
+}
+
 onMounted(async () => {
   isLoading.value = true
   await Promise.all([
-    directoriesStore.fillDivisionList(),
-    directoriesStore.fillSkillList(),
+    loadDirectories()
   ]).finally(async () => {
-    if(route.params.id !== 'new') {
-      if(!applicantStore?.worksList?.length) {
+    if (route.params.id !== 'new') {
+      if (!applicantStore?.worksList?.length) {
         await applicantStore.getWorksList()
       }
       const workItem = applicantStore.worksList?.find((item) => item.id === route.params.id)
-      if(workItem) {
+      if (workItem) {
         user.value = {
           nameCompany: workItem?.company_name || '',
           position: workItem?.position || '',

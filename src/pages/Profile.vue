@@ -287,10 +287,16 @@ const saveForm = async () => {
   }
 }
 
+const loadDirectories = async () => {
+  if(!directoriesStore?.cityList?.length) {
+    await directoriesStore.fillCityList()
+  }
+}
+
 onMounted(async () => {
   isLoading.value = true
   await Promise.all([
-    directoriesStore.fillCityList(),
+    loadDirectories()
   ]).finally(() => {
     userStore.fillUser()
     user.value = {

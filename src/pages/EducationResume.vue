@@ -205,12 +205,18 @@ const deleteEducation = async () => {
   }
 }
 
+const loadDirectories = async () => {
+  if(!directoriesStore?.cityList?.length) {
+    await directoriesStore.fillCityList()
+  }
+}
+
 onMounted(async () => {
   isLoading.value = true
   await Promise.all([
-    directoriesStore.fillCityList(),
-  ]).finally(() => {
-    applicantStore.getEducationList()
+    loadDirectories()
+  ]).finally(async () => {
+    await applicantStore.getEducationList()
     isLoading.value = false
   });
 })

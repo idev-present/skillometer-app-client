@@ -119,7 +119,13 @@
               <p class="mt-2">Работодатель прежде всего смотрит на ваш профиль, но вы также можете сопроводить свой отклик парой слов, чтобы привлечь внимание к своим самым важным профессиональным или личным качествам.</p>
             </div>
               <div class="mt-3">
-                <textarea rows="4" name="comment" id="comment" class="block px-3 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 placeholder:text-gray-400 outline-0 sm:text-sm sm:leading-6" />
+                <textarea
+                    v-model="comment"
+                    rows="4"
+                    name="comment"
+                    id="comment"
+                    class="block px-3 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 placeholder:text-gray-400 outline-0 sm:text-sm sm:leading-6"
+                />
               </div>
             <button type="button" @click="onClickResponse" class="mt-3 w-full sm:w-fit rounded-md bg-blue-600 px-5 py-2.5 text-sm font-semibold tr text-white shadow-sm hover:bg-blue-700 outline-0">
               Откликнуться
@@ -166,6 +172,7 @@ const isLoading = ref(false)
 
 const isOpenModal = ref(false)
 const isOpenResumeModal = ref(false)
+const comment = ref('')
 
 //* store
 const vacancyStore = useVacancyStore()
@@ -206,11 +213,12 @@ const formattedDateValue = ((date) => {
   return `${day}.${month}.${year}`;
 });
 
-const onClickResponse = () => {
+const onClickResponse = async () => {
   if(!userStore.isAuth) {
     isOpenModal.value = true
   } else {
-    vacancyStore.replyVacancyItem(router.params.id)
+    await vacancyStore.replyVacancyItem(router.params.id)
+    comment.value = ''
   }
 }
 const closeModal = () => {
@@ -218,23 +226,35 @@ const closeModal = () => {
   isOpenResumeModal.value = false
 }
 const singIn = () => {
+  isOpenModal.value = false
   const targetUrl = iamService.sdk.getSigninUrl()
   window.location.href = targetUrl
 }
+const loadDirectories = async () => {
+  if(!directoriesStore?.cityList?.length) {
+    await directoriesStore.fillCityList()
+  }
+  if(!directoriesStore?.employmentTypeList?.length) {
+    await directoriesStore.fillEmploymentTypeList()
+  }
+  if(!directoriesStore?.divisionList?.length) {
+    await directoriesStore.fillDivisionList()
+  }
+  if(!directoriesStore?.qualificationList?.length) {
+    await directoriesStore.fillQualificationList()
+  }
+}
+
 onMounted(async() => {
   isLoading.value = true
   await Promise.all([
-    directoriesStore.fillCityList(),
-    directoriesStore.fillEmploymentTypeList(),
-    directoriesStore.fillDivisionList(),
-    directoriesStore.fillQualificationList(),
-  ]).then(() => {
+    loadDirectories()
+  ]).finally(async () => {
     if(router?.params?.id) {
-      vacancyStore.fillVacancyItem(router.params.id)
+      await vacancyStore.fillVacancyItem(router.params.id)
     }
-  }).finally(() => {
     isLoading.value = false
-  });
+  })
 })
 </script>
 

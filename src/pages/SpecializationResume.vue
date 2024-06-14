@@ -336,15 +336,8 @@ const inputPrice = (event) => {
 }
 
 const addTagSkill = (newTag) => {
-  // this.options.push(newTag)
   user.value.skill.push(newTag)
 }
-
-const clearError = (field) => {
-  if (errors.value[field]) {
-    errors.value[field] = "";
-  }
-};
 
 const saveForm = async () => {
   const skills = user.value?.skill?.map((item => item.id) || []).join(',');
@@ -366,16 +359,30 @@ const saveForm = async () => {
   }
 }
 
+const loadDirectories = async () => {
+  if(!directoriesStore?.searchStatusList?.length) {
+    await directoriesStore.fillSearchStatusList()
+  }
+  if(!directoriesStore?.skillList?.length) {
+    await directoriesStore.fillSkillList()
+  }
+  if(!directoriesStore?.qualificationList?.length) {
+    await directoriesStore.fillQualificationList()
+  }
+  if(!directoriesStore?.divisionList?.length) {
+    await directoriesStore.fillDivisionList()
+  }
+  if(!directoriesStore?.currencyList?.length) {
+    await directoriesStore.fillCurrencyList()
+  }
+}
+
 onMounted(async () => {
   isLoading.value = true
   await Promise.all([
-    directoriesStore.fillSearchStatusList(),
-    directoriesStore.fillQualificationList(),
-    directoriesStore.fillSkillList(),
-    directoriesStore.fillDivisionList(),
-    directoriesStore.fillCurrencyList(),
-  ]).finally(() => {
-    applicantStore.getApplicant().finally(() => {
+    loadDirectories()
+  ]).finally( async () => {
+    await applicantStore.getApplicant().finally(() => {
       const res = applicantStore.applicant
       user.value = {
         selectedSearchStatus: searchStatusList?.value?.find((e) => e.id === res?.search_status_id) || null,

@@ -257,10 +257,16 @@ const saveForm = async () => {
   }
 }
 
+const loadDirectories = async () => {
+  if(!directoriesStore?.cityList?.length) {
+    await directoriesStore.fillCityList()
+  }
+}
+
 onMounted(async () => {
   isLoading.value = true
   await Promise.all([
-    directoriesStore.fillCityList(),
+    loadDirectories()
   ]).finally(async () => {
     if(route.params.id !== 'new') {
       if(!applicantStore?.educationList?.length) {

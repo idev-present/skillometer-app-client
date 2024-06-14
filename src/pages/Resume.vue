@@ -476,16 +476,31 @@ const maskPhone = (phone) => {
   return `+7 (${areaCode}) ${centralOfficeCode}-${lineNumberPart1}-${lineNumberPart2}`
 }
 
+const loadDirectories = async () => {
+  if(!directoriesStore?.currencyList?.length) {
+    await directoriesStore.fillCurrencyList()
+  }
+  if(!directoriesStore?.cityList?.length) {
+    await directoriesStore.fillCityList()
+  }
+  if(!directoriesStore?.employmentTypeList?.length) {
+    await directoriesStore.fillEmploymentTypeList()
+  }
+  if(!directoriesStore?.divisionList?.length) {
+    await directoriesStore.fillDivisionList()
+  }
+  if(!directoriesStore?.qualificationList?.length) {
+    await directoriesStore.fillQualificationList()
+  }
+  if(!directoriesStore?.searchStatusList?.length) {
+    await directoriesStore.fillSearchStatusList()
+  }
+}
+
 onMounted(async () => {
   isLoading.value = true
   await Promise.all([
-    directoriesStore.fillCurrencyList(),
-    directoriesStore.fillCityList(),
-    directoriesStore.fillSkillList(),
-    directoriesStore.fillEmploymentTypeList(),
-    directoriesStore.fillDivisionList(),
-    directoriesStore.fillQualificationList(),
-    directoriesStore.fillSearchStatusList(),
+    loadDirectories()
   ]).finally(async() => {
     await applicantStore.fillResume()
     isLoading.value = false
