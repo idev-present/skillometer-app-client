@@ -61,6 +61,13 @@
           <ArrowLeftEndOnRectangleIcon class="h-6 w-6 mr-1" aria-hidden="true" />
           Войти
         </div>
+<!--        <div-->
+<!--            @click="singUp"-->
+<!--            class="hidden lg:flex font-semibold cursor-pointer leading-6 text-gray-600 hover:text-gray-800 transform"-->
+<!--        >-->
+<!--          <ArrowLeftEndOnRectangleIcon class="h-6 w-6 mr-1" aria-hidden="true" />-->
+<!--          Регистрация-->
+<!--        </div>-->
       </nav>
       <!--mobile-->
       <Dialog class="lg:hidden" @close="mobileMenuOpen = false" :open="mobileMenuOpen">
@@ -181,9 +188,8 @@ const singUp = () => {
 
 const logout = async () => {
   isLoading.value = true
-  await userStore.logout().finally(() => {
-    isLoading.value = false
-  })
+  await userStore.logout()
+  isLoading.value = false
   mobileMenuOpen.value = false
 }
 
