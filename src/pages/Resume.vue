@@ -21,171 +21,369 @@
             </aside>
 
             <div v-if="!isLoading" class="divide-y divide-gray-200 lg:col-span-9">
-              <div class="px-4 py-4 sm:p-4 pb-3 sm:flex justify-between items-center">
-              <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900">
-                Резюме
-              </h1>
-              <router-link
-                    class="mt-2 sm:mt-0 cursor-pointer flex items-center font-bold text-sm text-blue-600 hover:text-blue-700"
-                    to="/resume/new"
-                >
-                <PencilIcon
-                      class="mr-1.5 h-5 w-5 flex-shrink-0"
-                      aria-hidden="true"
-                      />
-                  Редактировать резюме
-                </router-link>
+              <div class="px-4 py-4 sm:p-4 pb-3">
+                <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900">
+                  Резюме
+                </h1>
               </div>
-                <div class="px-4 sm:px-6">
-                        <div class="">
-                          <!-- Личная информация -->
-                          <div class=" py-6 sm:col-span-2">
-                          <dt class="text-xl font-medium leading-6 text-gray-900">Личная информация</dt>
-                          <dl class="grid grid-cols-2">
-                            <div class=" border-gray-100 py-6 sm:col-span-1">
-                                <dt class="text-sm font-medium leading-6 text-gray-900">Имя Фамилия </dt>
-                                <dd class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Пол</dd>
-                            </div> 
-                            <div class="border-gray-100 py-6 sm:col-span-1">
-                              <dt class="text-sm leading-6 text-gray-700">Игорь Журавлев</dt>
-                              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Мужской</dd>
-                            </div>
-                            <div class="border-t border-gray-100 py-6 sm:col-span-1">
-                              <dt class="text-sm font-medium leading-6 text-gray-900">Дата рождения</dt>
-                              <dd class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Город</dd>
-                            </div>
-                            <div class="border-t border-gray-100 py-6 sm:col-span-1">
-                              <div class="flex items-center">
-                                  <CalendarIcon
-                                    class="mr-2 h-5 w-5 text-gray-500"
-                                    aria-hidden="true"
-                                    />
-                                    <dd class="text-sm leading-6 text-gray-700">11.11.1111</dd>
-                                </div>
-                              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Киров</dd>
-                            </div>
-                          </dl>
-                          </div>
-                          <!-- О себе  -->
-                            <div class="border-t border-b border-gray-200 py-6 sm:col-span-2">
-                              <dt class="text-xl font-medium leading-6 text-gray-900">О себе</dt>
-                              <dt class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Профессиональные навыки</dt>
-                              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Технологии HTML/CSS(SCSS, SASS), БЭМ, JavaScript, PHP, Git, Node JS, Vue JS, React JS, Nuxt JS, Firebase, TypeScript, Flutter, WordPress, Docker, Leaflet. Работал с Jira, YouTrack и bitrix24. Хорошее знание немецкого языка. Английский язык читаю и перевожу со словарем.</dd>
-                              <dt class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Личные качества</dt>
-                              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Ответственность, организованность, целеустремленность, трудолюбие, коммуникабельность, пунктуальность, умение работать в команде, быстрая обучаемость, аналитический склад ума.</dd>
-                            </div>
-                            <!-- Специализация -->
-                            <div class="border-b border-gray-200 py-6 sm:col-span-2">
-                              <dt class="text-xl font-medium leading-6 text-gray-900">Специализация</dt>
-                              <dl class="grid grid-cols-2">
-                                <div class=" border-gray-100 py-6 sm:col-span-1">
-                                  <dd class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Квалификация</dd>
-                                  <dt class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Готовность к работе </dt>
-                                </div> 
-                                <div class="border-gray-100 py-6 sm:col-span-1">
-                                  <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Средний (Middle)</dd>
-                                  <dt class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">В активном поиске</dt>
-                                </div>
-                                <div class="border-t border-gray-100 py-6 sm:col-span-1">
-                                  <dt class="text-sm font-medium leading-6 text-gray-900">Специализация</dt>
-                                  <dd class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Зарплата</dd>
-                                </div>
-                                <div class="border-t border-gray-100 py-6 sm:col-span-1">
-                                  <dt class="text-sm leading-6 text-gray-700">Фронтенд разработчик</dt>
-                                  <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">200000</dd>
-                                </div>
-                                <div class="border-t border-gray-100 py-6 sm:col-span-1">
-                                  <dt class="text-sm font-medium leading-6 text-gray-900">Дополнительно</dt>
-                                </div>
-                                <div class="border-t border-gray-100 py-6 sm:col-span-1">
-                                  <dt class="text-sm leading-6 text-gray-700">Готов к переезду</dt>
-                                </div>
-                              </dl>
-                            </div>
-                            <!-- Опыт работы -->
-                            <div class="border-b border-gray-200 py-6 sm:col-span-2">
-                              <dt class="text-xl font-medium leading-6 text-gray-900">Опыт работы</dt>
-                              <dt class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Тестовая работа</dt>
-                              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Инженер по ручному тестированию</dd>
-                              <dt class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Ваши обязанности и достижения</dt>
-                              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Расскажите о своем опыте в подробностях. Минимальное количество символов — 50 Расскажите о своем опыте в подробностях. Минимальное количество символов — 50 Расскажите о своем опыте в подробностях. Минимальное количество символов — 50</dd>
-                              <dt class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Применяемые вами навыки</dt>
-                              <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">nodejs typescript html</dd>
-                              <div class="grid grid-cols-2">
-                                <dt class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Начачло работы</dt>
-                                <div class="flex items-center ">
-                                  <CalendarIcon
-                                    class="mr-2 h-5 w-5 text-gray-500"
-                                    aria-hidden="true"
-                                    />
-                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">11.11.1111</dd>
-                                </div>
-                                <dt class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Окончание работы</dt>
-                                <div class="flex items-center">
-                                  <CalendarIcon
-                                  class="mr-2 h-5 w-5 text-gray-500"
-                                  aria-hidden="true"
-                                  />
-                                  <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">22.22.2222</dd>
-                                  </div>
-                              </div>
-                            </div>
-                            <!-- Образование -->
-                            <div class="border-b border-gray-200 py-6 sm:col-span-2 ">
-                              <dt class="text-xl font-medium leading-6 text-gray-900">Образование</dt>
-                              <dl class="grid grid-cols-2">
-                                <div class=" border-gray-100 py-6 sm:col-span-1">
-                                  <dd class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Университет</dd>
-                                  <dt class="mt-10 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Город</dt>
-                                </div> 
-                                <div class="border-gray-100 py-6 sm:col-span-1">
-                                  <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Вятская государственная сельскохозяйственная академия</dd>
-                                  <dt class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Киров</dt>
-                                </div>
-                                <div class="border-t border-gray-100 py-6 sm:col-span-1">
-                                  <dt class="text-sm font-medium leading-6 text-gray-900">Специализация</dt>
-                                  <dd class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Факультет</dd>
-                                </div>
-                                <div class="border-t border-gray-100 py-6 sm:col-span-1">
-                                  <dt class="text-sm leading-6 text-gray-700">35.03.06</dt>
-                                  <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">Инженерный</dd>
-                                </div>
-                              </dl>
-                              <div class="grid grid-cols-2 py-6 sm:col-span-2">
-                                <dt class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Начачло обучения</dt>
-                                <div class="flex items-center">
-                                  <CalendarIcon
-                                    class="mr-2 h-5 w-5 text-gray-500"
-                                    aria-hidden="true"
-                                    />
-                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">11.11.1111</dd>
-                                </div>
-                                <dt class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Окончание обучения</dt>
-                                <div class="flex items-center">
-                                  <CalendarIcon
-                                  class="mr-2 h-5 w-5 text-gray-500"
-                                  aria-hidden="true"
-                                  />
-                                  <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">22.22.2222</dd>
-                                  </div>
-                              </div>
-                            </div>
-                            <!-- Контакты -->
-                              <div class="py-6 sm:col-span-2">
-                                <dt class="text-xl font-medium leading-6 text-gray-900">Контакты</dt>
-                                  <dl class="grid grid-cols-2">
-                                  <div class=" border-gray-100 py-6 sm:col-span-1">
-                                    <dt class="text-sm font-medium leading-6 text-gray-900">Электронная почта</dt>
-                                    <dd class="mt-1 text-sm font-medium leading-6 text-gray-900 sm:mt-2">Телефон</dd>
-                                  </div> 
-                                  <div class="border-gray-100 py-6 sm:col-span-1">
-                                    <dt class="text-sm leading-6 text-gray-700">ya@ro.ru</dt>
-                                    <dd class="mt-1 text-sm leading-6 text-gray-700 sm:mt-2">+7(987)654-32-21</dd>
-                                  </div>
-                                </dl>
-                              </div>
+              <!-- Личная информация -->
+              <div class="px-4 py-6 sm:p-6 lg:pb-8">
+                <div class="col-span-12 mb-2 flex flex-col sm:flex-row justify-between text-xl font-medium leading-6 text-gray-900">
+                  <router-link to="/profile" class="cursor-pointer">
+                    Личная информация
+                  </router-link>
+                  <router-link
+                      class="cursor-pointer flex items-center font-bold text-sm text-blue-600 hover:text-blue-700"
+                      to="/profile"
+                  >
+                    <PencilIcon
+                        class="mr-1 h-4 w-4 flex-shrink-0"
+                        aria-hidden="true"
+                    />
+                    Редактировать
+                  </router-link>
+                </div>
+                <div class="pt-4 grid grid-cols-6 gap-4 sm:grid-cols-12 sm:gap-6">
+                  <div class="col-span-12">
+                    <img
+                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        alt=""
+                        class="h-24 w-24 flex-none rounded-lg bg-gray-800 object-cover"
+                    />
+                  </div>
+                </div>
+                <div class="pt-4 grid grid-cols-6 gap-4 sm:grid-cols-12 sm:gap-6">
+                  <div class="col-span-6">
+                    <div class="text-sm font-medium leading-6 text-gray-900">Имя Фамилия</div>
+                    <div class="mt-0.5 flex items-center text-sm leading-6 text-gray-700">
+                      ХЗ
+                    </div>
+                  </div>
+                  <div class="col-span-6">
+                    <div class="text-sm font-medium leading-6 text-gray-900">Пол</div>
+                    <div class="mt-0.5 flex items-center text-sm leading-6 text-gray-700">
+                      ХЗ
+                    </div>
+                  </div>
+                </div>
+                <div class="pt-4 grid grid-cols-6 gap-4 sm:grid-cols-12 sm:gap-6">
+                  <div class="col-span-6">
+                    <div class="text-sm font-medium leading-6 text-gray-900">Возраст</div>
+                    <div class="mt-0.5 flex items-center text-sm leading-6 text-gray-700">
+                      ХЗ - не правильно
+                    </div>
+                  </div>
+                  <div class="col-span-6">
+                    <div class="text-sm font-medium leading-6 text-gray-900">Город</div>
+                    <div class="mt-0.5 flex items-center text-sm leading-6 text-gray-700">
+                      ХЗ - не правильно
+                    </div>
+                  </div>
+                </div>
+                <div class="pt-4 grid grid-cols-6 gap-4 sm:grid-cols-12 sm:gap-6">
+                  <div class="col-span-12">
+                    <div class="text-sm font-medium leading-6 text-gray-900">Описание</div>
+                    <div class="mt-0.5 flex items-center text-sm leading-6 text-gray-700">
+                      {{resume?.bio || '-'}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Специализация -->
+              <div class="px-4 py-6 sm:p-6 lg:pb-8">
+                <div class="col-span-12 mb-2 flex flex-col sm:flex-row justify-between text-xl font-medium leading-6 text-gray-900">
+                  <router-link to="/specialization" class="cursor-pointer">
+                    Специализация
+                  </router-link>
+                  <router-link
+                      class="cursor-pointer flex items-center font-bold text-sm text-blue-600 hover:text-blue-700"
+                      to="/specialization"
+                  >
+                    <PencilIcon
+                        class="mr-1 h-4 w-4 flex-shrink-0"
+                        aria-hidden="true"
+                    />
+                    Редактировать
+                  </router-link>
+                </div>
+                <div class="pt-4 grid grid-cols-6 gap-4 sm:grid-cols-12 sm:gap-6">
+                  <div class="col-span-6">
+                    <div class="text-sm font-medium leading-6 text-gray-900">Готовность к работе</div>
+                    <div class="mt-0.5 flex items-center text-sm leading-6 text-gray-700">
+                      {{resume?.selectedSearchStatus?.name || '-'}}
+                    </div>
+                  </div>
+                  <div class="col-span-6">
+                    <div class="text-sm font-medium leading-6 text-gray-900">Квалификация</div>
+                    <div class="mt-0.5 flex items-center text-sm leading-6 text-gray-700">
+                      {{resume?.selectedQualification?.name || '-'}}
+                    </div>
+                  </div>
+                </div>
+                <div class="pt-4 grid grid-cols-6 gap-4 sm:grid-cols-12 sm:gap-6">
+                  <div class="col-span-6">
+                    <div class="text-sm font-medium leading-6 text-gray-900">Специализация</div>
+                    <div class="mt-0.5 flex items-center text-sm leading-6 text-gray-700">
+                      {{resume?.selectedDivision?.name || '-'}}
+                    </div>
+                  </div>
+                  <div class="col-span-6">
+                    <div class="text-sm font-medium leading-6 text-gray-900">Зарплата</div>
+                    <div class="mt-0.5 flex items-center text-sm leading-6 text-gray-700">
+                      от {{resume?.salary_from || '-'}}
+                      <div class="ml-1" v-if="resume?.selectedCurrency?.value">
+                        {{resume.selectedCurrency.value}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="pt-4 grid grid-cols-6 gap-4 sm:grid-cols-12 sm:gap-6">
+                  <div class="col-span-12">
+                    <div class="text-sm font-medium leading-6 text-gray-900">Профессиональные навыки</div>
+                    <div v-if="resume?.skills?.length" class="flex items-center">
+                      <div v-for="(skill, index) in resume.skills"
+                           :key="index"
+                           class="mt-0.5 flex items-center text-sm leading-6 text-gray-700"
+                      >
+                        <svg
+                            v-if="index"
+                            viewBox="0 0 2 2"
+                            class="hidden sm:flex h-0.5 w-0.5 mx-2 fill-current"
+                        >
+                          <circle cx="1" cy="1" r="1" />
+                        </svg>
+                        {{ skill }}
+                      </div>
+                    </div>
+                    <div v-else class="mt-0.5 flex items-center text-sm leading-6 text-gray-700">
+                      -
+                    </div>
+                  </div>
+                </div>
+                <div v-if="resume?.is_relocation || resume?.is_remote"
+                     class="pt-4 grid grid-cols-6 gap-4 sm:grid-cols-12 sm:gap-6"
+                >
+                  <div
+                      v-if="resume?.is_relocation"
+                      class="col-span-6"
+                  >
+                    <div class="mt-0.5 flex items-center font-medium text-sm leading-6 text-gray-900">
+                      Готов к переезду
+                    </div>
+                  </div>
+                  <div v-if="resume?.is_remote" class="col-span-6">
+                    <div class="mt-0.5 flex items-center font-medium text-sm leading-6 text-gray-900">
+                      Готов к удаленной работе
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Опыт работы -->
+              <div class="px-4 py-6 sm:p-6 lg:pb-8">
+                <div class="col-span-12 mb-2 flex flex-col sm:flex-row justify-between text-xl font-medium leading-6 text-gray-900">
+                  <router-link to="/specialization" class="cursor-pointer">
+                    Опыт работы
+                  </router-link>
+                  <router-link
+                      class="cursor-pointer flex items-center font-bold text-sm text-blue-600 hover:text-blue-700"
+                      to="/experience"
+                  >
+                    <PencilIcon
+                        class="mr-1 h-4 w-4 flex-shrink-0"
+                        aria-hidden="true"
+                    />
+                    Редактировать
+                  </router-link>
+                </div>
+                <div class="divide-y divide-gray-300 lg:col-span-9">
+                  <div
+                      v-for="(item, index) in resume?.xp"
+                      :key="index"
+                  >
+                    <div class="py-4" :class="(index + 1 === resume?.xp?.length) && 'pb-0'">
+                      <div class="grid grid-cols-12">
+                        <div class="col-span-12 text-lg font-bold leading-6 text-gray-900">
+                          {{item?.company_name || '-'}}
+                        </div>
+                        <div class="col-span-12 mt-0.5 text-sm leading-6 text-gray-700">{{item?.position || '-'}}</div>
+                      </div>
+                      <div class="pt-4 grid grid-cols-12 gap-6">
+                        <div class="col-span-12">
+                          <div class="text-sm font-medium leading-6 text-gray-900">Ваши обязанности и достижения</div>
+                          <div class="mt-0.5 text-sm leading-6 text-gray-700">{{item?.description || '-'}}</div>
                         </div>
                       </div>
+                      <div class="pt-4 grid grid-cols-6 gap-4 sm:grid-cols-12 sm:gap-6">
+                        <div class="col-span-6">
+                          <div class="text-sm font-medium leading-6 text-gray-900">Начало работы</div>
+                          <div class="mt-0.5 flex items-center text-sm leading-6 text-gray-700">
+                            <CalendarIcon
+                                class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-500"
+                                aria-hidden="true"
+                            />
+                            {{item?.start_date ? formatDate(item.start_date) : '-'}}
+                          </div>
+                        </div>
+                        <div class="col-span-6">
+                          <div class="text-sm font-medium leading-6 text-gray-900">Окончание работы</div>
+                          <div class="mt-0.5 flex items-center text-sm leading-6 text-gray-700">
+                            <CalendarIcon
+                                class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-500"
+                                aria-hidden="true"
+                            />
+                            {{item?.end_date ? formatDate(item?.end_date) : 'По настоящее время'}}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="mt-4 grid grid-cols-12 gap-6">
+                        <div class="col-span-12">
+                          <div class="text-sm font-medium leading-6 text-gray-900">Применяемые вами навыки</div>
+                          <div class="mt-0.5 text-sm leading-6 text-gray-700 flex items-center">
+                            <div
+                                v-for="(skill, indexSkills) in item?.skills"
+                                :key="indexSkills"
+                                class="flex items-center"
+                            >
+                              <svg
+                                  v-if="indexSkills"
+                                  viewBox="0 0 2 2"
+                                  class="hidden sm:flex h-0.5 w-0.5 mx-2 fill-current"
+                              >
+                                <circle cx="1" cy="1" r="1" />
+                              </svg>
+                              {{skill}}
+                            </div>
+                            <div v-if="!item?.skills?.length">
+                              -
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div v-if="!resume?.xp?.length"
+                       class="w-full flex flex-col items-center py-28"
+                  >
+                    <span class="text-lg mb-3">Опыт работы отсутствует или не указан</span>
+                    <router-link
+                        class="w-fit rounded-md bg-blue-600 px-5 py-2.5 text-sm font-semibold tr text-white shadow-sm hover:bg-blue-700 outline-0"
+                        to="/experience/new"
+                    >
+                      Добавить опыт работы
+                    </router-link>
+                  </div>
+                </div>
+              </div>
+              <!-- Образование -->
+              <div class="px-4 py-6 sm:p-6 lg:pb-8">
+                <div class="col-span-12 mb-2 flex flex-col sm:flex-row justify-between text-xl font-medium leading-6 text-gray-900">
+                  <router-link to="/education" class="cursor-pointer">
+                    Образование
+                  </router-link>
+                  <router-link
+                      class="cursor-pointer flex items-center font-bold text-sm text-blue-600 hover:text-blue-700"
+                      to="/education"
+                  >
+                    <PencilIcon
+                        class="mr-1 h-4 w-4 flex-shrink-0"
+                        aria-hidden="true"
+                    />
+                    Редактировать
+                  </router-link>
+                </div>
+                <div class="divide-y divide-gray-300 lg:col-span-9">
+                  <div
+                      v-for="(item, index) in resume?.education"
+                      :key="index"
+                  >
+                    <div class="py-4" :class="(index + 1 === resume?.education?.length) && 'pb-0'">
+                      <div class="grid grid-cols-12">
+                        <div class="col-span-12 text-lg font-bold leading-6 text-gray-900">
+                          {{item?.university_name || '-'}}
+                        </div>
+                        <div class="col-span-12 mt-0.5 text-sm leading-6 text-gray-700">{{item?.faculty_name || '-'}}</div>
+                      </div>
+                      <div class="pt-4 grid grid-cols-12 gap-6">
+                        <div class="col-span-6">
+                          <div class="text-sm font-medium leading-6 text-gray-900">Местоположение учебного заведения</div>
+                          <div class="mt-0.5 text-sm leading-6 text-gray-700">{{item?.city?.name || '-'}}</div>
+                        </div>
+                        <div class="col-span-6">
+                          <div class="text-sm font-medium leading-6 text-gray-900">Специализация</div>
+                          <div class="mt-0.5 flex items-center text-sm leading-6 text-gray-700">
+                            {{item?.specialization || ''}}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="pt-4 grid grid-cols-6 gap-4 sm:grid-cols-12 sm:gap-6">
+                        <div class="col-span-6">
+                          <div class="text-sm font-medium leading-6 text-gray-900">Начало учебы</div>
+                          <div class="mt-0.5 flex items-center text-sm leading-6 text-gray-700">
+                            <CalendarIcon
+                                class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-500"
+                                aria-hidden="true"
+                            />
+                            {{item?.start_date ? formatDate(item.start_date) : '-'}}
+                          </div>
+                        </div>
+                        <div class="col-span-6">
+                          <div class="text-sm font-medium leading-6 text-gray-900">Завершение учебы</div>
+                          <div class="mt-0.5 flex items-center text-sm leading-6 text-gray-700">
+                            <CalendarIcon
+                                class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-500"
+                                aria-hidden="true"
+                            />
+                            {{item?.end_date ? formatDate(item?.end_date) : 'По настоящее время'}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div v-if="!resume?.education?.length"
+                       class="w-full flex flex-col items-center py-28"
+                  >
+                    <span class="text-lg mb-3">Образование отсутствует или не указано</span>
+                    <router-link
+                        class="w-fit rounded-md bg-blue-600 px-5 py-2.5 text-sm font-semibold tr text-white shadow-sm hover:bg-blue-700 outline-0"
+                        to="/education/new"
+                    >
+                      Добавить образование
+                    </router-link>
+                  </div>
+                </div>
+              </div>
+              <!-- Контакты -->
+              <div class="px-4 py-6 sm:p-6 lg:pb-8">
+                <div class="col-span-12 mb-2 flex flex-col sm:flex-row justify-between text-xl font-medium leading-6 text-gray-900">
+                  <router-link to="/contacts" class="cursor-pointer">
+                    Контакты
+                  </router-link>
+                  <router-link
+                      class="cursor-pointer flex items-center font-bold text-sm text-blue-600 hover:text-blue-700"
+                      to="/contacts"
+                  >
+                    <PencilIcon
+                        class="mr-1 h-4 w-4 flex-shrink-0"
+                        aria-hidden="true"
+                    />
+                    Редактировать
+                  </router-link>
+                </div>
+                <div class="pt-4 grid grid-cols-6 gap-4 sm:grid-cols-12 sm:gap-6">
+                  <div class="col-span-6">
+                    <div class="text-sm font-medium leading-6 text-gray-900">Электронная почта</div>
+                    <div class="mt-0.5 flex items-center text-sm leading-6 text-gray-700">
+                      {{resume?.email || '-'}}
+                    </div>
+                  </div>
+                  <div class="col-span-6">
+                    <div class="text-sm font-medium leading-6 text-gray-900">Телефон</div>
+                    <div class="mt-0.5 flex items-center text-sm leading-6 text-gray-700">
+                      {{resume?.phone ? maskPhone(resume.phone) : '-'}}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <loading class="py-40 divide-y divide-gray-200 lg:col-span-9" v-else />
@@ -201,14 +399,13 @@ import {computed, onMounted, ref} from "vue"
 import {useApplicantStore} from "@/app/store/modules/applican.js";
 import Loading from "@/shared/Loading.vue";
 import {
-  BellIcon,
   CogIcon,
   PencilIcon,
   UserCircleIcon,
 } from '@heroicons/vue/24/outline'
 import {useDirectoriesStore} from "@/app/store/modules/directories.js";
-import {BriefcaseIcon, CalendarIcon} from "@heroicons/vue/20/solid/index.js";
-import {AcademicCapIcon, UserPlusIcon, WrenchScrewdriverIcon} from "@heroicons/vue/24/outline/index.js";
+import {BriefcaseIcon, CalendarIcon, PlusIcon} from "@heroicons/vue/20/solid/index.js";
+import {AcademicCapIcon, TrashIcon, UserPlusIcon, WrenchScrewdriverIcon} from "@heroicons/vue/24/outline/index.js";
 
 const isLoading = ref(false)
 
@@ -225,25 +422,73 @@ const subNavigation = [
   { name: 'Резюме', href: '/resume', icon: WrenchScrewdriverIcon },
 ]
 
+const searchStatusList = computed(() => {
+  return directoriesStore?.searchStatusList || []
+})
+const qualificationList = computed(() => {
+  return directoriesStore?.qualificationList || []
+})
+const divisionList = computed(() => {
+  return directoriesStore?.divisionList || []
+})
+const currencyList = computed(() => {
+  return directoriesStore?.currencyList || []
+})
+const cityList = computed(() => {
+  return directoriesStore?.cityList || []
+})
+
 const resume = computed(() => {
   return {
     ...applicantStore.resume,
+    selectedSearchStatus: searchStatusList?.value?.find((e) => e.id === applicantStore?.resume?.search_status_id) || null,
+    selectedQualification: qualificationList?.value?.find((e) => e.id === applicantStore?.resume?.qualification_id) || null,
+    selectedDivision: divisionList?.value?.find((e) => e.id === applicantStore?.resume?.division_id) || null,
+    selectedCurrency: currencyList?.value?.find((e) => e.key === applicantStore?.resume?.currency) || null,
+    skills: applicantStore?.resume?.skill_set?.split(',') || [],
+    xp: applicantStore?.resume?.xp?.map((item) => ({
+      ...item,
+      skills: item?.skill_set?.split(',') || [],
+    })) || [],
+    education: applicantStore?.resume?.education?.map((item) => ({
+      ...item,
+      city: cityList?.value?.find((e) => e.id === (item?.city_id || '')) || null,
+    })) || [],
   }
 })
 
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+  return `${day}.${month}.${year}`;
+}
+
+const maskPhone = (phone) => {
+  if (phone.length !== 10) {
+    return ''
+  }
+  const areaCode = phone.slice(0, 3);
+  const centralOfficeCode = phone.slice(3, 6);
+  const lineNumberPart1 = phone.slice(6, 8);
+  const lineNumberPart2 = phone.slice(8);
+  return `+7 (${areaCode}) ${centralOfficeCode}-${lineNumberPart1}-${lineNumberPart2}`
+}
+
 onMounted(async () => {
-  // isLoading.value = true
-  // await Promise.all([
-  //   directoriesStore.fillCurrencyList(),
-  //   directoriesStore.fillCityList(),
-  //   directoriesStore.fillSkillList(),
-  //   directoriesStore.fillEmploymentTypeList(),
-  //   directoriesStore.fillDivisionList(),
-  //   directoriesStore.fillQualificationList(),
-  //   directoriesStore.fillSearchStatusList(),
-  // ]).finally(async() => {
-  //   await applicantStore.fillResume()
-  //   isLoading.value = false
-  // });
+  isLoading.value = true
+  await Promise.all([
+    directoriesStore.fillCurrencyList(),
+    directoriesStore.fillCityList(),
+    directoriesStore.fillSkillList(),
+    directoriesStore.fillEmploymentTypeList(),
+    directoriesStore.fillDivisionList(),
+    directoriesStore.fillQualificationList(),
+    directoriesStore.fillSearchStatusList(),
+  ]).finally(async() => {
+    await applicantStore.fillResume()
+    isLoading.value = false
+  });
 })
 </script>

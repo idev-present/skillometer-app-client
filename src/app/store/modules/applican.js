@@ -229,7 +229,7 @@ export const useApplicantStore = defineStore({
         fillResume(payload = null) {
             return new Promise((resolve, reject) => {
                 ApiService
-                    .get("/user/cv/", payload)
+                    .get("/user/cv", payload)
                     .then((res) => {
                         resolve(res || [])
                         this.resume = res || []
