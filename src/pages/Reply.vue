@@ -46,7 +46,6 @@
                   <div v-if="item?.vacancy" class="relative flex justify-between gap-x-6 rounded-xl">
                     <div class="min-w-0 flex-1">
                       <h2
-                          @click.stop="redirect(`/vacancy/${item.vacancy_id}`)"
                           class="text-xl font-bold leading-7 text-gray-900 sm:text-2xl sm:tracking-tight"
                       >
                         {{ item?.vacancy?.name }}

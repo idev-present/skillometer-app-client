@@ -303,12 +303,12 @@
                         </div>
                         <div class="col-span-12 mt-0.5 text-sm leading-6 text-gray-700">{{item?.faculty_name || '-'}}</div>
                       </div>
-                      <div class="pt-4 grid grid-cols-12 gap-6">
-                        <div class="col-span-6">
+                      <div class="pt-4 grid grid-cols-12 gap-4 sm:gap-6">
+                        <div class="col-span-12 sm:col-span-6">
                           <div class="text-sm font-medium leading-6 text-gray-900">Местоположение учебного заведения</div>
                           <div class="mt-0.5 text-sm leading-6 text-gray-700">{{item?.city?.name || '-'}}</div>
                         </div>
-                        <div class="col-span-6">
+                        <div class="col-span-12 sm:col-span-6">
                           <div class="text-sm font-medium leading-6 text-gray-900">Специализация</div>
                           <div class="mt-0.5 flex items-center text-sm leading-6 text-gray-700">
                             {{item?.specialization || ''}}
@@ -404,8 +404,8 @@ import {
   UserCircleIcon,
 } from '@heroicons/vue/24/outline'
 import {useDirectoriesStore} from "@/app/store/modules/directories.js";
-import {BriefcaseIcon, CalendarIcon, PlusIcon} from "@heroicons/vue/20/solid/index.js";
-import {AcademicCapIcon, TrashIcon, UserPlusIcon, WrenchScrewdriverIcon} from "@heroicons/vue/24/outline/index.js";
+import {BriefcaseIcon, CalendarIcon} from "@heroicons/vue/20/solid/index.js";
+import {AcademicCapIcon, UserPlusIcon, WrenchScrewdriverIcon} from "@heroicons/vue/24/outline/index.js";
 
 const isLoading = ref(false)
 

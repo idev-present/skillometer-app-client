@@ -36,7 +36,7 @@
                 
                   <div>
                     <!--Название компании/Должность-->
-                    <div class="mt-4 grid grid-cols-12 gap-6">
+                    <div class="mt-4 grid grid-cols-12 gap-4 sm:gap-6">
                       <div class="col-span-12 sm:col-span-6">
                         <label
                             class="block text-sm font-medium leading-6 text-gray-900">
@@ -85,7 +85,7 @@
                       </div>
                     </div>
                     <!--Дата начала/конца-->
-                    <div class="mt-4 grid grid-cols-12 gap-6">
+                    <div class="mt-4 grid grid-cols-12 gap-4 sm:gap-6">
                       <div class="col-span-12 sm:col-span-6">
                         <label
                             class="block mb-1 text-sm font-medium leading-6 text-gray-900">
