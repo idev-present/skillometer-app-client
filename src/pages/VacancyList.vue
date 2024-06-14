@@ -27,6 +27,12 @@
       </div>
       <!-- cards -->
       <list-filters class="flex lg:hidden" />
+      <div
+          v-if="!isLoading && !vacancyList?.length"
+          class="w-full flex justify-center text-center mt-10 text-gray-800"
+      >
+        Список вакансий пуст
+      </div>
       <template v-if="!isLoading">
         <router-link
           v-for="(item, index) in vacancyList"
