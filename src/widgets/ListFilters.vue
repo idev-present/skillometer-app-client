@@ -123,7 +123,7 @@
           <input name="price"
                  class="block mr-2 w-full rounded-md border-0 py-[5px] mt-0.5 pl-3 pr-3 text-gray-900 shadow-sm ring-1 ring-gray-300 outline-0 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                  @input="inputPrice"
-                 v-model="inputValue"
+                 :value="inputValue"
                  placeholder="От"
           />
           <Listbox as="div" v-model="selectedCurrency">
