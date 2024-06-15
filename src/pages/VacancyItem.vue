@@ -348,9 +348,7 @@ const onClickResponse = async () => {
   } else {
     const payload = {
       id: router.params.id,
-      data: {
-        comment: comment?.value || ''
-      }
+      comment: comment?.value || ''
     }
     await vacancyStore.replyVacancyItem(payload)
     if(!directoriesStore?.replyStatusList?.length) {
