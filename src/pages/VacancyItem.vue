@@ -346,7 +346,13 @@ const onClickResponse = async () => {
   if(!userStore.isAuth) {
     isOpenModal.value = true
   } else {
-    await vacancyStore.replyVacancyItem(router.params.id)
+    const payload = {
+      id: router.params.id,
+      data: {
+        comment: comment?.value || ''
+      }
+    }
+    await vacancyStore.replyVacancyItem(payload)
     if(!directoriesStore?.replyStatusList?.length) {
       await directoriesStore.fillReplyStatusList()
     }
