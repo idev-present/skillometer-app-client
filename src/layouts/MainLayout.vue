@@ -157,6 +157,7 @@
     </header>
     <div class="mx-auto w-full max-w-7xl px-4 pt-8 pb-16 md:py-16 sm:px-6 lg:px-8">
       {{ userTg }}
+      <div @click="tgUser">11</div>
       <RouterView />
     </div>
   </div>
@@ -218,24 +219,49 @@ const getProfile = async () => {
   })
 }
 
+const tgUser = () => {
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const tg = window.Telegram.WebApp;
+
+    // Получение данных о пользователе
+    const user = tg.initDataUnsafe?.user;
+    const userId = user?.id;
+    const firstName = user?.first_name;
+    const lastName = user?.last_name;
+    const username = user?.username;
+    const languageCode = user?.language_code;
+
+    // Вывод данных в консоль
+    console.log('User ID:', userId);
+    console.log('First Name:', firstName);
+    console.log('Last Name:', lastName);
+    console.log('Username:', username);
+    console.log('Language Code:', languageCode);
+    alert(userId)
+    userTg.value = tg.initDataUnsafe?.user;
+  })
+}
+
 onMounted(async () => {
   await getProfile()
-  const tg = window.Telegram.WebApp;
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const tg = window.Telegram.WebApp;
 
-  // Получение данных о пользователе
-  const user = tg.initDataUnsafe?.user;
-  const userId = user?.id;
-  const firstName = user?.first_name;
-  const lastName = user?.last_name;
-  const username = user?.username;
-  const languageCode = user?.language_code;
+    // Получение данных о пользователе
+    const user = tg.initDataUnsafe?.user;
+    const userId = user?.id;
+    const firstName = user?.first_name;
+    const lastName = user?.last_name;
+    const username = user?.username;
+    const languageCode = user?.language_code;
 
-  // Вывод данных в консоль
-  console.log('User ID:', userId);
-  console.log('First Name:', firstName);
-  console.log('Last Name:', lastName);
-  console.log('Username:', username);
-  console.log('Language Code:', languageCode);
-  userTg.value = tg.initDataUnsafe?.user;
+    // Вывод данных в консоль
+    console.log('User ID:', userId);
+    console.log('First Name:', firstName);
+    console.log('Last Name:', lastName);
+    console.log('Username:', username);
+    console.log('Language Code:', languageCode);
+    userTg.value = tg.initDataUnsafe?.user;
+  })
 })
 </script>
