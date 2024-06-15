@@ -34,7 +34,12 @@
           <Menu as="div" class="relative">
             <div>
               <MenuButton class="relative flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none">
-                <img class="h-8 w-8 min-w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+                <img v-if="userStore?.user?.avatar" class="h-8 w-8 min-w-8 rounded-full bg-gray-50" :src="userStore?.user?.avatar" alt="" />
+                <span v-else class="inline-block h-8 w-8 -mt-1 min-w-8 overflow-hidden rounded-full bg-gray-100">
+                  <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
+                </span>
               </MenuButton>
             </div>
             <transition enter-active-class="transition ease-out duration-200" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
@@ -95,7 +100,12 @@
               <div v-if="isAuth" class="border-t -mx-3 border-gray-200 pb-3 pt-4">
                 <div class="flex items-center px-3">
                   <div class="flex-shrink-0">
-                    <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
+                    <img v-if="userStore?.user?.avatar" class="h-8 w-8 rounded-full bg-gray-50" :src="userStore?.user?.avatar" alt="" />
+                    <span v-else class="inline-block -mb-1.5 h-10 w-10 overflow-hidden rounded-full bg-gray-100">
+                      <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                      </svg>
+                    </span>
                   </div>
                   <div class="ml-3">
                     <div class="text-base font-medium text-gray-800">
