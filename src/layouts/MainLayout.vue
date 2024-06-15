@@ -220,24 +220,22 @@ const getProfile = async () => {
 
 onMounted(async () => {
   await getProfile()
-  window.addEventListener('DOMContentLoaded', (event) => {
-    const tg = window.Telegram.WebApp;
+  const tg = window.Telegram.WebApp;
 
-    // Получение данных о пользователе
-    const user = tg.initDataUnsafe?.user;
-    const userId = user?.id;
-    const firstName = user?.first_name;
-    const lastName = user?.last_name;
-    const username = user?.username;
-    const languageCode = user?.language_code;
+  // Получение данных о пользователе
+  const user = tg.initDataUnsafe?.user;
+  const userId = user?.id;
+  const firstName = user?.first_name;
+  const lastName = user?.last_name;
+  const username = user?.username;
+  const languageCode = user?.language_code;
 
-    // Вывод данных в консоль
-    console.log('User ID:', userId);
-    console.log('First Name:', firstName);
-    console.log('Last Name:', lastName);
-    console.log('Username:', username);
-    console.log('Language Code:', languageCode);
-    userTg.value = tg.initDataUnsafe?.user;
-  });
+  // Вывод данных в консоль
+  console.log('User ID:', userId);
+  console.log('First Name:', firstName);
+  console.log('Last Name:', lastName);
+  console.log('Username:', username);
+  console.log('Language Code:', languageCode);
+  userTg.value = tg.initDataUnsafe?.user;
 })
 </script>
