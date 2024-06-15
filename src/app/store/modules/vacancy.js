@@ -48,7 +48,7 @@ export const useVacancyStore = defineStore({
         replyVacancyItem(payload = null) {
             return new Promise((resolve, reject) => {
                 ApiService
-                    .post(`/vacancy/${payload.id}/reply`, payload.comment)
+                    .post(`/vacancy/${payload.id}/reply?comment=${payload.comment}`, null)
                     .then((res) => {
                         resolve(res)
                         toast.success("Успешно")

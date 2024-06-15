@@ -156,11 +156,11 @@
       </Dialog>
     </header>
     <div class="mx-auto w-full max-w-7xl px-4 pt-8 pb-16 md:py-16 sm:px-6 lg:px-8">
-      <h1 v-if="userTg">Welcome, {{ userTg.firstName }} {{ userTg.lastName }}</h1>
-      <p v-if="userTg">Username: @{{ userTg.username }}</p>
-      <p v-if="userTg">Language: {{ userTg.languageCode }}</p>
-      <p v-if="userTg">User ID: {{ userTg.userId }}</p>
-      <p v-if="userTg">User {{ userTg }}</p>
+<!--      <h1 v-if="userTg">Welcome, {{ userTg.firstName }} {{ userTg.lastName }}</h1>-->
+<!--      <p v-if="userTg">Username: @{{ userTg.username }}</p>-->
+<!--      <p v-if="userTg">Language: {{ userTg.languageCode }}</p>-->
+<!--      <p v-if="userTg">User ID: {{ userTg.userId }}</p>-->
+<!--      <p v-if="userTg">User {{ userTg }}</p>-->
       <RouterView />
     </div>
   </div>
