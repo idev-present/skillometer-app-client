@@ -150,6 +150,9 @@
             </div>
           </div>
         </DialogPanel>
+        <div class="text-xs absolute bottom-2 right-2 text-gray-400 z-50">
+          v0.4.2
+        </div>
       </Dialog>
     </header>
     <div class="mx-auto w-full max-w-7xl px-4 pt-8 pb-16 md:py-16 sm:px-6 lg:px-8">
