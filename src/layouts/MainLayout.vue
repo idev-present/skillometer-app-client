@@ -153,6 +153,7 @@
       </Dialog>
     </header>
     <div class="mx-auto w-full max-w-7xl px-4 pt-8 pb-16 md:py-16 sm:px-6 lg:px-8">
+      {{ userTg }}
       <RouterView />
     </div>
   </div>
@@ -176,6 +177,8 @@ const userNavigation = [
   { name: 'Отклики', href: '/reply' },
 ]
 const isLoading = ref(false)
+
+const userTg = ref('')
 
 const router = useRouter()
 //* store
@@ -214,5 +217,7 @@ const getProfile = async () => {
 
 onMounted(async () => {
   await getProfile()
+  const tg = window.Telegram.WebApp;
+  userTg.value = tg.initDataUnsafe?.user;
 })
 </script>
