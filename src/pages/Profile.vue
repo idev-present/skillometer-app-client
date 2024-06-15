@@ -134,8 +134,8 @@
                           auto-apply
                           locale="ru-RU"
                       />
-                      <span v-if="errors?.date" class="text-red-600 text-sm">
-                          {{errors.date}}
+                      <span v-if="errors?.birthday" class="text-red-600 text-sm">
+                          {{errors.birthday}}
                       </span>
                     </div>
                   </div>
@@ -296,6 +296,7 @@ const saveForm = async () => {
     city: user?.value?.city?.id || '',
     bio: user?.value?.description || '',
   }
+  console.log(1, payload)
   errors.value = ProfileForm.validate(payload)
   if(!errors.value && !isLoading.value) {
     isLoading.value = true

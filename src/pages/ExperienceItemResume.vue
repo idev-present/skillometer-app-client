@@ -35,7 +35,7 @@
                   </div>
                 
                   <div>
-                    <!--Название компании/Должность-->
+                    <!--Название компании/Дата начала-->
                     <div class="mt-4 grid grid-cols-12 gap-4 sm:gap-6">
                       <div class="col-span-12 sm:col-span-6">
                         <label
@@ -50,6 +50,24 @@
                           {{errors.company_name}}
                         </span>
                       </div>
+                      <div class="col-span-12 sm:col-span-6">
+                        <label
+                            class="block mb-1 text-sm font-medium leading-6 text-gray-900">
+                          Начало работы
+                        </label>
+                        <VueDatePicker
+                            v-model="user.startDate"
+                            format="dd.MM.yyyy"
+                            auto-apply
+                            locale="ru-RU"
+                        />
+                        <span v-if="errors?.start_date" class="text-red-600 text-sm">
+                          {{errors.start_date}}
+                        </span>
+                      </div>
+                    </div>
+                    <!--Должность/конца-->
+                    <div class="mt-4 grid grid-cols-12 gap-4 sm:gap-6">
                       <div class="col-span-12 sm:col-span-6">
                         <Combobox as="div"
                                   v-model="user.position">
@@ -79,26 +97,11 @@
                             </ComboboxOptions>
                           </div>
                         </Combobox>
+                        <p class="mt-0.5 mb-1 text-sm text-gray-500">
+                          Должность можно указать любую, в списке указаны только самые популярные
+                        </p>
                         <span v-if="errors?.position" class="text-red-600 text-sm">
                           {{errors.position}}
-                        </span>
-                      </div>
-                    </div>
-                    <!--Дата начала/конца-->
-                    <div class="mt-4 grid grid-cols-12 gap-4 sm:gap-6">
-                      <div class="col-span-12 sm:col-span-6">
-                        <label
-                            class="block mb-1 text-sm font-medium leading-6 text-gray-900">
-                          Начало работы
-                        </label>
-                        <VueDatePicker
-                            v-model="user.startDate"
-                            format="dd.MM.yyyy"
-                            auto-apply
-                            locale="ru-RU"
-                        />
-                        <span v-if="errors?.start_date" class="text-red-600 text-sm">
-                          {{errors.start_date}}
                         </span>
                       </div>
                       <div class="col-span-12 sm:col-span-6">
