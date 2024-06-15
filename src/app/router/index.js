@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useUserStore } from '@/app/store/modules/user';
+import Cookies from "js-cookie";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -134,14 +134,13 @@ const router = createRouter({
   ]
 })
 
-// router.beforeEach((to, from, next) => {
-//   const authStore = useUserStore();
-//
-//   if (to.meta.requiresAuth && !authStore.isAuth) {
-//     next({ name: 'VacancyList' });
-//   } else {
-//     next();
-//   }
-// });
+router.beforeEach((to, from, next) => {
+  const isAuth = Cookies.get('skillometer_access_token')
+  if (to.meta.requiresAuth && !isAuth) {
+    next({ name: 'VacancyList' });
+  } else {
+    next();
+  }
+});
 
 export default router

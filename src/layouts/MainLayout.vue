@@ -149,7 +149,7 @@
 </template>
 
 <script setup>
-import {RouterView} from 'vue-router'
+import {RouterView, useRouter} from 'vue-router'
 import {computed, onMounted, ref} from 'vue'
 import { Dialog, DialogPanel, MenuButton, Menu, MenuItem, MenuItems } from '@headlessui/vue'
 import { Bars3Icon, XMarkIcon, BellIcon, ArrowLeftEndOnRectangleIcon } from '@heroicons/vue/24/outline'
@@ -167,6 +167,7 @@ const userNavigation = [
 ]
 const isLoading = ref(false)
 
+const router = useRouter()
 //* store
 const userStore = useUserStore()
 
@@ -191,6 +192,7 @@ const logout = async () => {
   await userStore.logout()
   isLoading.value = false
   mobileMenuOpen.value = false
+  await router.push('/')
 }
 
 const getProfile = async () => {
