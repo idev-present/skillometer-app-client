@@ -151,7 +151,7 @@
                 </div>
               </div>
               <!--Отказ от отклика-->
-              <div v-if="(replyItem?.status?.key !== 'DECLINED') || (replyItem?.status?.key !== 'DONE')" class="flex justify-end gap-x-3 px-4 py-4 sm:px-6">
+              <div v-if="(replyItem?.status?.key !== 'DECLINED') && (replyItem?.status?.key !== 'DONE')" class="flex justify-end gap-x-3 px-4 py-4 sm:px-6">
                 <button
                     @click="openDeclinedReplyModal"
                     type="button"
@@ -216,6 +216,11 @@ const subNavigation = [
 ]
 
 const replyItem = computed(() => {
+  console.log({
+    ...userStore?.userReplyItem,
+    vacancy: vacancyList?.value?.find((e) => e?.id === userStore?.userReplyItem?.vacancy_id) || null,
+    status: replyStatusList?.value?.find((e) => e?.key === userStore?.userReplyItem?.status) || null,
+  })
   return {
     ...userStore?.userReplyItem,
     vacancy: vacancyList?.value?.find((e) => e?.id === userStore?.userReplyItem?.vacancy_id) || null,
