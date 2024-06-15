@@ -28,6 +28,7 @@
               </div>
               <div class="px-4 py-6 sm:p-6 lg:pb-8">
                 <div
+                    v-if="replyItem?.status?.bgColor && replyItem?.status?.textColor && replyItem?.status?.fillColor"
                       class="mb-2 flex w-fit items-center gap-x-1.5 rounded-md px-2 py-1 text-xs font-medium text-blue-700"
                       :class="[replyItem?.status?.bgColor, replyItem?.status?.textColor]"
                   >

@@ -32,6 +32,7 @@
               >
                 <div class="px-4 py-6 sm:p-6 lg:pb-8">
                   <span
+                      v-if="item?.status?.bgColor && item?.status?.textColor && item?.status?.fillColor"
                       class="mb-2 flex w-fit items-center gap-x-1.5 rounded-md px-2 py-1 text-xs font-medium text-blue-700"
                       :class="[item.status.bgColor, item.status.textColor]"
                   >
