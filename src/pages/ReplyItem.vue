@@ -141,8 +141,13 @@
                   <h2
                       class="text-xl font-bold leading-7 text-gray-900 sm:text-2xl sm:tracking-tight"
                   >
-                    Вакансия удалена
+                    {{replyItem?.vacancy_name || ''}}
                   </h2>
+                  <span
+                      class="mt-1 flex items-center font-bold text-red-600"
+                  >
+                      Вакансия удалена
+                    </span>
                 </div>
               </div>
               <!--Отказ от отклика-->
