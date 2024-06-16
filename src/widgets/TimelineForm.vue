@@ -35,11 +35,19 @@
         </ul>
       </div>
       <div class="mt-6 flex flex-col justify-stretch">
+        <div v-if="(replyItem?.status?.key === 'HR_INTERVIEW') || (replyItem?.status?.key === 'JOB_INTERVIEW')">
+          <button
+              @click="openCalendlyModal"
+              type="button"
+              class="w-full rounded-md bg-blue-600 px-5 py-2.5 text-sm font-semibold tr text-white shadow-sm hover:bg-blue-700 outline-0">
+            Выбрать дату
+          </button>
+        </div>
         <div v-if="(replyItem?.status?.key !== 'DECLINED') && (replyItem?.status?.key !== 'DONE')">
           <button
               @click="openDeclinedReplyModal"
               type="button"
-              class="w-full rounded-md bg-red-500 px-5 py-2.5 text-sm font-semibold tr text-white shadow-sm hover:bg-red-600 outline-0">
+              class="w-full mt-2 rounded-md bg-red-500 px-5 py-2.5 text-sm font-semibold tr text-white shadow-sm hover:bg-red-600 outline-0">
             Отменить отклик
           </button>
         </div>
@@ -57,6 +65,7 @@
         textarea-label="Укажите причину отказа"
     />
     <modal-calendly
+        v-if="isCalendlyModal"
         :is-open="isCalendlyModal"
         @close-modal="closeModal"
         title="Дата собеседования"
@@ -99,6 +108,10 @@ const replyStatusList = computed(() => {
 
 const openDeclinedReplyModal = () => {
   isDeclinedReplyModal.value = true
+}
+
+const openCalendlyModal = () => {
+  isCalendlyModal.value = true
 }
 
 const closeModal = () => {

@@ -16,6 +16,8 @@ export const useUserStore = defineStore({
             userReplyList: [],
             userReplyItem: null,
             userReplyActivity: [],
+            availableDays: [],
+            availableTime: [],
         }
     },
     actions: {
@@ -144,6 +146,50 @@ export const useUserStore = defineStore({
                     .catch((err) => {
                         console.error(err)
                         toast.error(err?.message || "Ошибка загрузки истории статусов! Пожалуйста, попробуйте позже")
+                        reject()
+                    })
+            })
+        },
+        getAvailableDays(payload = null) {
+            return new Promise((resolve, reject) => {
+                ApiService
+                    .get(`/events/available/days`, null)
+                    .then((res) => {
+                        resolve(res || [])
+                        this.availableDays = res || []
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        toast.error(err?.message || "Ошибка загрузки свободных дней на собеседование! Пожалуйста, попробуйте позже")
+                        reject()
+                    })
+            })
+        },
+        getAvailableTime(payload = null) {
+            return new Promise((resolve, reject) => {
+                ApiService
+                    .get(`/events/available/time?reply_id=${payload.id}&day=${payload.day}`, null)
+                    .then((res) => {
+                        resolve(res || [])
+                        this.availableTime = res || []
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        toast.error(err?.message || "Ошибка загрузки слотов на собеседование! Пожалуйста, попробуйте позже")
+                        reject()
+                    })
+            })
+        },
+        createAvailable(payload = null) {
+            return new Promise((resolve, reject) => {
+                ApiService
+                    .post(`/events/?reply_id=${payload.id}`, payload.data)
+                    .then((res) => {
+                        resolve(res || null)
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        toast.error(err?.message || "Ошибка выбора даты собеседования! Пожалуйста, попробуйте позже")
                         reject()
                     })
             })
