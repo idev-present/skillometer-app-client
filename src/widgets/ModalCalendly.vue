@@ -19,6 +19,10 @@
                 class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5
                 text-left shadow-xl transition-all sm:my-8 sm:p-6 sm:pb-3">
               <div class="mb-5 sm:mb-6 text-center">
+                <XMarkIcon
+                    @click="closeModal"
+                    class="absolute text-gray-600 hover:text-gray-900 right-2 sm:right-3 top-2 sm:top-3 h-8 w-8 cursor-pointer"
+                />
                 <DialogTitle as="h3" class="text-lg sm:text-xl font-semibold leading-6 text-gray-900">
                   {{ props.title }}
                 </DialogTitle>
@@ -71,7 +75,7 @@
               </div>
               <div class="flex flex-col sm:flex-row sm:items-center justify-between border-t mt-2 pt-2">
                 <div class="text-gray-600 mb-2 sm:mb-0">
-                  {{formatDate ? formatDate(selectedDate) : ''}}
+                  {{selectedDate ? formatDate(selectedDate) : ''}}
                 </div>
                 <button
                     @click="submit"
@@ -93,6 +97,7 @@
 
 <script setup>
 import {ref, computed} from 'vue'
+import { XMarkIcon } from '@heroicons/vue/20/solid/index.js'
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot} from '@headlessui/vue'
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
@@ -146,7 +151,6 @@ const allowedDates = computed(() => {
 });
 
 const submit = () => {
-  console.log(111)
   emit('submit')
 }
 const closeModal = () => {

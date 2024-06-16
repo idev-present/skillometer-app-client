@@ -66,7 +66,7 @@
 </template>
 
 <script setup>
-import { CheckIcon, HandThumbUpIcon, UserIcon } from '@heroicons/vue/20/solid/index.js'
+import { CheckIcon, HandThumbUpIcon, UserIcon, XMarkIcon } from '@heroicons/vue/20/solid/index.js'
 import {computed, ref} from "vue";
 import {useUserStore} from "@/app/store/modules/user.js";
 import {REPLY_STATUS_COLOR} from "@/app/constants/replyStatusColor.js";
@@ -74,7 +74,6 @@ import {useDirectoriesStore} from "@/app/store/modules/directories.js";
 import Modal from "@/shared/Modal.vue";
 import {useRoute} from "vue-router";
 import ModalCalendly from "@/widgets/ModalCalendly.vue";
-import {XMarkIcon} from "@heroicons/vue/24/outline";
 
 const userStore = useUserStore()
 const directoriesStore = useDirectoriesStore()
