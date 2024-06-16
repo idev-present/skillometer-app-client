@@ -147,6 +147,7 @@ const declinedReply = async (reason) => {
   if(payload?.id) {
     await userStore.changeStatusToDeclined(payload)
     await userStore.fillUserReplyItem(route.params.id)
+    await userStore.getReplyActivity(route.params.id)
     closeModal()
   } else {
     console.error('Не найден ID отклика')
