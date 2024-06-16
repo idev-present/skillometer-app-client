@@ -37,6 +37,12 @@
                     <p class="text-sm text-gray-500">
                       {{ item.text }} <span v-if="item?.target?.value" class="font-medium text-gray-900">{{ item.target.value }}</span>
                     </p>
+                    <span
+                        v-if="item?.target?.key === 'DECLINED'"
+                        class="text-sm font-medium text-gray-900"
+                    >
+                      {{userStore?.userReplyItem?.reason || ''}}
+                    </span>
                   </div>
                   <div class="whitespace-nowrap flex items-center text-right text-sm text-gray-500">
                     {{ formattedDate ? formattedDate(item.created_at) : '' }}
