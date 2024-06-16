@@ -130,6 +130,7 @@
                             format="dd.MM.yyyy"
                             auto-apply
                             locale="ru-RU"
+                            text-input
                         />
                         <span v-if="errors?.start_date" class="text-red-600 text-sm">
                           {{errors.start_date}}
@@ -145,6 +146,7 @@
                             format="dd.MM.yyyy"
                             auto-apply
                             locale="ru-RU"
+                            text-input
                         />
                         <p class="mt-0.5 mb-1 text-sm text-gray-500">
                           Если обучаетесь по настоящее время, дату завершения учебы указывать не нужно

@@ -133,6 +133,7 @@
                           format="dd.MM.yyyy"
                           auto-apply
                           locale="ru-RU"
+                          text-input
                       />
                       <span v-if="errors?.birthday" class="text-red-600 text-sm">
                           {{errors.birthday}}
