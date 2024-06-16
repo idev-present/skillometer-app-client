@@ -137,7 +137,7 @@
                     </span>
                 </div>
               </div>
-              <div class="px-4 py-6 sm:p-6 lg:pb-8">
+              <div v-if="replyItem?.vacancy" class="px-4 py-6 sm:p-6 lg:pb-8">
                 <label
                     class="block font-bold mb-1.5 leading-6 text-gray-900">
                   Текущий статус
@@ -174,7 +174,7 @@
                     <chat/>
                   </div>
                   <div class="col-span-12 xl:col-span-6">
-                    <timeline-form class=""/>
+                    <timeline-form :user-reply-activity="userReplyActivity" class=""/>
                   </div>
                 </div>
               </div>
@@ -319,6 +319,10 @@ const loadDirectories = async () => {
     await directoriesStore.fillQualificationList()
   }
 }
+
+const userReplyActivity = computed(() => {
+  return userStore.userReplyActivity || []
+})
 
 onMounted(async () => {
   isLoading.value = true

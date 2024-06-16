@@ -8,25 +8,38 @@
       <!-- Activity Feed -->
       <div class="mt-6 flow-root">
         <ul role="list" class="-mb-8">
-          <li v-for="(item, itemIdx) in timeline" :key="item.id">
+          <li v-for="(item, itemIdx) in timeline" :key="itemIdx">
             <div class="relative pb-8">
                     <span v-if="itemIdx !== timeline.length - 1"
                           class="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true" />
               <div class="relative items-center flex space-x-3">
                 <div>
-                        <span
-                          :class="[item.type.bgColorClass, 'flex h-8 w-8 items-center justify-center rounded-full ring-8 ring-white']">
-                          <component :is="item.type.icon" class="h-5 w-5 text-white" aria-hidden="true" />
-                        </span>
+                  <span
+                      v-if="item?.target?.key === 'DECLINED'"
+                      class="bg-red-500 flex h-8 w-8 items-center justify-center rounded-full ring-8 ring-white"
+                  >
+                    <XMarkIcon class="h-5 w-5 text-white" />
+                  </span>
+                  <span
+                      v-else-if="item?.target?.key === 'OFFER_POSTED' || item?.target?.key === 'OFFER_ACCEPTED' || item?.target?.key === 'DONE'"
+                      class="bg-green-500 flex h-8 w-8 items-center justify-center rounded-full ring-8 ring-white"
+                  >
+                    <CheckIcon class="h-5 w-5 text-white" />
+                  </span>
+                  <span
+                      v-else
+                      :class="[item.type.bgColorClass, 'flex h-8 w-8 items-center justify-center rounded-full ring-8 ring-white']">
+                    <component :is="item.type.icon" class="h-5 w-5 text-white" aria-hidden="true" />
+                  </span>
                 </div>
                 <div class="flex min-w-0 flex-1 justify-between space-x-4">
                   <div>
                     <p class="text-sm text-gray-500">
-                      {{ item.content }} <span class="font-medium text-gray-900">{{ item.target }}</span>
+                      {{ item.text }} <span v-if="item?.target?.value" class="font-medium text-gray-900">{{ item.target.value }}</span>
                     </p>
                   </div>
                   <div class="whitespace-nowrap flex items-center text-right text-sm text-gray-500">
-                    {{ formattedDate ? formattedDate(item.date) : '' }}
+                    {{ formattedDate ? formattedDate(item.created_at) : '' }}
                   </div>
                 </div>
               </div>
@@ -83,6 +96,10 @@ import {useDirectoriesStore} from "@/app/store/modules/directories.js";
 import Modal from "@/shared/Modal.vue";
 import {useRoute} from "vue-router";
 import ModalCalendly from "@/widgets/ModalCalendly.vue";
+
+const props = defineProps({
+  userReplyActivity: {type: Array, default: []}
+})
 
 const userStore = useUserStore()
 const directoriesStore = useDirectoriesStore()
@@ -143,51 +160,27 @@ const formattedDate = (date) => {
   return `${day}.${month}`;
 };
 
+
+const timeline = computed(() => {
+  const resDefault = [{
+    id: 1,
+    type: eventTypes.applied,
+    text: 'Отклик успешно создан',
+    created_at: '2024-06-16T14:15:19.072808Z',
+  }]
+  const resActivity = props?.userReplyActivity?.map((item) => ({
+    ...item,
+    text: item?.type === 'REPLY_STATUS' ? `Изменен статус на` : (item?.text || ''),
+    target: replyStatusList?.value?.find((e) => e.key === item?.text) || '',
+    type: item?.type === 'REPLY_STATUS' ? eventTypes.advanced : eventTypes.advanced,
+  })) || []
+  return resDefault.concat(resActivity || [])
+})
+
 const eventTypes = {
   applied: { icon: UserIcon, bgColorClass: 'bg-gray-400' },
   advanced: { icon: HandThumbUpIcon, bgColorClass: 'bg-blue-500' },
   completed: { icon: CheckIcon, bgColorClass: 'bg-green-500' },
   error: { icon: XMarkIcon, bgColorClass: 'bg-red-500' }
 }
-
-const timeline = [
-  {
-    id: 1,
-    type: eventTypes.applied,
-    content: 'Отклик успешно создан',
-    date: '2024-06-16T14:15:19.072808Z',
-  },
-  {
-    id: 2,
-    type: eventTypes.advanced,
-    content: 'Advanced to phone screening by',
-    target: 'Bethany Blake',
-    date: 'Sep 22',
-    datetime: '2020-09-22'
-  },
-  {
-    id: 3,
-    type: eventTypes.completed,
-    content: 'Completed phone screening with',
-    target: 'Martha Gardner',
-    date: 'Sep 28',
-    datetime: '2020-09-28'
-  },
-  {
-    id: 4,
-    type: eventTypes.advanced,
-    content: 'Advanced to interview by',
-    target: 'Bethany Blake',
-    date: 'Sep 30',
-    datetime: '2020-09-30'
-  },
-  {
-    id: 5,
-    type: eventTypes.error,
-    content: 'Completed interview with',
-    target: 'Katherine Snyder',
-    date: 'Oct 4',
-    datetime: '2020-10-04'
-  }
-]
 </script>
