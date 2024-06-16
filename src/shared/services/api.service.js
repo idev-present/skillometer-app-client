@@ -24,14 +24,12 @@ class ApiFacade {
   }
 
   _parseError(err) {
-    // TODO(i.zhuravlev): prepare response and check structure
-    if (err.response.status < 500) {
-      // return {
-      //     code: err.response.status,
-      //     message: err.response.data.detail,
-      // }
-      return Promise.reject(err)
-    }
+    // if (err?.response?.status < 500) {
+    //   return Promise.reject({
+    //       code: err?.response?.status,
+    //       message: err?.response?.data?.detail,
+    //   })
+    // }
     return Promise.reject(err);
   }
 

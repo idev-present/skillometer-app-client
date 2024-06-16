@@ -139,27 +139,39 @@
               </div>
               <div class="px-4 py-6 sm:p-6 lg:pb-8">
                 <label
-                    class="block font-bold mb-1 leading-6 text-gray-900">
+                    class="block font-bold mb-1.5 leading-6 text-gray-900">
                   Текущий статус
                 </label>
-                <div
-                    v-if="replyItem?.status?.bgColor && replyItem?.status?.textColor && replyItem?.status?.fillColor"
-                    class="mb-2 flex w-fit items-center gap-x-1.5 rounded-md px-2 py-1 text-xs font-medium text-blue-700"
-                    :class="[replyItem?.status?.bgColor, replyItem?.status?.textColor]"
-                >
-                  <svg
-                      class="h-1.5 w-1.5 fill-blue-500"
-                      :class="[replyItem?.status?.fillColor]"
-                      viewBox="0 0 6 6" aria-hidden="true">
-                    <circle cx="3" cy="3" r="3" />
-                  </svg>
-                  {{replyItem?.status?.value}}
+                <div class="mb-2 flex items-center mt-1 ">
+                  <div
+                      v-if="replyItem?.status?.bgColor && replyItem?.status?.textColor && replyItem?.status?.fillColor"
+                      class="flex w-fit items-center gap-x-1.5 rounded-md px-2 py-1 font-medium text-blue-700"
+                      :class="[replyItem?.status?.bgColor, replyItem?.status?.textColor]"
+                  >
+                    <svg
+                        class="h-2 w-2 fill-blue-500"
+                        :class="[replyItem?.status?.fillColor]"
+                        viewBox="0 0 6 6" aria-hidden="true">
+                      <circle cx="3" cy="3" r="3" />
+                    </svg>
+                    {{replyItem?.status?.value}}
+                  </div>
+                  <div
+                      class="flex ml-3 -mt-0.5 items-center text-sm text-gray-600"
+                  >
+                    <CalendarIcon
+                        class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-500"
+                        aria-hidden="true"
+                    />
+                    {{formattedDateValueTime(replyItem?.updated_at) || '-'}}
+                  </div>
                 </div>
                 <div class="grid grid-cols-12 gap-4 xl:gap-6 mt-5">
-                  <div class="col-span-12 xl:col-span-6">
-                    <chat
-                        v-if="(replyItem?.status?.key !== 'DECLINED') && replyItem?.vacancy"
-                    />
+                  <div
+                      v-if="(replyItem?.status?.key !== 'DECLINED') && replyItem?.vacancy"
+                      class="col-span-12 xl:col-span-6"
+                  >
+                    <chat/>
                   </div>
                   <div class="col-span-12 xl:col-span-6">
                     <timeline-form class=""/>
@@ -297,6 +309,16 @@ const formattedDateValue = (date) => {
   const month = String(dateRes.getMonth() + 1).padStart(2, "0");
   const year = dateRes.getFullYear();
   return `${day}.${month}.${year}`;
+};
+
+const formattedDateValueTime = (date) => {
+  const dateRes = new Date(date);
+  const day = String(dateRes.getDate()).padStart(2, '0');
+  const month = String(dateRes.getMonth() + 1).padStart(2, '0');
+  const year = dateRes.getFullYear();
+  const hours = String(dateRes.getHours()).padStart(2, '0');
+  const minutes = String(dateRes.getMinutes()).padStart(2, '0');
+  return `${day}.${month}.${year} ${hours}:${minutes}`;
 };
 
 const redirect = (url) => {

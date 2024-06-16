@@ -262,7 +262,7 @@
   <modal
     :is-open="isOpenResumeModal" 
     title="Заполните резюме"
-    description="Для отклика требуется заполнить резюме. Чем подробнее вы заполните, тем легче нам будет принять решение"
+    description="Для отклика требуется заполнить резюме. Чем подробнее вы заполните, тем легче нам будет принять решение (Профиль и специализация обязательны для заполнения)"
     @close-modal="closeModal"
     @submit="openResume"
     button-name="Заполнить резюме"
@@ -348,7 +348,7 @@ const onClickResponse = async () => {
     isOpenModal.value = true
   } else {
     await userStore.fillUser()
-    if (!userStore.has_applicant) {
+    if (!userStore?.user?.has_applicant) {
       isOpenResumeModal.value = true
     } else {
       const payload = {

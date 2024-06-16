@@ -59,7 +59,7 @@
         >
         <button
             @click="sendMessage"
-            class="bg-[#3C5DE3] hover:bg-blue-700 text-white p-2 rounded-r-lg transition-all">
+            class="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-r-lg transition-all">
           <PaperAirplaneIcon class="h-5 w-5 text-white-600 mx-1" aria-hidden="true" />
         </button>
       </div>
@@ -198,7 +198,7 @@ onUnmounted(() => {
 
 <style>
 .message-me {
-  background: #3C5DE3;
+  @apply bg-blue-600;
   color: white;
 }
 </style>
