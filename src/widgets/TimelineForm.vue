@@ -1,7 +1,7 @@
 <template>
   <section aria-labelledby="timeline-title" class="lg:col-span-1 lg:col-start-3">
-    <div class="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6">
-      <h2 id="timeline-title" class="text-lg font-medium text-gray-900">
+    <div class="bg-white border px-4 pb-4 pt-3 shadow rounded-lg">
+      <h2 id="timeline-title" class="text-xl font-bold">
         История
       </h2>
 
