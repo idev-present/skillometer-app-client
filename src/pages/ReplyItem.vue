@@ -178,15 +178,6 @@
                   </div>
                 </div>
               </div>
-              <!--Отказ от отклика-->
-              <div v-if="(replyItem?.status?.key !== 'DECLINED') && (replyItem?.status?.key !== 'DONE')" class="flex justify-end gap-x-3 px-4 py-4 sm:px-6">
-                <button
-                    @click="openDeclinedReplyModal"
-                    type="button"
-                    class="w-full sm:w-fit rounded-md bg-red-500 px-5 py-2.5 text-sm font-semibold tr text-white shadow-sm hover:bg-red-600 outline-0">
-                  Отменить отклик
-                </button>
-              </div>
             </div>
 
             <loading class="py-40 divide-y divide-gray-200 lg:col-span-9" v-else />
@@ -194,17 +185,6 @@
         </div>
       </main>
     </div>
-    <modal
-        :is-open="isDeclinedReplyModal"
-        title="Вы действительно ходите отменить отклик?"
-        description="При отмене, работодатель не будет рассматривать ваше резюме"
-        @close-modal="closeModal"
-        @submit="declinedReply"
-        button-name="Да"
-        button-name-close="Нет"
-        is-textarea
-        textarea-label="Укажите причину отказа"
-    />
   </div>
 </template>
 
@@ -224,13 +204,10 @@ import {useDirectoriesStore} from "@/app/store/modules/directories.js";
 import {useVacancyStore} from "@/app/store/modules/vacancy.js";
 import {useRoute, useRouter} from "vue-router";
 import {REPLY_STATUS_COLOR} from "@/app/constants/replyStatusColor.js"
-import Modal from "@/shared/Modal.vue";
 import Chat from "@/shared/Chat.vue";
 import TimelineForm from "@/widgets/TimelineForm.vue";
 
 const isLoading = ref(false)
-
-const isDeclinedReplyModal = ref(false)
 
 const router = useRouter()
 const route = useRoute()
@@ -246,11 +223,6 @@ const subNavigation = [
 ]
 
 const replyItem = computed(() => {
-  console.log({
-    ...userStore?.userReplyItem,
-    vacancy: vacancyList?.value?.find((e) => e?.id === userStore?.userReplyItem?.vacancy_id) || null,
-    status: replyStatusList?.value?.find((e) => e?.key === userStore?.userReplyItem?.status) || null,
-  })
   return {
     ...userStore?.userReplyItem,
     vacancy: vacancyList?.value?.find((e) => e?.id === userStore?.userReplyItem?.vacancy_id) || null,
@@ -345,31 +317,6 @@ const loadDirectories = async () => {
   }
   if(!directoriesStore?.qualificationList?.length) {
     await directoriesStore.fillQualificationList()
-  }
-}
-
-const openDeclinedReplyModal = () => {
-  isDeclinedReplyModal.value = true
-}
-
-const closeModal = () => {
-  isDeclinedReplyModal.value = false
-}
-
-const declinedReply = async (reason) => {
-  const payload = {
-    id: replyItem.value.id,
-    data: {
-      status: 'DECLINED',
-      reason: reason || 'Причина не указана'
-    }
-  }
-  if(payload?.id) {
-    await userStore.changeStatusToDeclined(payload)
-    await userStore.fillUserReplyItem(route.params.id)
-    closeModal()
-  } else {
-    console.error('Не найден ID отклика')
   }
 }
 
