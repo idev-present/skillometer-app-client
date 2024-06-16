@@ -330,6 +330,7 @@ onMounted(async () => {
     }
     if(route.params.id) {
       await userStore.fillUserReplyItem(route.params.id)
+      await userStore.getReplyActivity(route.params.id)
     }
     isLoading.value = false
   });

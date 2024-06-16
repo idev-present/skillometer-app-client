@@ -12,7 +12,7 @@
             <div class="relative pb-8">
                     <span v-if="itemIdx !== timeline.length - 1"
                           class="absolute left-4 top-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true" />
-              <div class="relative flex space-x-3">
+              <div class="relative items-center flex space-x-3">
                 <div>
                         <span
                           :class="[item.type.bgColorClass, 'flex h-8 w-8 items-center justify-center rounded-full ring-8 ring-white']">
@@ -22,11 +22,11 @@
                 <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
                   <div>
                     <p class="text-sm text-gray-500">
-                      {{ item.content }} <a href="#" class="font-medium text-gray-900">{{ item.target }}</a>
+                      {{ item.content }} <span class="font-medium text-gray-900">{{ item.target }}</span>
                     </p>
                   </div>
-                  <div class="whitespace-nowrap text-right text-sm text-gray-500">
-                    <time :datetime="item.datetime">{{ item.date }}</time>
+                  <div class="whitespace-nowrap flex items-center text-right text-sm text-gray-500">
+                    {{ formattedDate ? formattedDate(item.date) : '' }}
                   </div>
                 </div>
               </div>
@@ -56,6 +56,12 @@
         is-textarea
         textarea-label="Укажите причину отказа"
     />
+    <modal-calendly
+        :is-open="isCalendlyModal"
+        @close-modal="closeModal"
+        title="Дата собеседования"
+        description="Выберите удобную дату и время"
+    />
   </section>
 </template>
 
@@ -67,6 +73,8 @@ import {REPLY_STATUS_COLOR} from "@/app/constants/replyStatusColor.js";
 import {useDirectoriesStore} from "@/app/store/modules/directories.js";
 import Modal from "@/shared/Modal.vue";
 import {useRoute} from "vue-router";
+import ModalCalendly from "@/widgets/ModalCalendly.vue";
+import {XMarkIcon} from "@heroicons/vue/24/outline";
 
 const userStore = useUserStore()
 const directoriesStore = useDirectoriesStore()
@@ -74,6 +82,7 @@ const directoriesStore = useDirectoriesStore()
 const route = useRoute()
 
 const isDeclinedReplyModal = ref(false)
+const isCalendlyModal = ref(false)
 
 const replyItem = computed(() => {
   return {
@@ -95,6 +104,7 @@ const openDeclinedReplyModal = () => {
 
 const closeModal = () => {
   isDeclinedReplyModal.value = false
+  isCalendlyModal.value = false
 }
 
 const declinedReply = async (reason) => {
@@ -114,20 +124,26 @@ const declinedReply = async (reason) => {
   }
 }
 
+const formattedDate = (date) => {
+  const dateRes = new Date(date);
+  const day = String(dateRes.getDate()).padStart(2, "0");
+  const month = String(dateRes.getMonth() + 1).padStart(2, "0");
+  return `${day}.${month}`;
+};
+
 const eventTypes = {
   applied: { icon: UserIcon, bgColorClass: 'bg-gray-400' },
   advanced: { icon: HandThumbUpIcon, bgColorClass: 'bg-blue-500' },
-  completed: { icon: CheckIcon, bgColorClass: 'bg-green-500' }
+  completed: { icon: CheckIcon, bgColorClass: 'bg-green-500' },
+  error: { icon: XMarkIcon, bgColorClass: 'bg-red-500' }
 }
 
 const timeline = [
   {
     id: 1,
     type: eventTypes.applied,
-    content: 'Applied to',
-    target: 'Front End Developer',
-    date: 'Sep 20',
-    datetime: '2020-09-20'
+    content: 'Отклик успешно создан',
+    date: '2024-06-16T14:15:19.072808Z',
   },
   {
     id: 2,
@@ -155,7 +171,7 @@ const timeline = [
   },
   {
     id: 5,
-    type: eventTypes.completed,
+    type: eventTypes.error,
     content: 'Completed interview with',
     target: 'Katherine Snyder',
     date: 'Oct 4',

@@ -15,6 +15,7 @@ export const useUserStore = defineStore({
             expires_in: '',
             userReplyList: [],
             userReplyItem: null,
+            userReplyActivity: [],
         }
     },
     actions: {
@@ -128,6 +129,21 @@ export const useUserStore = defineStore({
                     .catch((err) => {
                         console.error(err)
                         toast.error(err?.message || "Ошибка отказа отклика! Пожалуйста, попробуйте позже")
+                        reject()
+                    })
+            })
+        },
+        getReplyActivity(payload = null) {
+            return new Promise((resolve, reject) => {
+                ApiService
+                    .get(`/reply/${payload}/activity`, null)
+                    .then((res) => {
+                        resolve(res || [])
+                        this.userReplyActivity = res || []
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                        toast.error(err?.message || "Ошибка загрузки истории статусов! Пожалуйста, попробуйте позже")
                         reject()
                     })
             })
