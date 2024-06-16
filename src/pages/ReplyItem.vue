@@ -27,19 +27,6 @@
                 </h1>
               </div>
               <div class="px-4 py-6 sm:p-6 lg:pb-8">
-                <div
-                    v-if="replyItem?.status?.bgColor && replyItem?.status?.textColor && replyItem?.status?.fillColor"
-                      class="mb-2 flex w-fit items-center gap-x-1.5 rounded-md px-2 py-1 text-xs font-medium text-blue-700"
-                      :class="[replyItem?.status?.bgColor, replyItem?.status?.textColor]"
-                  >
-                    <svg
-                        class="h-1.5 w-1.5 fill-blue-500"
-                        :class="[replyItem?.status?.fillColor]"
-                        viewBox="0 0 6 6" aria-hidden="true">
-                      <circle cx="3" cy="3" r="3" />
-                    </svg>
-                    {{replyItem?.status?.value}}
-                  </div>
                 <div v-if="replyItem?.vacancy" class="relative flex justify-between gap-x-6 rounded-xl">
                   <div class="min-w-0 flex-1">
                     <h2
@@ -150,6 +137,27 @@
                     </span>
                 </div>
               </div>
+              <div class="px-4 py-6 sm:p-6 lg:pb-8">
+                <div
+                    v-if="replyItem?.status?.bgColor && replyItem?.status?.textColor && replyItem?.status?.fillColor"
+                    class="mb-2 flex w-fit items-center gap-x-1.5 rounded-md px-2 py-1 text-xs font-medium text-blue-700"
+                    :class="[replyItem?.status?.bgColor, replyItem?.status?.textColor]"
+                >
+                  <svg
+                      class="h-1.5 w-1.5 fill-blue-500"
+                      :class="[replyItem?.status?.fillColor]"
+                      viewBox="0 0 6 6" aria-hidden="true">
+                    <circle cx="3" cy="3" r="3" />
+                  </svg>
+                  {{replyItem?.status?.value}}
+                </div>
+                <div class="flex justify-between mt-4">
+                  <chat
+                      v-if="(replyItem?.status?.key !== 'DECLINED') && replyItem?.vacancy"
+                  />
+                  <timeline-form class="ml-6"/>
+                </div>
+              </div>
               <!--Отказ от отклика-->
               <div v-if="(replyItem?.status?.key !== 'DECLINED') && (replyItem?.status?.key !== 'DONE')" class="flex justify-end gap-x-3 px-4 py-4 sm:px-6">
                 <button
@@ -197,6 +205,8 @@ import {useVacancyStore} from "@/app/store/modules/vacancy.js";
 import {useRoute, useRouter} from "vue-router";
 import {REPLY_STATUS_COLOR} from "@/app/constants/replyStatusColor.js"
 import Modal from "@/shared/Modal.vue";
+import Chat from "@/shared/Chat.vue";
+import TimelineForm from "@/widgets/TimelineForm.vue";
 
 const isLoading = ref(false)
 
