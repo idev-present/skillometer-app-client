@@ -19,7 +19,7 @@
                           <component :is="item.type.icon" class="h-5 w-5 text-white" aria-hidden="true" />
                         </span>
                 </div>
-                <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
+                <div class="flex min-w-0 flex-1 justify-between space-x-4">
                   <div>
                     <p class="text-sm text-gray-500">
                       {{ item.content }} <span class="font-medium text-gray-900">{{ item.target }}</span>
