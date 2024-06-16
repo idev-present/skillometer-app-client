@@ -15,7 +15,7 @@
         </div>
       </div>
     </div>
-    <div v-else class="flex flex-col sm:min-w-[360px] pb-4 bg-white rounded shadow-md sm:h-[550px] chat">
+    <div v-else class="flex flex-col sm:min-w-[360px] pb-4 bg-white rounded shadow-md h-[550px] chat">
       <div class="flex border-b justify-between px-4 pb-2 pt-3">
         <div class="flex items-center text-xl font-bold">
           <svg viewBox="0 0 34 28" xmlns="http://www.w3.org/2000/svg" class="h-6 mr-3"><path d="M32.76 4.551h-8.019v12.223c0 .737-.554 1.3-1.28 1.3H11.945v3.901c0 .737.555 1.3 1.28 1.3h9.342l6.185 4.465c.213.173.47.26.725.26.213 0 .384-.043.597-.13.427-.217.683-.65.683-1.17v-3.424h1.962c.725 0 1.28-.564 1.28-1.3V5.85c.043-.736-.512-1.3-1.237-1.3z" fill="#D4ECFF"></path><path d="M23.632 18.248c.725 0 1.28-.564 1.28-1.3V1.3c0-.737-.555-1.3-1.28-1.3H1.28C.555 0 0 .563 0 1.3v15.647c0 .737.555 1.3 1.28 1.3h2.9v4.378c0 .52.299.997.768 1.17.17.087.341.13.512.13.299 0 .64-.13.853-.346l5.674-5.331H23.632z" fill="#89B7E2"></path></svg>
@@ -197,12 +197,6 @@ onUnmounted(() => {
 </script>
 
 <style>
-.chat {
-  @media screen and (max-width: 640px) {
-    width: calc(100vw - 2.5rem);
-    height: calc(100vh - 1.5rem);
-  }
-}
 .message-me {
   background: #3C5DE3;
   color: white;

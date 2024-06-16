@@ -138,6 +138,10 @@
                 </div>
               </div>
               <div class="px-4 py-6 sm:p-6 lg:pb-8">
+                <label
+                    class="block font-bold mb-1 leading-6 text-gray-900">
+                  Текущий статус
+                </label>
                 <div
                     v-if="replyItem?.status?.bgColor && replyItem?.status?.textColor && replyItem?.status?.fillColor"
                     class="mb-2 flex w-fit items-center gap-x-1.5 rounded-md px-2 py-1 text-xs font-medium text-blue-700"
@@ -151,11 +155,15 @@
                   </svg>
                   {{replyItem?.status?.value}}
                 </div>
-                <div class="flex justify-between mt-4">
-                  <chat
-                      v-if="(replyItem?.status?.key !== 'DECLINED') && replyItem?.vacancy"
-                  />
-                  <timeline-form class="ml-6"/>
+                <div class="grid grid-cols-12 gap-4 xl:gap-6 mt-5">
+                  <div class="col-span-12 xl:col-span-6">
+                    <chat
+                        v-if="(replyItem?.status?.key !== 'DECLINED') && replyItem?.vacancy"
+                    />
+                  </div>
+                  <div class="col-span-12 xl:col-span-6">
+                    <timeline-form class=""/>
+                  </div>
                 </div>
               </div>
               <!--Отказ от отклика-->
