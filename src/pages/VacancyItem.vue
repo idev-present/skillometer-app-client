@@ -262,9 +262,9 @@
   <modal
     :is-open="isOpenResumeModal" 
     title="Заполните резюме"
-    description="Для отклика требуется заполнить резюме"
+    description="Для отклика требуется заполнить резюме. Чем подробнее вы заполните, тем легче нам будет принять решение"
     @close-modal="closeModal"
-    @submit="console.log('submit isOpenResumeModal')"
+    @submit="openResume"
     button-name="Заполнить резюме"
   />
   </div>
@@ -277,12 +277,13 @@ import {useVacancyStore} from "@/app/store/modules/vacancy.js";
 import Loading from "@/shared/Loading.vue";
 import Modal from "@/shared/Modal.vue";
 import {useDirectoriesStore} from "@/app/store/modules/directories.js";
-import { useRoute } from 'vue-router'
+import {useRoute, useRouter} from 'vue-router'
 import { useUserStore } from '@/app/store/modules/user';
 import iamService from "@/shared/services/iam.service.js";
 import {REPLY_STATUS_COLOR} from "@/app/constants/replyStatusColor.js";
 
-const router = useRoute()
+const router = useRouter()
+const route = useRoute()
 
 const isLoading = ref(false)
 
@@ -346,21 +347,30 @@ const onClickResponse = async () => {
   if(!userStore.isAuth) {
     isOpenModal.value = true
   } else {
-    const payload = {
-      id: router.params.id,
-      comment: comment?.value || ''
+    await userStore.fillUser()
+    if (!userStore.has_applicant) {
+      isOpenResumeModal.value = true
+    } else {
+      const payload = {
+        id: route.params.id,
+        comment: comment?.value || ''
+      }
+      await vacancyStore.replyVacancyItem(payload)
+      if(!directoriesStore?.replyStatusList?.length) {
+        await directoriesStore.fillReplyStatusList()
+      }
+      await userStore.fillUserReplyList()
+      comment.value = ''
     }
-    await vacancyStore.replyVacancyItem(payload)
-    if(!directoriesStore?.replyStatusList?.length) {
-      await directoriesStore.fillReplyStatusList()
-    }
-    await userStore.fillUserReplyList()
-    comment.value = ''
   }
 }
 const closeModal = () => {
   isOpenModal.value = false
   isOpenResumeModal.value = false
+}
+const openResume = () => {
+  closeModal()
+  router.push('/profile')
 }
 const singIn = () => {
   isOpenModal.value = false
@@ -387,8 +397,8 @@ onMounted(async() => {
   await Promise.all([
     loadDirectories()
   ]).finally(async () => {
-    if(router?.params?.id) {
-      await vacancyStore.fillVacancyItem(router.params.id)
+    if(route?.params?.id) {
+      await vacancyStore.fillVacancyItem(route.params.id)
     }
     if(userStore.isAuth && !userStore?.userReplyList?.length) {
       if(!directoriesStore?.replyStatusList?.length) {
