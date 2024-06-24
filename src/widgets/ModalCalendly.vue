@@ -118,6 +118,7 @@ const props = defineProps({
   title: {type: String, default: ''},
   description: {type: String, default: ''},
   isOpen: {type: Boolean, default: false},
+  replyItem: {type: Object, default: null}
 })
 
 //* store
@@ -179,10 +180,10 @@ const submit = async () => {
   const payload = {
     id: route?.params?.id || '',
     data: {
-      name: `zoom-${route?.params?.id || ''}`,
+      name: `${props.replyItem?.status?.value || ''} ${userStore?.user?.full_name || ''}`,
       type: "ZOOM",
-      payload: `payload-${route?.params?.id || ''}`,
-      description: `description-${route?.params?.id || ''}`,
+      payload: userStore?.user?.email || '',
+      description: ``,
       start_at: selectedTime.value.value[0],
       end_at: selectedTime.value.value[1]
     }

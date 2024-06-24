@@ -186,6 +186,7 @@ export const useUserStore = defineStore({
                     .post(`/events/?reply_id=${payload.id}`, payload.data)
                     .then((res) => {
                         resolve(res || null)
+                        toast.success("Дата успешно сохранена")
                     })
                     .catch((err) => {
                         console.error(err)

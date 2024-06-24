@@ -86,6 +86,7 @@
     <modal-calendly
         v-if="isCalendlyModal"
         :is-open="isCalendlyModal"
+        :reply-item="replyItem"
         @close-modal="closeModal"
         title="Дата собеседования"
         description="Выберите удобную дату и время"
